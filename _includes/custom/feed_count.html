@@ -1,0 +1,5 @@
+{% if site.feed_count %}
+  {% if site.subscribe_email %}
+    <a href="{{ site.subscribe_email }}" style="float:right"><img src="{{ site.feed_count }}" height="26" width="88" style="border:0" /></a>
+  {% endif %}
+{% endif %}
