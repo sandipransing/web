@@ -1,0 +1,25 @@
+# Site settings
+url: http://funonrails.com
+title: "Fun On Rails"
+email: san2821@gmail.com
+subtitle: "Journal of a Web Developer #ruby #rails #JS"
+author: sandipransing
+simple_search: http://google.com/search
+description: >
+  Journal of a web developer containing learnings and experiences while developing with ruby, rails, JS and linux
+baseurl: "" # the subpath of your site, e.g. /blog/
+keywords: ruby, rails, gems, plugins, radiant, cms, SEO, geokit, asterisk, adhearsion, pdf, prawn, ubuntu, vim, linux, jQuery, sass, haml, nginx, passenger
+twitter_username: sandipransing
+github_username:  sandipransing
+
+# Build settings
+markdown: kramdown
+gems: 
+  - octopress-image-tag
+  - octopress-codeblock
+  - jekyll-textile-converter
+  - octopress-quote-tag
+  - octopress-codefence
+  - octopress-solarized
+  - octopress-gist
+  - octopress-render-code
