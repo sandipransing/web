@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>nginx passenger configuration for rails application - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      nginx passenger configuration for rails application
+    
+    
+      
+        
+        
+      
+    
+  
+
+
+#user  nobody;
+user www-dat...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2010/02/nginx-passenger-configuration-for-rails/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">nginx passenger configuration for rails application</h1>
+    
+    
+      <p class="meta">
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>#user  nobody;
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>user www-data;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>worker_processes  2;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>#error_log  logs/error.log;
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>#error_log  logs/error.log  notice;
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>#error_log  logs/error.log  info;
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>#pid        logs/nginx.pid;
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>events &#x7b;
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    worker_connections  1024;
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>&#x7d;
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>http &#x7b;
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>    passenger_root /var/lib/gems/1.8/gems/passenger-2.2.8;
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>    passenger_ruby /usr/bin/ruby1.8;
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>    passenger_max_pool_size 3;
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>    include       mime.types;
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>default_type  application/octet-stream;
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>    #log_format  main  &lsquo;$remote_addr - $remote_user [$time_local] &ldquo;$request&rdquo; &rsquo;
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>    #                  &lsquo;$status $body_bytes_sent &ldquo;$http_referer&rdquo; &rsquo;
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>    #                  &lsquo;&ldquo;$http_user_agent&rdquo; &ldquo;$http_x_forwarded_for&rdquo;&rsquo;;
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>    #access_log  logs/access.log  main;
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>    sendfile        on;
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>    #tcp_nopush     on;
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'>    #keepalive_timeout  0;
+</div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'>    keepalive_timeout  65;
+</div></div><div data-line='34' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='35' class='code-highlight-row numbered'><div class='code-highlight-line'>    #gzip  on;
+</div></div><div data-line='36' class='code-highlight-row numbered'><div class='code-highlight-line'> server &#x7b;
+</div></div><div data-line='37' class='code-highlight-row numbered'><div class='code-highlight-line'>     listen 80;
+</div></div><div data-line='38' class='code-highlight-row numbered'><div class='code-highlight-line'>     server_name localhost;
+</div></div><div data-line='39' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='40' class='code-highlight-row numbered'><div class='code-highlight-line'>     root /home/josh/current/public;   # &lt;&mdash; be sure to point to &lsquo;public&rsquo;!
+</div></div><div data-line='41' class='code-highlight-row numbered'><div class='code-highlight-line'>     passenger_enabled on;
+</div></div><div data-line='42' class='code-highlight-row numbered'><div class='code-highlight-line'>     passenger_use_global_queue on;
+</div></div><div data-line='43' class='code-highlight-row numbered'><div class='code-highlight-line'>   &#x7d;
+</div></div><div data-line='44' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='45' class='code-highlight-row numbered'><div class='code-highlight-line'>    server &#x7b;
+</div></div><div data-line='46' class='code-highlight-row numbered'><div class='code-highlight-line'>        listen       80;
+</div></div><div data-line='47' class='code-highlight-row numbered'><div class='code-highlight-line'>        server_name  localhost;
+</div></div><div data-line='48' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='49' class='code-highlight-row numbered'><div class='code-highlight-line'>        #charset koi8-r;
+</div></div><div data-line='50' class='code-highlight-row numbered'><div class='code-highlight-line'>        #access_log  logs/host.access.log  main;
+</div></div><div data-line='51' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='52' class='code-highlight-row numbered'><div class='code-highlight-line'>        location / &#x7b;
+</div></div><div data-line='53' class='code-highlight-row numbered'><div class='code-highlight-line'>            root   html;
+</div></div><div data-line='54' class='code-highlight-row numbered'><div class='code-highlight-line'>            index  index.html index.htm;
+</div></div><div data-line='55' class='code-highlight-row numbered'><div class='code-highlight-line'>        &#x7d;
+</div></div><div data-line='56' class='code-highlight-row numbered'><div class='code-highlight-line'>     #error_page  404              /404.html;
+</div></div><div data-line='57' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='58' class='code-highlight-row numbered'><div class='code-highlight-line'>        # redirect server error pages to the static page /50x.html
+</div></div><div data-line='59' class='code-highlight-row numbered'><div class='code-highlight-line'>        #
+</div></div><div data-line='60' class='code-highlight-row numbered'><div class='code-highlight-line'>        error_page   500 502 503 504  /50x.html;
+</div></div><div data-line='61' class='code-highlight-row numbered'><div class='code-highlight-line'>        location = /50x.html &#x7b;
+</div></div><div data-line='62' class='code-highlight-row numbered'><div class='code-highlight-line'>            root   html;
+</div></div><div data-line='63' class='code-highlight-row numbered'><div class='code-highlight-line'>        &#x7d;
+</div></div><div data-line='64' class='code-highlight-row numbered'><div class='code-highlight-line'>   &#x7d;
+</div></div><div data-line='65' class='code-highlight-row numbered'><div class='code-highlight-line'>&#x7d;</div></div></pre></div></figure></p>
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    railsnginxpassenger
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2010/02/nginx-passenger-configuration-for-rails/" data-via="sandipransing" data-counturl="http://funonrails.com/2010/02/nginx-passenger-configuration-for-rails/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/02/activerecordreadonlyrecord-while/" title="Previous Post: ActiveRecord::ReadOnlyRecord while updating object fetched by joins">&laquo; ActiveRecord::ReadOnlyRecord while updating object fetched by joins</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/02/hasmany-through-association-for-rails/" title="Next Post: has_many => through association for rails polymorphic model">has_many => through association for rails polymorphic model &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

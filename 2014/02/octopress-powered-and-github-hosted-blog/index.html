@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Getting started: Octopress powered and Github hosted blog - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      Getting started: Octopress powered and Github hosted blog
+    
+    
+      
+        
+        
+      
+    
+  
+
+
+There are various blo...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2014/02/octopress-powered-and-github-hosted-blog/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">Getting started: Octopress powered and Github hosted blog</h1>
+    
+    
+      <p class="meta">
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>There are various blogging sites like <code>blogspot</code>, <code>wordpress</code>, <code>posterous</code>, and many more.
+Each has their own pros and cons and none of the engine gives us full power of ehhance our blogging experience.
+Anyone who has atleast some technical knowledge can start with octopress powered blog. This gives us the power of freedom of doing anything.
+So, Lets first understand about octopress framework and its features.</p>
+
+<h2>Octopress</h2>
+
+<blockquote><p>Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator. If you wanted to know more then it can be found <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">here</a></p></blockquote>
+
+<!--more-->
+
+
+<h2>Octopress Setup</h2>
+
+<p><strong>1.  Before starting make sure you have <code>git</code> installed.</strong>
+If not then do install using,
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install git</div></div></pre></div></figure></p>
+
+<p><strong>2.  Install <code>ruby 1.9.3</code> or higher</strong>
+Make git clone of octopress source code
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>git clone git://github.com/imathis/octopress.git octopress
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>cd octopress
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>bundle install</div></div></pre></div></figure></p>
+
+<h2>Installing Octopress theme</h2>
+
+<p>Install the default Octopress theme using
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake install</div></div></pre></div></figure></p>
+
+<p>In order to install custom themes,
+Please <a href="http://opthemes.com/">browse through themes</a> and make a selection for your blog.
+Once choice is made, you need to do <code>git clone</code> of theme source and install it.</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cd octopress
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>git clone <a href="https://github.com/kAworu/octostrap3">https://github.com/kAworu/octostrap3</a> .themes/octostrap3
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>rake &lsquo;install[octostrap3]&rsquo;</div></div></pre></div></figure></p>
+
+<p>To genrate infrastrcture for your blog i.e. <code>layouts</code>, <code>js</code> and <code>css</code>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake generate</div></div></pre></div></figure></p>
+
+<p>Edit <code>_config.yml</code> to configure blog <code>title</code>, <code>header</code>, <code>metadata</code>, <code>plugins</code> and <code>3rd Party Settings</code>.
+more on configurations can be found <a href="http://octopress.org/docs/configuring/">here</a>.</p>
+
+<p>We are almost done, and now ready to create our first blog post -
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake new_post[&ldquo;My first octopress post&rdquo;]
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>mkdir -p source/<em>posts
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>Creating new post: source/</em>posts/2014-02-09-my-first-octopress-post.markdown</div></div></pre></div></figure></p>
+
+<p>Now you can open a post inside editor and change as you wanted. More on writing markdown can be found <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet#wiki-html">here</a> and <a href="http://daringfireball.net/projects/markdown/syntax">here too</a></p>
+
+<p>Well ! Now its time to see, how our blog looks like -
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cd octopress
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>rake watch
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>rake preview</div></div></pre></div></figure></p>
+
+<p>Visit browser <code>http://localhost:4000</code> and you should be seeing blog running there :-)</p>
+
+<h2>Deployment</h2>
+
+<p>There are ways to deploy octopress blog. You can either deploy this blog on <code>heroku</code> or on <code>github</code> using github pages.</p>
+
+<p><strong>1. Heroku</strong>:
+As heroku provides free hosting (1 node) you may want to deploy at heroku.
+More on this deployment can be found <a href="http://def.reyssi.net/blog/2012/01/14/get-blogging-with-octopress-on-heroku/">here</a></p>
+
+<p><strong>2. With Github Project Pages</strong>:
+Github provides free static website hosting using github pages and deployment is also very simple.</p>
+
+<p>Note: You should have a github repository called <code>username.github.io</code></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cd octopress
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>rake setup_github_pages
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>git remote add origin git@github.com:username/username.github.io.git
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>rake generate
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>rake deploy</div></div></pre></div></figure></p>
+
+<p>Visit <code>http://username.github.io</code> to see your blog hosted on github.
+Also, do not forget to commit and push your source code on github.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>git add .
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>git commit -m &lsquo;octopress first blog&rsquo;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>git push origin source</div></div></pre></div></figure></p>
+
+<h2>Adding custom domain</h2>
+
+<p>First create a <code>CNAME</code> file and add naked domain name to it.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>echo &lsquo;funonrails.com&rsquo; >> source/CNAME</div></div></pre></div></figure></p>
+
+<p>Then goto your domain provider website and point your <code>domain</code> i.e A record to github ip address <code>204.232.175.78</code>.</p>
+
+<h2>Adding subdomain</h2>
+
+<p>If you want to point subdomain to github blog then -
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>echo &lsquo;blog.sandipransing.in&rsquo; >> source/CNAME</div></div></pre></div></figure></p>
+
+<p>then go to your domain provider website and create a CNAME record for your <code>subdomain</code> i.e. <code>blog</code> pointing to <code>yourname.github.io.</code>
+If you want more help on this then please see <a href="http://octopress.org/docs/deploying/github/">here</a> and also <a href="http://help.github.com/pages/#custom_domains">here</a></p>
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    octopressgithub-pages
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2014/02/octopress-powered-and-github-hosted-blog/" data-via="sandipransing" data-counturl="http://funonrails.com/2014/02/octopress-powered-and-github-hosted-blog/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/03/what-is-new-in-rails-3/" title="Previous Post: what is new in rails 3">&laquo; what is new in rails 3</a>
+      
+      
+        <a class="basic-alignment right" href="/2014/02/writing-octopress-blog-posts-using-markdown/" title="Next Post: Writing Octopress blog posts using markdown">Writing Octopress blog posts using markdown &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Accessing View Helpers & Routes in Rails Console, Rake Tasks and Mailers - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      Accessing View Helpers & Routes in Rails Console, Rake Tasks and Mailers
+    
+    
+      
+        
+        
+      
+    
+  
+
+
+While ...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2011/03/accessing-view-helpers-routes-in-rails/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">Accessing View Helpers & Routes in Rails Console, Rake Tasks and Mailers</h1>
+    
+    
+      <p class="meta">
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>While looking for accessing rails template tags to be accessed on rails console in order to examine whatever written needs to be correct, found that - rails template tags can be tested on rails console using <em>helper</em> object</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">display_amount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">number_to_currency</span> <span class="n">amount</span><span class="p">,</span> <span class="ss">:precision</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span><br/>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Helpers on rails console</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">rails</span> <span class="n">c</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="p">.</span><span class="nf">text_field_tag</span> <span class="ss">:name</span><span class="p">,</span> <span class="s1">&lsquo;sandip&rsquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;&lt;input id=&rdquo;</span><span class="nb">name</span><span class="s2">&ldquo; name=&rdquo;</span><span class="nb">name</span><span class="s2">&ldquo; type=&rdquo;</span><span class="n">text</span><span class="s2">&ldquo; value=&rdquo;</span><span class="n">sandip</span><span class="s2">&ldquo; /&gt;&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="p">.</span><span class="nf">link_to</span> <span class="s1">&lsquo;my blog&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;<a href="http://funonrails.com">http://funonrails.com</a>&rsquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;&lt;a href=&lsquo;'<a href="http://funonrails.com&amp;gt;my">http://funonrails.com&amp;gt;my</a> blog&lt;/a&gt;&rdquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="p">.</span><span class="nf">display_amount</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;$2,000&rdquo;</span></div></div></pre></div></figure></p>
+
+<p>isn&rsquo;t it cool ? though it&rsquo;s not finished yet. we can include helper files on console and access custom helper methods too
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="no">ActionView</span><span class="o">::</span><span class="no">Helpers</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="no">Object</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="no">ApplicationHelper</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="no">Object</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="no">ActionView</span><span class="o">::</span><span class="no">Helpers</span><span class="o">::</span><span class="no">ApplicationHelper</span><span class="o">^</span><span class="no">C</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">display_amount</span> <span class="mi">2500</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;$2,500&rdquo;</span></div></div></pre></div></figure></p>
+
+<p>Using same way one can make use helpers in rake tasks file. Make sure environment is getting loaded into rake task.</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="n">lib</span><span class="o">/</span><span class="n">tasks</span><span class="o">/</span><span class="n">helper_task</span><span class="p">.</span><span class="nf">rake</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">namespace</span> <span class="ss">:helper</span> <span class="k">do</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="n">desc</span> <span class="s1">&lsquo;Access helper methods in rake tasks&rsquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="n">task</span> <span class="ss">:test</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">include</span> <span class="no">ActionView</span><span class="o">::</span><span class="no">Helpers</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">include</span> <span class="no">ApplicationHelper</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nb">puts</span> <span class="n">display_amount</span> <span class="mi">2500</span>  <span class="c1">#=&gt; &ldquo;$2,500&rdquo;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="k">end</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Accessing helpers in Action Mailers</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Notifier</span> <span class="o">&lt;</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">add_template_helper</span><span class="p">(</span><span class="no">ApplicationHelper</span><span class="p">)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">subject</span> <span class="s2">&ldquo;Hello </span><span class="si">#&#x7b;</span><span class="n">user</span><span class="p">.</span><span class="nf">name</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">from</span>          <span class="s1">&lsquo;<a href="&#109;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#110;&#x6f;&#45;&#114;&#x65;&#112;&#108;&#121;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#x6e;&#111;&#45;&#x72;&#101;&#x70;&#108;&#x79;&#64;&#101;&#120;&#97;&#109;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#109;</a>&rsquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">recipients</span>    <span class="n">user</span><span class="p">.</span><span class="nf">email</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">sent_on</span>       <span class="no">Time</span><span class="p">.</span><span class="nf">now</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@user</span> <span class="o">=</span> <span class="n">user</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span></div></div></pre></div></figure></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># app/views/notifier/greet.html.erb
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>Hi <span class="err">&lt;</span>%= @user.try(:name)%&gt;,
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>Greetings !!!
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>You have got <span class="err">&lt;</span>%= display_amount(3000) %&gt;</div></div></pre></div></figure></p>
+
+<h2>Rails routes on rails console</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">rails</span> <span class="n">c</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="p">.</span><span class="nf">root_url</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;<a href="http://www.example.com/">http://www.example.com/</a>&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="p">.</span><span class="nf">change_password_path</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;/change/password&rdquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="p">.</span><span class="nf">change_password_url</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;<a href="http://www.example.com/change/password">http://www.example.com/change/password</a>&rdquo;</span></div></div></pre></div></figure></p>
+
+<p>Now you may have got requirement to access routes inside rake tasks. Here is the way to do that -
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/tasks/route_test.rake</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">namespace</span> <span class="ss">:routes</span> <span class="k">do</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="n">desc</span> <span class="s1">&lsquo;Access helper methods in rake tasks&rsquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="n">task</span> <span class="ss">:test</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">include</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">UrlWriter</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">default_url_options</span><span class="p">[</span><span class="ss">:host</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&ldquo;myroutes.check&rdquo;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nb">puts</span> <span class="n">root_url</span>  <span class="c1">#=&gt; &ldquo;<a href="http://myroutes.check">http://myroutes.check</a>&rdquo;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="k">end</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Optionally you can set value of host parameter from action mailer host configuration using</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">default_url_options</span><span class="p">[</span><span class="ss">:host</span><span class="p">]</span> <span class="o">=</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">default_url_options</span><span class="p">[</span><span class="ss">:host</span><span class="p">]</span></div></div></pre></div></figure></p>
+
+<p>Attention: This is my preferred way to use helpers and routes when needed and there may have other choices to do same. Anyone having better approach please feel free to add your valuable comment. I will definitely incorporate that in further developments.
+Got Easy, Cheers ;)</p>
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    rails
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2011/03/accessing-view-helpers-routes-in-rails/" data-via="sandipransing" data-counturl="http://funonrails.com/2011/03/accessing-view-helpers-routes-in-rails/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/03/monitor-delayed-job-in-rails/" title="Previous Post: Monitor Delayed Job in rails">&laquo; Monitor Delayed Job in rails</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/03/number-to-indian-currency-helper-for-rails/" title="Next Post: number to indian currency helper for rails with WebRupee">number to indian currency helper for rails with WebRupee &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ruby on rails installation on fresh ubuntu machine - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      ruby on rails installation on fresh ubuntu machine
+    
+    
+      
+        
+        
+      
+    
+  
+
+
+Ruby On Rails Installation o...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2010/03/ruby-on-rails-installation-on-fresh-ubuntu/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">ruby on rails installation on fresh ubuntu machine</h1>
+    
+    
+      <p class="meta">
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Ruby On Rails Installation on fresh ubuntu machine</p>
+
+<p>Installation steps are applicable to ubuntu versions interpid, karmic koala. Make necessary changes according to package manager provided by other linux operating systems in order install ruby and rails.</p>
+
+<p>Before getting started to installations make sure to build essential packages on fresh ubutnu machine. Ubuntu machine has built in apt-get package manager and that i loves because it is very to use as compared to other OS.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install build-essential</div></div></pre></div></figure></p>
+
+<p>Now there are many versions of ruby available including latest 1.9.2</p>
+
+<p>But would like to prefer ruby version 1.8.7 as it is the most stable version as of now. I would like to recommend installtion of Ruby Enterprise Edition (REE) version as it is uses minimal system resources and consumes less memory.</p>
+
+<p>Instrunctions to setup normal ruby and rails environment</p>
+
+<h2>1. Install Ruby, Rails, MySQL, irb and neceesary packages using single command</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install ruby ri rdoc mysql-server libmysql-ruby ruby1.8-dev irb1.8 libdbd-mysql-perl libdbi-perl libmysql-ruby1.8 libmysqlclient15off libnet-daemon-perl libplrpc-perl libreadline-ruby1.8 libruby1.8 mysql-client-5.1 mysql-common mysql-server-5.1 rdoc1.8 ri1.8 ruby1.8 irb libopenssl-ruby libopenssl-ruby1.8 libhtml-template-perl mysql-server-core-5.1 libmysqlclient16 libreadline5 psmisc</div></div></pre></div></figure></p>
+
+<h2>2. Install ruby gems</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>wget <a href="http://rubyforge.org/frs/download.php/60718/rubygems-1.3.5.tgz">http://rubyforge.org/frs/download.php/60718/rubygems-1.3.5.tgz</a>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>tar xvzf rubygems-1.3.5.tgz
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>cd rubygems-1.3.5
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo ruby setup.rb</div></div></pre></div></figure></p>
+
+<h2>3. Create symbolic links to installation paths</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo ln -s /usr/bin/gem1.8 /usr/local/bin/gem
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo ln -s /usr/bin/ruby1.8 /usr/local/bin/ruby
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo ln -s /usr/bin/rdoc1.8 /usr/local/bin/rdoc
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo ln -s /usr/bin/ri1.8 /usr/local/bin/ri
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo ln -s /usr/bin/irb1.8 /usr/local/bin/irb</div></div></pre></div></figure></p>
+
+<h2>4. Setup gemrc in order to avoid rdoc installation and to setup gem sources.</h2>
+
+<p>Add following lines to ~/.gemrc file
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>&mdash;
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>gem: &ndash;no-ri &ndash;no-rdoc
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>:benchmark: false
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>:verbose: true
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>:backtrace: false
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>:update_sources: true
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>:sources:
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>- <a href="http://gems.rubyforge.org">http://gems.rubyforge.org</a>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>- <a href="http://gems.github.com">http://gems.github.com</a>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>:bulk_threshold: 1000</div></div></pre></div></figure></p>
+
+<h2>5. Install rails</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo gem install rails &ndash;no-rdoc &ndash;no-ri</div></div></pre></div></figure></p>
+
+<h2>Ruby Enterprise Edition i.e. REE (ruby 1.8.7) Installation</h2>
+
+<p>This will install ruby, rails, mysql, nginx and passenger</p>
+
+<h4>1. Download REE setup and install it</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>wget <a href="http://rubyforge.org/frs/download.php/68719/ruby-enterprise-1.8.7-2010.01.tar.gz">http://rubyforge.org/frs/download.php/68719/ruby-enterprise-1.8.7-2010.01.tar.gz</a> /opt/ruby
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>cd /opt
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>./ruby/installer</div></div></pre></div></figure></p>
+
+<h4>2. Add ruby inside path</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>vi ~/.bashrc
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'># Add following line at the end of file
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>export PATH=/opt/ruby/bin:$PATH</div></div></pre></div></figure></p>
+
+<p>Thanks to @vwadhwani!</p>
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    rubyinstallationrailsubuntu
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2010/03/ruby-on-rails-installation-on-fresh-ubuntu/" data-via="sandipransing" data-counturl="http://funonrails.com/2010/03/ruby-on-rails-installation-on-fresh-ubuntu/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/03/download-rails-api-to-work-offline/" title="Previous Post: Download Rails API to work offline">&laquo; Download Rails API to work offline</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/03/nginx-and-thin-installation/" title="Next Post: nginx and thin installation and configuration">nginx and thin installation and configuration &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

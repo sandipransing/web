@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>twitter-bootstrap form builder for rails - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      twitter-bootstrap form builder for rails
+    
+    
+      
+        
+        
+      
+    
+  
+
+
+twitter-bootstrap is pluggable css sui...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2012/01/twitter-bootstrap-form-builder-for-rails/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">twitter-bootstrap form builder for rails</h1>
+    
+    
+      <p class="meta">
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="twitter.github.com/bootstrap/">twitter-bootstrap</a> is pluggable css suit provided by twitter.
+To know more about how to get started on it click <a href="http://www.funonrails.com/2011/11/rails-311-haml-sass-jquery-coffee-rails">here</a>.</p>
+
+<p>Below post will help you out in getting started bootstrap css with rails app. One need to add below files to helpers directory.
+MainForm can be used as base version of form builder and can be overriden for its subsequent use inside other custom form builders.</p>
+
+<ol>
+<li>Main Form
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/helpers/main_form.rb </span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">MainForm</span> <span class="o">&lt;</span> <span class="no">ActionView</span><span class="o">::</span><span class="no">Helpers</span><span class="o">::</span><span class="no">FormBuilder</span> <span class="c1"># NestedForm::Builder</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">CSS</span> <span class="o">=</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:label</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;label-control&rsquo;</span><span class="p">,</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:hint</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;hint&rsquo;</span><span class="p">,</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:hint_ptr</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;hint-pointer&rsquo;</span><span class="p">,</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;help-inline&rsquo;</span><span class="p">,</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:field_error</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;error&rsquo;</span><span class="p">,</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:main_class</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;clearfix&rsquo;</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">&#x7d;</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">FIELDS</span> <span class="o">=</span> <span class="sx">%w(radio_button check_box text_field text_area password_field select file_field collection_select email_field date_select)</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">main_class</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="kp">nil</span><span class="p">)</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="no">CSS</span><span class="p">[</span><span class="ss">:main_class</span><span class="p">]</span> <span class="k">unless</span> <span class="n">error</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">[</span><span class="no">CSS</span><span class="p">[</span><span class="ss">:main_class</span><span class="p">],</span> <span class="no">CSS</span><span class="p">[</span><span class="ss">:field_error</span><span class="p">]].</span><span class="nf">join</span><span class="p">(</span><span class="s1">&lsquo; &rsquo;</span><span class="p">)</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">required</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">object</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">validators_on</span><span class="p">(</span><span class="nb">name</span><span class="p">).</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:class</span><span class="p">).</span><span class="nf">include?</span><span class="p">(</span><span class="no">ActiveModel</span><span class="o">::</span><span class="no">Validations</span><span class="o">::</span><span class="no">PresenceValidator</span><span class="p">)</span> <span class="k">rescue</span> <span class="kp">nil</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">&#x7b;&#x7d;)</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">link</span> <span class="o">=</span> <span class="n">options</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="ss">:return</span><span class="p">,</span> <span class="s2">&ldquo;/&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="s2">&ldquo;Cancel&rdquo;</span><span class="p">,</span> <span class="ss">:href</span> <span class="o">=&gt;</span> <span class="n">link</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;btn_form button np_cancel_btn </span><span class="si">#&#x7b;</span><span class="n">options</span><span class="p">[</span><span class="ss">:class</span><span class="p">]</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&ldquo;Save&rdquo;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">&#x7b;&#x7d;)</span>
+</div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">options</span><span class="p">[</span><span class="ss">:class</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&ldquo;send_form_btn </span><span class="si">#&#x7b;</span><span class="n">options</span><span class="p">[</span><span class="ss">:class</span><span class="p">]</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">super</span>
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">label_class</span>
+</div></div><div data-line='34' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">&#x7b;</span><span class="ss">:class</span> <span class="o">=&gt;</span> <span class="no">CSS</span><span class="p">[</span><span class="ss">:label</span><span class="p">]&#x7d;</span>
+</div></div><div data-line='35' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='36' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='37' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">label_tag</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+</div></div><div data-line='38' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># Incase its a mandatory field, the &lsquo;<em>&rsquo; is added to the field.</span>
+</div></div><div data-line='39' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">txt</span> <span class="o">=</span> <span class="n">arg</span><span class="p">[</span><span class="ss">:label</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">arg</span><span class="p">[</span><span class="ss">:label</span><span class="p">].</span><span class="nf">to_s</span> <span class="o">||</span> <span class="n">attribute</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">titleize</span>
+</div></div><div data-line='40' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">txt</span><span class="o">&lt;&lt;</span> <span class="s1">&lsquo;</em>&rsquo;</span> <span class="k">if</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="ss">:required</span><span class="p">]</span> <span class="o">||</span> <span class="n">required</span><span class="p">(</span><span class="n">attribute</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="n">arg</span><span class="p">[</span><span class="ss">:required</span><span class="p">]</span> <span class="o">!=</span> <span class="kp">false</span>
+</div></div><div data-line='41' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">label</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">txt</span><span class="p">,</span> <span class="n">label_class</span><span class="p">)</span>
+</div></div><div data-line='42' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='43' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='44' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">error_tag</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+</div></div><div data-line='45' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">errs</span> <span class="o">=</span> <span class="n">field_error</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+</div></div><div data-line='46' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="n">errs</span><span class="p">.</span><span class="nf">first</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="no">CSS</span><span class="p">[</span><span class="ss">:error</span><span class="p">])</span> <span class="k">if</span> <span class="n">errs</span><span class="p">.</span><span class="nf">present?</span>
+</div></div><div data-line='47' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='48' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='49' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">field_error</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+</div></div><div data-line='50' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="k">if</span> <span class="vi">@object</span> <span class="o">&amp;&amp;</span> <span class="vi">@object</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">blank?</span>
+</div></div><div data-line='51' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="vi">@object</span><span class="p">.</span><span class="nf">errors</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="k">if</span> <span class="n">method_name</span> <span class="o">!=</span> <span class="s1">&lsquo;file_field&rsquo;</span>
+</div></div><div data-line='52' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@object</span><span class="p">.</span><span class="nf">errors</span><span class="p">[</span><span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="n">attribute</span><span class="p">.</span><span class="nf">to_s</span><span class="si">&#x7d;</span><span class="s2"><em>file_name&rdquo;</span><span class="p">]</span> <span class="o">|</span> <span class="vi">@object</span><span class="p">.</span><span class="nf">errors</span><span class="p">[</span><span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="n">attribute</span><span class="p">.</span><span class="nf">to_s</span><span class="si">&#x7d;</span><span class="s2"></em>file_size&rdquo;</span><span class="p">]</span> <span class="o">|</span> <span class="vi">@object</span><span class="p">.</span><span class="nf">errors</span><span class="p">[</span><span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="n">attribute</span><span class="p">.</span><span class="nf">to_s</span><span class="si">&#x7d;</span><span class="s2">_content_type&rdquo;</span><span class="p">]</span>
+</div></div><div data-line='53' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='54' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='55' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">hint_tag</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+</div></div><div data-line='56' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">hintPtr</span> <span class="o">=</span> <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="s1">&lsquo;&rsquo;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="no">CSS</span><span class="p">[</span><span class="ss">:hint_ptr</span><span class="p">])</span>
+</div></div><div data-line='57' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">hintT</span> <span class="o">=</span> <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="n">txt</span> <span class="o">+</span> <span class="n">hintPtr</span><span class="p">,</span> <span class="p">&#x7b;</span><span class="ss">:class</span> <span class="o">=&gt;</span> <span class="no">CSS</span><span class="p">[</span><span class="ss">:hint</span><span class="p">]&#x7d;,</span> <span class="kp">false</span><span class="p">)</span>
+</div></div><div data-line='58' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='59' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='60' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">spinner_tag</span>
+</div></div><div data-line='61' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@template</span><span class="p">.</span><span class="nf">image_tag</span><span class="p">(</span><span class="s1">&lsquo;spinner.gif&rsquo;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="ss">:spinner</span><span class="p">,</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:spinner</span><span class="p">)</span>
+</div></div><div data-line='62' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='63' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>  </div></div></pre></div></figure></li>
+</ol>
+
+
+<!--more-->
+
+
+<p>ZeroForm is custom form builder which is inherited from <code>main_form</code> and its going to be actually used inside forms.
+Feel free to make custom form related changes inside this</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/helpers/zero_form.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">ZeroForm</span> <span class="o">&lt;</span> <span class="no">MainForm</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># Overridden label_class here as we dont need class to be applied</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">label_class</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">&#x7b;&#x7d;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">create_tagged_field</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">define_method</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">attribute</span><span class="p">,</span> <span class="o"><em></span><span class="n">args</span><span class="o">|</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">arg</span> <span class="o">=</span> <span class="n">args</span><span class="p">.</span><span class="nf">last</span> <span class="o">&amp;&amp;</span> <span class="n">args</span><span class="p">.</span><span class="nf">last</span><span class="p">.</span><span class="nf">is_a?</span><span class="p">(</span><span class="no">Hash</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">args</span><span class="p">.</span><span class="nf">last</span> <span class="o">||</span> <span class="p">&#x7b;&#x7d;</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1"># Bypass form-builder and do your own custom stuff!</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">return</span> <span class="k">super</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="o"></em></span><span class="n">args</span><span class="p">)</span> <span class="k">if</span> <span class="n">arg</span><span class="p">[</span><span class="ss">:skip</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">args</span><span class="p">.</span><span class="nf">last</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="ss">:skip</span><span class="p">)</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">errT</span> <span class="o">=</span> <span class="n">error_tag</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">labelT</span> <span class="o">=</span> <span class="n">label_tag</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">mainT</span> <span class="o">=</span> <span class="k">super</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">baseT</span> <span class="o">=</span> <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="n">mainT</span> <span class="o">+</span> <span class="n">errT</span><span class="p">)</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">hintT</span> <span class="o">=</span> <span class="n">hint_tag</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="ss">:hint</span><span class="p">])</span> <span class="k">if</span> <span class="n">arg</span><span class="p">[</span><span class="ss">:hint</span><span class="p">]</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">spinnerT</span> <span class="o">=</span> <span class="n">spinner_tag</span> <span class="k">if</span> <span class="n">arg</span><span class="p">[</span><span class="ss">:spinner</span><span class="p">]</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">allT</span> <span class="o">=</span> <span class="n">labelT</span> <span class="o">+</span> <span class="n">baseT</span> <span class="o">+</span> <span class="n">spinnerT</span> <span class="o">+</span> <span class="n">hintT</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="n">allT</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="n">main_class</span><span class="p">(</span><span class="n">errT</span><span class="p">))</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">FIELDS</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">create_tagged_field</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>In order to use Nested Forms you need to extend MainForm with NestedForm Builder</p>
+
+<p><strong>Integrate NestedForm with FormBuilder</strong></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">MainForm</span> <span class="o">&lt;</span> <span class="no">NestedForm</span><span class="o">::</span><span class="no">Builder</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p><strong>View Form</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@address</span> <span class="o">||=</span> <span class="no">Address</span><span class="p">.</span><span class="nf">new</span><span class="p">,</span> <span class="ss">:builder</span> <span class="o">=&gt;</span> <span class="no">ZeroForm</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:street_address</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">text_area</span> <span class="ss">:detail_address</span><span class="p">,</span> <span class="ss">:rows</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:city</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">select</span> <span class="ss">:state</span><span class="p">,</span> <span class="sx">%w(US IN AUS UK UKRAINE)</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">submit</span> <span class="s1">&lsquo;Save &amp; Continue&rsquo;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;btn primary&rsquo;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">link_to</span> <span class="s1">&lsquo;Skip »&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;#&rsquo;</span></div></div></pre></div></figure></p>
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    bootstrapform-builderrails 3
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2012/01/twitter-bootstrap-form-builder-for-rails/" data-via="sandipransing" data-counturl="http://funonrails.com/2012/01/twitter-bootstrap-form-builder-for-rails/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/01/get-models-used-in-rails-app/" title="Previous Post: Get models list inside rails app">&laquo; Get models list inside rails app</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/01/mongoid-array-field-and-rails-form/" title="Next Post: mongoid array field and rails form">mongoid array field and rails form &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

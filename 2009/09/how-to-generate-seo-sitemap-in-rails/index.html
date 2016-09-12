@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>How to generate SEO sitemap in rails ? - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      How to generate SEO sitemap in rails ?
+    
+    
+      
+        
+        
+      
+    
+  
+
+
+What is sitemap ?
+
+Sitemap is nothing bu...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2009/09/how-to-generate-seo-sitemap-in-rails/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">How to generate SEO sitemap in rails ?</h1>
+    
+    
+      <p class="meta">
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>What is sitemap ?</h2>
+
+<p>Sitemap is nothing but a .xml file containing urls available on your website</p>
+
+<p>It contains URL, last modified date, frequency of content change and priority ( between 0..1 )</p>
+
+<h2>Why we need sitemap ?</h2>
+
+<p>We can submit sitemap file to search engine. It will help them in analysing what urls on your site are available for crawling.</p>
+
+<h2>What is xml pattern ?</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>   <span class="cp">&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?&gt;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nt">&lt;urlset</span> <span class="na">xmlns=</span><span class="s">&ldquo;<a href="http://www.sitemaps.org/schemas/sitemap/0.9">http://www.sitemaps.org/schemas/sitemap/0.9</a>&rdquo;</span><span class="nt">&gt;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="nt">&lt;url&gt;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>           <span class="nt">&lt;loc&gt;</span><a href="http://www.example.com/">http://www.example.com/</a><span class="nt">&lt;/loc&gt;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>           <span class="nt">&lt;lastmod&gt;</span>2005-01-01<span class="nt">&lt;/lastmod&gt;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>           <span class="nt">&lt;changefreq&gt;</span>monthly<span class="nt">&lt;/changefreq&gt;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>           <span class="nt">&lt;priority&gt;</span>0.8<span class="nt">&lt;/priority&gt;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="nt">&lt;/url&gt;</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>       &hellip;
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>       &hellip;
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">&lt;/urlset&gt;</span></div></div></pre></div></figure></p>
+
+<h2>What will be the path for sitemap ?</h2>
+
+<p><strong>&ldquo;www.example.com/sitemap.xml&rdquo;</strong></p>
+
+<h4>Are we going to generate sitemap manually ?</h4>
+
+<p>No&hellip; there is <code>mephisto sitemap plugin</code> and you can make can use it.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/plugin install <a href="http://svn.appelsiini.net/svn/rails/plugins/mephisto_sitemap/">http://svn.appelsiini.net/svn/rails/plugins/mephisto_sitemap/</a></div></div></pre></div></figure></p>
+
+<h4>Am i needed to generate to sitemap for each request ?</h4>
+
+<p>No&hellip; we can generate it in background task daily basis.</p>
+
+<h4>How it will be accessed for request to sitemap ?</h4>
+
+<p>We can define path to local file in routes</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>map.connect &ldquo;sitemap.xml&rdquo;, :controller => :sitemap</div></div></pre></div></figure></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">SitemapController</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">index</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">render</span> <span class="s2">&ldquo;some local file path&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">.</span><span class="nf">.</span><span class="o">.</span></div></div></pre></div></figure></p>
+
+<p>Here are some reference links :</p>
+
+<ol>
+<li><a href="http://www.fortytwo.gr/blog/19/Generating-Sitemaps-With-Rails">http://www.fortytwo.gr/blog/19/Generating-Sitemaps-With-Rails</a></li>
+<li><a href="http://www.bestechvideos.com/2008/07/04/ruby-plus-71-how-to-create-a-seo-sitemap-for-rails-apps">http://www.bestechvideos.com/2008/07/04/ruby-plus-71-how-to-create-a-seo-sitemap-for-rails-apps</a></li>
+</ol>
+
+
+<h2>Comments</h2>
+
+<p><strong>info ternak</strong></p>
+
+<p>i got lots of information from your site, thank for your sharing… :)</p>
+
+<p><strong>Elena Morgan</strong></p>
+
+<p>Search engines generate nearly 90% of all Internet traffic and are responsible for 55% of all E-commerce transactions. Today, it is essential for all online businesses to make SEO an integral part of their online business strategy.</p>
+
+<p>So I would like to recommend one of my client who helps you define, evolve and implement a powerful SEO strategy to leverage your online business potential</p>
+
+<p><a href="http://www.redalkemi.com/">http://www.redalkemi.com/</a></p>
+
+<p><strong>sandipransing</strong></p>
+
+<p>Link mentioned is very good !
+but it has limitation that we will not have any control over urls that will be submitted to search engines :)</p>
+
+<p><strong>Sethupathi</strong></p>
+
+<p><em>How to create sitemap.xml</em></p>
+
+<p>From the following link you can generate the site-map.xml if your application is not in https. Just by giving the application link it will generate the xml for you.</p>
+
+<p><a href="http://www.xml-sitemaps.com/">http://www.xml-sitemaps.com/</a></p>
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    seorails
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2009/09/how-to-generate-seo-sitemap-in-rails/" data-via="sandipransing" data-counturl="http://funonrails.com/2009/09/how-to-generate-seo-sitemap-in-rails/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/09/what-is-new-in-edge-rails-2-3-3/" title="Previous Post: What is new in edge rails 2.3.3 ?">&laquo; What is new in edge rails 2.3.3 ?</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/09/4-steps-to-install-nginx-with-passenger/" title="Next Post: 4 steps to install nginx with passenger">4 steps to install nginx with passenger &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>What is new in edge rails 2.3.3 ? - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      What is new in edge rails 2.3.3 ?
+    
+    
+      
+        
+        
+      
+    
+  
+
+
+Rails community has released rails 2.3.3 rece...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2009/09/what-is-new-in-edge-rails-2-3-3/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">What is new in edge rails 2.3.3 ?</h1>
+    
+    
+      <p class="meta">
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Rails community has released rails 2.3.3 recently with major upgrades and several bug fixes added.</p>
+
+<p>On the other hand, <code>rails 3</code> ( i.e. merge of rails and merb framework ) is supposed to be officially get released in this May.</p>
+
+<p>Lets see what are the notable features added in rails 2.3.3</p>
+
+<h2>1. Rack</h2>
+
+<p>Rack is an abstraction built on the top of rails framework</p>
+
+<p>It provides minimal interface between webservers supporting ruby ( like  apache-mongrel, nginx-passenger ) and rails framework.
+Gives access to middleware goodness i.e. wrapping HTML requests and response in simple way
+unifies and distills the API for web servers, web frameworks, and software in between</p>
+
+<p><a href="http://guides.rubyonrails.org/rails_on_rack.html">read more …</a></p>
+
+<h2>2. Metal</h2>
+
+<p>It is a subset of rack middleware specially designed to integrate with rails application.</p>
+
+<p>Whenever you need achieve raw speed for certain requests by skipping action controller stack.</p>
+
+<p><a href="http://weblog.rubyonrails.org/2008/12/17/introducing-rails-metal">read more …</a></p>
+
+<h2>3. Engines</h2>
+
+<p>It was a plugin that got merged in rails core.</p>
+
+<p>It is used for sharing controllers, models and views seamlessly from within a plugin to your rails application.</p>
+
+<p><a href="http://rails-engines.org/news/2009/02/02/engines-in-rails-2-3/">read more …</a></p>
+
+<h2>4. Templates</h2>
+
+<p>These are the ruby files which describes which gems, plugins and initiliazers  has to be added while creating new rails project.</p>
+
+<p><a href="http://rails-engines.org/news/2009/02/02/engines-in-rails-2-3/">read more …</a></p>
+
+<h2>5. Nested Forms</h2>
+
+<p>Earlier nested forms for has_one and has_many associations wasn’t there in rails.
+this release added nested forms complex associations in models.</p>
+
+<p><a href="http://weblog.rubyonrails.org/2009/1/26/nested-model-forms">read more here…</a> and <a href="http://ryandaigle.com/articles/2009/2/1/what-s-new-in-edge-rails-nested-attributes">also see here …</a></p>
+
+<h2>Edge rails Installation</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install rails &ndash;source <a href="http://gems.rubyonrails.org">http://gems.rubyonrails.org</a></div></div></pre></div></figure></p>
+
+<p>I am  always thankful to rails community for continuous improvements to rails core.
+Cheers, now rails is getting its way !</p>
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    rails
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2009/09/what-is-new-in-edge-rails-2-3-3/" data-via="sandipransing" data-counturl="http://funonrails.com/2009/09/what-is-new-in-edge-rails-2-3-3/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/08/ruby-on-rails-search-engine/" title="Previous Post: Ruby On Rails Search Engine Optimization (SEO)">&laquo; Ruby On Rails Search Engine Optimization (SEO)</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/09/how-to-generate-seo-sitemap-in-rails/" title="Next Post: How to generate SEO sitemap in rails ?">How to generate SEO sitemap in rails ? &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

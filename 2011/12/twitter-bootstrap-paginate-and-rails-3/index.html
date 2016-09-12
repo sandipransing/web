@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>twitter bootstrap paginate and rails 3 - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      twitter bootstrap paginate and rails 3
+    
+    
+      
+        
+        
+      
+    
+  
+
+
+Twitter bootstrap is css toolkit for rap...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2011/12/twitter-bootstrap-paginate-and-rails-3/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">twitter bootstrap paginate and rails 3</h1>
+    
+    
+      <p class="meta">
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Twitter bootstrap is css toolkit for rapid front-end UI development.
+To get will-paginate working with bootstrap css we need to override default pagination link renderer.</p>
+
+<p>Using Bootstrap-sass for rails 3
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># Gemfile
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>gem &lsquo;sass-rails&rsquo;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>gem &lsquo;bootstrap-sass&rsquo;</div></div></pre></div></figure></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nn">#</span> <span class="nt">app</span><span class="o">/</span><span class="nt">assets</span><span class="o">/</span><span class="nt">stylesheets</span><span class="o">/</span><span class="nt">application</span><span class="nc">.css.sass</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">// Place all the styles related to the home controller here.
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>// They will automatically be included in application.css.
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>// You can use Sass (SCSS) here: <a href="http://sass-lang.com/">http://sass-lang.com/</a></span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">//=</span> <span class="nt">require</span> <span class="nt">bootstrap</span></div></div></pre></div></figure></p>
+
+<p>Add WillPaginate LinkRenderer to intitializer
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># config/initializers/will_paginate.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">WillPaginate</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">ActiveRecord</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">module</span> <span class="nn">RelationMethods</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="kp">alias_method</span> <span class="ss">:per</span><span class="p">,</span> <span class="ss">:per_page</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="kp">alias_method</span> <span class="ss">:num_pages</span><span class="p">,</span> <span class="ss">:total_pages</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="kp">alias_method</span> <span class="ss">:total_count</span><span class="p">,</span> <span class="ss">:count</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">ActionView</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">def</span> <span class="nf">will_paginate</span><span class="p">(</span><span class="n">collection</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="p">&#x7b;&#x7d;)</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">options</span><span class="p">[</span><span class="ss">:inner_window</span><span class="p">]</span> <span class="o">||=</span> <span class="mi">0</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">options</span><span class="p">[</span><span class="ss">:outer_window</span><span class="p">]</span> <span class="o">||=</span> <span class="mi">0</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">options</span><span class="p">[</span><span class="ss">:class</span><span class="p">]</span> <span class="o">||=</span> <span class="s1">&lsquo;pagination pull-left&rsquo;</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">options</span><span class="p">[</span><span class="ss">:renderer</span><span class="p">]</span> <span class="o">||=</span> <span class="no">BootstrapLinkRenderer</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">super</span><span class="p">.</span><span class="nf">try</span> <span class="ss">:html_safe</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">class</span> <span class="nc">BootstrapLinkRenderer</span> <span class="o">&lt;</span> <span class="no">LinkRenderer</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="kp">protected</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">def</span> <span class="nf">html_container</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">tag</span> <span class="ss">:div</span><span class="p">,</span> <span class="n">tag</span><span class="p">(</span><span class="ss">:ul</span><span class="p">,</span> <span class="n">html</span><span class="p">),</span> <span class="n">container_attributes</span>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">def</span> <span class="nf">page_number</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">tag</span> <span class="ss">:li</span><span class="p">,</span> <span class="n">link</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="ss">:rel</span> <span class="o">=&gt;</span> <span class="n">rel_value</span><span class="p">(</span><span class="n">page</span><span class="p">)),</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="s1">&lsquo;active&rsquo;</span> <span class="k">if</span> <span class="n">page</span> <span class="o">==</span> <span class="n">current_page</span><span class="p">)</span>
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">def</span> <span class="nf">previous_or_next_page</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">classname</span><span class="p">)</span>
+</div></div><div data-line='34' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">tag</span> <span class="ss">:li</span><span class="p">,</span> <span class="n">link</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">page</span> <span class="o">||</span> <span class="s1">&lsquo;javascript:void(0)&rsquo;</span><span class="p">),</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="n">classname</span><span class="p">[</span><span class="mi">0</span><span class="p">.</span><span class="nf">.</span><span class="mi">3</span><span class="p">],</span> <span class="n">classname</span><span class="p">,</span> <span class="p">(</span><span class="s1">&lsquo;disabled&rsquo;</span> <span class="k">unless</span> <span class="n">page</span><span class="p">)].</span><span class="nf">join</span><span class="p">(</span><span class="s1">&lsquo; &rsquo;</span><span class="p">)</span>
+</div></div><div data-line='35' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='36' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='37' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">def</span> <span class="nf">gap</span>
+</div></div><div data-line='38' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">tag</span> <span class="ss">:li</span><span class="p">,</span> <span class="n">link</span><span class="p">(</span><span class="k">super</span><span class="p">,</span> <span class="s1">&lsquo;javascript:void(0)&rsquo;</span><span class="p">),</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;disabled&rsquo;</span>
+</div></div><div data-line='39' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='40' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='41' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='42' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='43' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    bootstraprails 3sass
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2011/12/twitter-bootstrap-paginate-and-rails-3/" data-via="sandipransing" data-counturl="http://funonrails.com/2011/12/twitter-bootstrap-paginate-and-rails-3/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/12/best-practices-to-use-named-scopes/" title="Previous Post: Best practices to use named scopes inside models">&laquo; Best practices to use named scopes inside models</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/12/simplified-active-record-extensions/" title="Next Post: Simplified Active Record Extensions">Simplified Active Record Extensions &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

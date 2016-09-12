@@ -1,0 +1,829 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+  
+  
+  
+    
+      
+    
+      DelayedJOb's (DJ) fancy methods
+    
+    
+      
+        Oct 6, 2010
+        
+      
+    
+  
+
+
+  Delayed Job provi...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/page/7/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/10/delayed-jobs-fancy-methods/">DelayedJOb's (DJ) fancy methods</a></h1>
+    
+    
+      <p class="meta">
+        Oct 6, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Delayed Job provides <code>send_later</code> and <code>send_at</code> as <em>instance</em> as well as <em>class</em>  methods. It also gives us <code>handle_asynchronously</code> as <em>class</em> method to be written inside class.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">Delayed</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">MessageSending</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">def</span> <span class="nf">send_later</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="o"><em></span><span class="n">args</span><span class="p">)</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="no">Delayed</span><span class="o">::</span><span class="no">Job</span><span class="p">.</span><span class="nf">enqueue</span> <span class="no">Delayed</span><span class="o">::</span><span class="no">PerformableMethod</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="nb">method</span><span class="p">.</span><span class="nf">to_sy</span> <span class="n">m</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">def</span> <span class="nf">send_at</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="nb">method</span><span class="p">,</span> <span class="o"></em></span><span class="n">args</span><span class="p">)</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="no">Delayed</span><span class="o">::</span><span class="no">Job</span><span class="p">.</span><span class="nf">enqueue</span><span class="p">(</span><span class="no">Delayed</span><span class="o">::</span><span class="no">PerformableMethod</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="nb">method</span><span class="p">.</span><span class="nf">to_sy</span> <span class="n">m</span><span class="p">,</span> <span class="n">args</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">module</span> <span class="nn">ClassMethods</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">def</span> <span class="nf">handle_asynchronously</span><span class="p">(</span><span class="nb">method</span><span class="p">)</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">aliased_method</span><span class="p">,</span> <span class="n">punctuation</span> <span class="o">=</span> <span class="nb">method</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">sub</span><span class="p">(</span><span class="sr">/([?!=])$/</span><span class="p">,</span> <span class="s1">&lsquo;&rsquo;</span><span class="p">),</span> <span class="vg">$1</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">with_method</span><span class="p">,</span> <span class="n">without_method</span> <span class="o">=</span> <span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="n">aliased_method</span><span class="si">&#x7d;</span><span class="s2"><em>with_send_later</span><span class="si">#&#x7b;</span><span class="n">pu</span> <span class="n">nctuation</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span><span class="p">,</span> <span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="n">aliased_method</span><span class="si">&#x7d;</span><span class="s2"></em>without_send_later</span><span class="si">#&#x7b;</span><span class="n">punctuation</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">define_method</span><span class="p">(</span><span class="n">with_method</span><span class="p">)</span> <span class="k">do</span> <span class="o">|<em></span><span class="n">args</span><span class="o">|</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>          <span class="n">send_later</span><span class="p">(</span><span class="n">without_method</span><span class="p">,</span> <span class="o"></em></span><span class="n">args</span><span class="p">)</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="k">end</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">alias_method_chain</span> <span class="nb">method</span><span class="p">,</span> <span class="ss">:send_later</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Usage of <em>send_later</em>, <em>send_at</em> and <em>handle_asynchronously</em></h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># instance method</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">user</span><span class="p">.</span><span class="nf">send_later</span><span class="p">(</span><span class="ss">:deliver_welcome</span><span class="p">)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># class_method</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Notifier</span><span class="p">.</span><span class="nf">send_later</span><span class="p">(</span><span class="ss">:deliver_welcome</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Notifier</span><span class="p">.</span><span class="nf">send_at</span><span class="p">(</span><span class="mi">15</span><span class="p">.</span><span class="nf">minutes</span><span class="p">.</span><span class="nf">from_now</span><span class="p">,</span> <span class="ss">:deliver_welcome</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># Inside User class write below line after deliver_welcome method</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">handle_asynchronously</span> <span class="ss">:deliver_welcome</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/10/solution-to-delayed-job-gem-server-start-problem/">Solution to DelayedJob(DJ) gem server start problem</a></h1>
+    
+    
+      <p class="meta">
+        Oct 5, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Solution to DelayedJob(DJ) gem server start problem</p>
+
+<p>I had installed delayed_job gem 2.0.3, daemons gem but after staring DJ server it shows daemon started but actually process gets killed automatically.</p>
+
+<p>I performed steps given by Kevin on google group and it worked like charm</p>
+
+<p>Here are the steps:</p>
+
+<h2>1 Add github to gem sources</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo gem sources -a <a href="http://gems.github.com">http://gems.github.com</a></div></div></pre></div></figure></p>
+
+<h2>2 Install alexvollmer-daemon-spawn</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo gem install alexvollmer-daemon-spawn</div></div></pre></div></figure></p>
+
+<h2>3 Move the old daemons delayed job script out of the way</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>mv script/delayed_job script/delayed_job.daemons</div></div></pre></div></figure></p>
+
+<h2>4 Copy below gist to <em>script/delayed_job</em>:</h2>
+
+<script src="https://gist.github.com/akmathur/104314.js"></script>
+
+
+<p>Try it out again making sure it writes to the tmp/pids directory ok.</p>
+
+<p>My line looks like this:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>RAILS_ENV=production script/delayed_job start</div></div></pre></div></figure></p>
+
+<p>then to check (besides running &lsquo;ps&rsquo;), you can run this:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>RAILS_ENV=production script/delayed_job status</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/10/introduction-to-delayed-job/">Introduction To Delayed Job</a></h1>
+    
+    
+      <p class="meta">
+        Oct 4, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Check out this SlideShare Presentation:
+<strong style="display:block;margin:12px 0 4px">
+<a href="http://www.slideshare.net/jonathanjulian/introduction-to-delayed-job" title="Introduction To Delayed Job">Introduction To Delayed Job</a>
+</strong></p>
+
+<object id="__sse2467230" width="825" height="355">
+<param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introtodelayedjob-091110110012-phpapp01&stripped_title=introduction-to-delayed-job&userName=jonathanjulian" />
+<param name="allowFullScreen" value="true"/>
+<param name="allowScriptAccess" value="always"/>
+<embed name="__sse2467230" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introtodelayedjob-091110110012-phpapp01&stripped_title=introduction-to-delayed-job&userName=jonathanjulian" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" height="355">
+</embed>
+</object>
+
+
+<div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/jonathanjulian">Jonathan Julian</a>.</div>
+
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/09/best-ways-to-populate-dynamic-array-in-ruby/">Best ways to populate dynamic array of numbers in ruby</a></h1>
+    
+    
+      <p class="meta">
+        Sep 29, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>Array of years using range</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">((</span><span class="n">yr</span><span class="o">=</span><span class="no">Date</span><span class="p">.</span><span class="nf">current</span><span class="p">.</span><span class="nf">year</span><span class="p">)</span><span class="o">-</span><span class="mi">9</span><span class="p">.</span><span class="nf">.</span><span class="n">yr</span><span class="p">).</span><span class="nf">to_a</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010]</span></div></div></pre></div></figure></p>
+
+<h4>Array of years using lambda</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Array</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="mi">10</span><span class="p">)&#x7b;</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="no">Date</span><span class="p">.</span><span class="nf">current</span><span class="p">.</span><span class="nf">year</span><span class="o">-</span><span class="n">i</span><span class="p">&#x7d;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001]</span></div></div></pre></div></figure></p>
+
+<h4>Array of months</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Date</span><span class="o">::</span><span class="no">MONTHNAMES</span><span class="p">.</span><span class="nf">compact</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [&ldquo;January&rdquo;, &ldquo;February&rdquo;, &ldquo;March&rdquo;, &ldquo;April&rdquo;, &ldquo;May&rdquo;, &ldquo;June&rdquo;, &ldquo;July&rdquo;, &ldquo;August&rdquo;, &ldquo;September&rdquo;, &ldquo;October&rdquo;, &ldquo;November&rdquo;, &ldquo;December&rdquo;]</span></div></div></pre></div></figure></p>
+
+<h4>Array of abbreviated months</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Date</span><span class="o">::</span><span class="no">ABBR_MONTHNAMES</span><span class="p">.</span><span class="nf">compact</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [&ldquo;Jan&rdquo;, &ldquo;Feb&rdquo;, &ldquo;Mar&rdquo;, &ldquo;Apr&rdquo;, &ldquo;May&rdquo;, &ldquo;Jun&rdquo;, &ldquo;Jul&rdquo;, &ldquo;Aug&rdquo;, &ldquo;Sep&rdquo;, &ldquo;Oct&rdquo;, &ldquo;Nov&rdquo;, &ldquo;Dec&rdquo;]</span></div></div></pre></div></figure></p>
+
+<h4>Array of abbreviated months with index (ps. collect_with_index is core extension method added to array)</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Date</span><span class="o">::</span><span class="no">ABBR_MONTHNAMES</span><span class="p">.</span><span class="nf">compact</span><span class="p">.</span><span class="nf">collect_with_index</span><span class="p">&#x7b;</span><span class="o">|</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span> <span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="p">]&#x7d;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [[&ldquo;Jan&rdquo;, 1], [&ldquo;Feb&rdquo;, 2], [&ldquo;Mar&rdquo;, 3], [&ldquo;Apr&rdquo;, 4], [&ldquo;May&rdquo;, 5], [&ldquo;Jun&rdquo;, 6], [&ldquo;Jul&rdquo;, 7], [&ldquo;Aug&rdquo;, 8], [&ldquo;Sep&rdquo;, 9], [&ldquo;Oct&rdquo;, 10], [&ldquo;Nov&rdquo;, 11], [&ldquo;Dec&rdquo;, 12]]</span></div></div></pre></div></figure></p>
+
+<h4>or</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Date</span><span class="o">::</span><span class="no">ABBR_MONTHNAMES</span><span class="p">.</span><span class="nf">compact</span><span class="p">.</span><span class="nf">each_with_index</span><span class="p">.</span><span class="nf">collect</span><span class="p">&#x7b;</span><span class="o">|</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span> <span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]&#x7d;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [[&ldquo;Jan&rdquo;, 1], [&ldquo;Feb&rdquo;, 2], [&ldquo;Mar&rdquo;, 3], [&ldquo;Apr&rdquo;, 4], [&ldquo;May&rdquo;, 5], [&ldquo;Jun&rdquo;, 6], [&ldquo;Jul&rdquo;, 7], [&ldquo;Aug&rdquo;, 8], [&ldquo;Sep&rdquo;, 9], [&ldquo;Oct&rdquo;, 10], [&ldquo;Nov&rdquo;, 11], [&ldquo;Dec&rdquo;, 12]]</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/09/rails-3-beautiful-code/">Rails 3 Beautiful Code</a></h1>
+    
+    
+      <p class="meta">
+        Sep 9, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Check out this SlideShare Presentation: <div style="width:825px" id="__ss_3219240"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/GreggPollack/rails-3-beautiful-code-3219240" title="Rails 3 Beautiful Code">Rails 3 Beautiful Code</a></strong><object id="__sse3219240" width="825" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><embed name="__sse3219240" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=beautifulcodeinrails3-greggpollack-100218130149-phpapp02&stripped_title=rails-3-beautiful-code-3219240" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="825" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/GreggPollack">GreggPollack</a>.</div></div></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/zipcode-validation-using-geokit-in-rails/">Zipcode validation using geokit in rails</a></h1>
+    
+    
+      <p class="meta">
+        Aug 21, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ol>
+<li><strong>Install geokit gem</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install geokit</div></div></pre></div></figure></li>
+</ol>
+
+
+<p>OR<br/>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># Add following line inside rails initialize block</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Rails</span><span class="o">::</span><span class="no">Initializer</span><span class="p">.</span><span class="nf">run</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="n">config</span><span class="p">.</span><span class="nf">gem</span> <span class="s1">&lsquo;geokit&rsquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>And then run command
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake gems:install</div></div></pre></div></figure></p>
+
+<ol>
+<li><strong>Consider User model with zipcode as attribute field</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="kp">include</span> <span class="no">Geokit</span><span class="o">::</span><span class="no">Geocoders</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">set_table_name</span> <span class="ss">:users</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">validate_presence_of</span> <span class="ss">:zipcode</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">validate</span> <span class="ss">:request_zipcode_validation_using_geokit</span><span class="p">,</span> <span class="ss">:if</span> <span class="o">=&gt;</span> <span class="ss">:zipcode</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">private</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">request_zipcode_validation_using_geokit</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># Method request google api for location</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># if location found then zipcode is valid otherwise</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># add validation error on zipcode field</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># as it method contacts with google api and takes time</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># to return result, poll request only when zipcode gets</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># changed</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">poll</span> <span class="o">=</span> <span class="kp">true</span> <span class="c1"># default true for new objects</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="nb">self</span><span class="p">.</span><span class="nf">id</span> <span class="c1">## this means already existing user and zipcode is valid last time</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1"># Hack to find where zipcode got modified or not </span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1"># old_user = User.find self.id</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">poll</span> <span class="o">=</span> <span class="kp">false</span> <span class="k">if</span> <span class="n">old_user</span><span class="p">.</span><span class="nf">zipcode</span> <span class="o">==</span> <span class="nb">self</span><span class="p">.</span><span class="nf">zipcode</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># Actual requesting api to return location associated with zipcode</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="n">poll</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">loc</span> <span class="o">=</span> <span class="no">MultiGeocoder</span><span class="p">.</span><span class="nf">geocode</span><span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nf">zip_code</span><span class="p">)</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># Add Validation Error if location is not found</span>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">errors</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="ss">:zip_code</span><span class="p">,</span> <span class="s2">&ldquo;Unable to geocode your location from zipcode entered.&rdquo;</span><span class="p">)</span> <span class="k">unless</span> <span class="n">loc</span><span class="p">.</span><span class="nf">success</span>
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></li>
+</ol>
+
+
+<p><strong>Please note that same method can also be used to validate state, city and country.
+Again we can use combination of fields to validate each other.
+Like -</strong></p>
+
+<ol>
+<li><strong>Based on country entered, state validation</strong></li>
+<li><strong>Based on state, city validation</strong></li>
+<li><strong>Based on city, zipcode validation</strong>
+or</li>
+<li><strong>Based on zipcode and country, state and city validation</strong></li>
+</ol>
+
+
+<p>Here is another method to validate state and city based on zipcode and country.
+Lets take example of &lsquo;US&rsquo;
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">def</span> <span class="nf">request_state_and_city_validation_based_on_zipcode</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">poll</span> <span class="o">=</span> <span class="kp">true</span> <span class="c1"># default true for new objects</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">if</span> <span class="nb">self</span><span class="p">.</span><span class="nf">id</span> <span class="c1">## this means already existing user and all attributes were valid last time</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># Hack to find any one of location attribute got modified</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># old_user = User.find self.id</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">loc_attrs</span> <span class="o">=</span> <span class="sx">%w&#x7b;zipcode state city&#x7d;</span> <span class="c1"># keep in mind country US is default assumed</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="n">loc_attrs</span><span class="p">.</span><span class="nf">all?</span> <span class="p">&#x7b;</span><span class="o">|</span><span class="kp">attr</span><span class="o">|</span> <span class="nb">self</span><span class="p">.</span><span class="nf">attribute_for_inspect</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span> <span class="o">==</span> <span class="n">old_user</span><span class="p">.</span><span class="nf">attribute_for_inspect</span><span class="p">(</span><span class="kp">attr</span><span class="p">)&#x7d;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">self</span><span class="p">.</span><span class="nf">poll</span> <span class="o">=</span> <span class="kp">false</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># Actual requesting api to return location associated with zipcode</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">if</span> <span class="n">poll</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">loc</span> <span class="o">=</span> <span class="no">MultiGeocoder</span><span class="p">.</span><span class="nf">geocode</span><span class="p">(</span><span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="nb">self</span><span class="p">.</span><span class="nf">zip_code</span><span class="si">&#x7d;</span><span class="s2">, US&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># Add Validation Error if location is not found</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">unless</span> <span class="n">loc</span><span class="p">.</span><span class="nf">success</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">errors</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="ss">:zip_code</span><span class="p">,</span> <span class="s2">&ldquo;Unable to geocode your location from zipcode entered.&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">else</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># Validate state and city fields in compare to loc object returned by geocode</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">errors</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="ss">:state</span><span class="p">,</span> <span class="s2">&ldquo;State doesn&rsquo;t matches with zipcode entered&rdquo;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">self</span><span class="p">.</span><span class="nf">state</span> <span class="o">!=</span> <span class="n">loc</span><span class="p">.</span><span class="nf">state</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">errors</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="ss">:city</span><span class="p">,</span> <span class="s2">&ldquo;City doesn&rsquo;t matches with zipcode entered&rdquo;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">self</span><span class="p">.</span><span class="nf">city</span> <span class="o">!=</span> <span class="n">loc</span><span class="p">.</span><span class="nf">city</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p><strong>Note</strong> **
+If you are subscriber of blog and not displaying post correctly. I request you to visit post on blog itself. Somehow style is not getting correctly in email. I will try to fix this problem asap.</p>
+
+<p><strong>Upcoming Posts</strong></p>
+
+<ol>
+<li>Geokit finders: Find locations in/within/beyond particular radius from specified location using acts_as_mappable plugin</li>
+<li>Customizing authlogic for multiple sessions i.e. using different models for role based authentication.</li>
+</ol>
+
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/actionmailer-smtp-settings-in-rails/">ActionMailer SMTP settings in rails</a></h1>
+    
+    
+      <p class="meta">
+        Aug 21, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>1. Add following line to rails environment file</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">delivery_method</span> <span class="o">=</span> <span class="ss">:smtp</span></div></div></pre></div></figure></p>
+
+<p><strong>2. Include your email authentication</strong></p>
+
+<p>Create a ruby file called <code>smtp_settings</code> under <code>config/initializers</code> directory
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># config/initializers/smtp_settings.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">smtp_settings</span> <span class="o">=</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="ss">:address</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;smtp.gmail.com&rdquo;</span><span class="p">,</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="ss">:port</span> <span class="o">=&gt;</span> <span class="mi">587</span><span class="p">,</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="ss">:authentication</span> <span class="o">=&gt;</span> <span class="ss">:plain</span><span class="p">,</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="ss">:enable_starttls_auto</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="ss">:user_name</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;<a href="&#109;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#x72;&#101;&#x70;&#x6c;&#x69;&#101;&#x73;&#x40;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#111;&#109;">&#114;&#x65;&#112;&#x6c;&#105;&#x65;&#115;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;</a>&rdquo;</span><span class="p">,</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;<em>my_gmail_password</em>&rdquo;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">&#x7d;</span></div></div></pre></div></figure></p>
+
+<p><strong>note:</strong> Keep <code>starttls_auto</code> always <code>true</code></p>
+
+<p><strong>3. Create sample mailer in order to ensure that your settings are correct</strong></p>
+
+<p>Create a sample mailer
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>class EmailMailer &lt; ActionMailer::Base
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> def test_email
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  from &lsquo;<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#x3a;&#120;&#x78;&#64;&#x67;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#120;&#x78;&#64;&#x67;&#109;&#x61;&#105;&#108;&#x2e;&#99;&#x6f;&#109;</a>&rsquo;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  to &lsquo;<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#x3a;&#x73;&#x6f;&#x6d;&#101;&#64;&#x78;&#x78;&#46;&#99;&#111;&#x6d;">&#115;&#111;&#109;&#101;&#64;&#120;&#120;&#46;&#99;&#x6f;&#109;</a>&rsquo;
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  subject &ldquo;This is test email&rdquo;
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  message &ldquo;It should get delivered to recipient inbox&rdquo;
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> end
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>end</div></div></pre></div></figure></p>
+
+<p><strong>4. Test your configuration</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">EmailMailer</span><span class="p">.</span><span class="nf">deliver_test_email</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/email-attachments-in-ruby-rails/">Email attachments in ruby & rails</a></h1>
+    
+    
+      <p class="meta">
+        Aug 21, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>1. Add ActionMailer configuration in environment</strong></p>
+
+<p>This configuration can be different for development and production.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># Include your application configuration below</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># You can set two configurations sendmail as well as smtp</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># To use SMTP you need to provide your email account credentials</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># Sendmail is a unix package that needs to be installed and configured while </span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># using sendmail settings</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># Chances of getting emails into recipient&rsquo;s inbox are 100% for smtp settings</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># whereas sendmail needs some other configurations to be done before using.</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">delivery_method</span> <span class="o">=</span> <span class="ss">:smtp</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">default_content_type</span> <span class="o">=</span> <span class="s2">&ldquo;text/html&rdquo;</span></div></div></pre></div></figure></p>
+
+<p><strong>2. Create Mailer Model and add method to deliver email</strong></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">EmailMailer</span> <span class="o">&lt;</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">email_with_attachments</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="p">[])</span><br/>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># content type also can be set in environment file as</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># ActionMailer::Base.default_content_type = &ldquo;text/html&rdquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@headers</span> <span class="o">=</span> <span class="p">&#x7b;</span><span class="n">content_type</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;text/html&rsquo;</span><span class="p">&#x7d;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@sent_on</span> <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><br/>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@recipients</span> <span class="o">=</span> <span class="n">email</span><span class="p">.</span><span class="nf">recipients</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@from</span> <span class="o">=</span> <span class="n">email</span><span class="p">.</span><span class="nf">from</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@cc</span> <span class="o">=</span> <span class="no">FEEDBACK_RECIPIENT</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@subject</span> <span class="o">=</span> <span class="n">email</span><span class="p">.</span><span class="nf">subject</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@body</span> <span class="o">=</span> <span class="n">email</span><span class="p">.</span><span class="nf">message</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># attach files  </span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">files</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span><br/>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">attachment</span> <span class="s2">&ldquo;application/octet-stream&rdquo;</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span><br/>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">a</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="n">file</span><span class="p">.</span><span class="nf">read</span><br/>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">a</span><span class="p">.</span><span class="nf">filename</span> <span class="o">=</span> <span class="n">file</span><span class="p">.</span><span class="nf">original_filename</span><br/>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span> <span class="k">unless</span> <span class="n">file</span><span class="p">.</span><span class="nf">blank?</span><br/>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span><br/>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p><strong>3. Email Model</strong></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># This is the virtual model in rails which has no database table associated with it</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Email</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># It uses has_no_table plugin to create virtual model</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># This can also be done using following lines of code</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># </span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># def self.columns() @columns ||= []; end</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># def self.column(name, sql_type = nil, default = nil, null = true)</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1">#  columns &lt;&lt; ActiveRecord::ConnectionAdapters::Column.new(name.to_s, default, sql_type.to_s, null)</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># end</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1">#</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">has_no_table</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1">#insert the names of the form fields here</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">column</span> <span class="ss">:from</span><span class="p">,</span> <span class="ss">:string</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">column</span> <span class="ss">:recipients</span><span class="p">,</span> <span class="ss">:string</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">column</span> <span class="ss">:subject</span><span class="p">,</span> <span class="ss">:string</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">column</span> <span class="ss">:message</span><span class="p">,</span> <span class="ss">:text</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">column</span> <span class="ss">:call_id</span><span class="p">,</span> <span class="ss">:integer</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">attr_accessor</span> <span class="ss">:is_subscribed</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1">#Validations goes here</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">validates_presence_of</span> <span class="ss">:from</span><span class="p">,</span> <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;You dont have Email ID, you cannot continue!&rdquo;</span><span class="p">,</span> <span class="ss">:unless</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;call_id.blank?&rdquo;</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">validates_format_of</span> <span class="ss">:from</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="sr">/^([^@]+)@((?:[-a-z0-9]+.)+[a-z]&#x7b;2,&#x7d;)$/i</span><span class="p">,</span> <span class="ss">:unless</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;from.blank?&rdquo;</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">validates_presence_of</span> <span class="ss">:recipients</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">validates_format_of</span> <span class="ss">:recipients</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="sr">/^([^@]+)@((?:[-a-z0-9]+.)+[a-z]&#x7b;2,&#x7d;)$/i</span><span class="p">,</span> <span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;Invalid email format&rdquo;</span><span class="p">,</span> <span class="ss">:unless</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;recipients.blank?&rdquo;</span>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">validates_presence_of</span> <span class="ss">:subject</span><span class="p">,</span> <span class="ss">:message</span>
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p><strong>4. Usage from console or controller</strong></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># Here email is the valid object of email model
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'># attachments is the area of files to be attached with email
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'># In my case attachments are of kind of pdf files
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'># you can specify type of attachment in your mailer method
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>EmailMailer.deliver_email_with_attachements(email, attachments) if email.valid?</div></div></pre></div></figure></p>
+
+<h4>Sending data stream as email attachments in rails</h4>
+
+<p>In some cases, We need to dynamically generate files and you don&rsquo;t want to store them locally on file system instead you always like to email them from memory itself</p>
+
+<p>Here is the way to do that:</p>
+
+<p><strong>1. Mailer data stream as attachment method</strong></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">EmailMailer</span> <span class="o">&lt;</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">email_with_data_stream</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">data_stream</span><span class="o">=</span><span class="p">[])</span><br/>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@headers</span> <span class="o">=</span> <span class="p">&#x7b;&#x7d;</span><br/>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@sent_on</span> <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><br/>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@recipients</span> <span class="o">=</span> <span class="n">email</span><span class="p">.</span><span class="nf">recipients</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@from</span> <span class="o">=</span> <span class="n">email</span><span class="p">.</span><span class="nf">from</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@subject</span> <span class="o">=</span> <span class="n">email</span><span class="p">.</span><span class="nf">subject</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@body</span> <span class="o">=</span> <span class="n">email</span><span class="p">.</span><span class="nf">message</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># attach files  </span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">data_stream</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">data</span><span class="o">|</span><br/>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">attachment</span> <span class="s2">&ldquo;application/octet-stream&rdquo;</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span><br/>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">a</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">a</span><span class="p">.</span><span class="nf">filename</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span> <span class="k">unless</span> <span class="n">data_stream</span><span class="p">.</span><span class="nf">blank?</span><br/>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span><br/>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span><br/>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p><strong>2. Lets take example of pdf renderer</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># Assume we have pdf object</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">attachments</span> <span class="o">=</span> <span class="p">[]</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">data</span> <span class="o">=</span> <span class="n">pdf</span><span class="p">.</span><span class="nf">render</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># Attach as many files you wanted. Be careful about email maximum size ;)</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">attachments</span> <span class="o">&lt;&lt;</span> <span class="n">data</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">EmailMailer</span><span class="p">.</span><span class="nf">deliver_email_with_data_stream</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">attachments</span><span class="p">)</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/multiple-sites-hosting-using-radiant/">Multiple sites hosting using radiant cms</a></h1>
+    
+    
+      <p class="meta">
+        Aug 7, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This involves 4-5 simple in-order to get multiple sites working using radiant cms. Follow the below steps one by one.</p>
+
+<h4>Setup radiant cms</h4>
+
+<p>first Install radiant gem</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo gem install radiant</div></div></pre></div></figure></p>
+
+<p>set &lsquo;radiant&rsquo; under path</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>export PATH=$PATH:/var/lib/gems/1.8/gems/radiant-0.8.0/bin</div></div></pre></div></figure></p>
+
+<p>Now, As we are done with radiant installation lets create new project.</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>$ radiant multisite -d mysql</div></div></pre></div></figure></p>
+
+<h4>Edit database config</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>$ cd multisite/
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>$ vi config/database.yml
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>development:
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  adapter: mysql
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  database: multisite_development
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  username: root
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  password: abcd
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  host: localhost</div></div></pre></div></figure></p>
+
+<h4>Migrations</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake db:create</div></div></pre></div></figure></p>
+
+<h4>Run the database bootstrap rake task:</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake db:bootstrap
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>This task will destroy any data in the database. Are you sure you want
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>to continue? [yn] yes
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>&hellip;
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>Create the admin user (press enter for defaults).
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>Name (Administrator): admin
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>Username (admin): admin
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>Password (radiant):
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>&hellip;.
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>Select a database template:
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>1. Empty
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>2. Roasters (a coffee-themed blog or brochure)
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>3. Simple Blog
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>4. Styled Blog
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>[1-4]: 2
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>&hellip;.</div></div></pre></div></figure></p>
+
+<h4>Now we are ready to start</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/server</div></div></pre></div></figure></p>
+
+<p>Open following URL in browser:</p>
+
+<p><code>http://localhost:3000</code></p>
+
+<p>You should see site homepage. To manage site go to admin panel.
+<code>http://localhost:3000/admin</code></p>
+
+<p>Now Lets start with multiple sites management</p>
+
+<p><strong>1) Clone multi_site extension into <code>vendor/extensions</code> of your project</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>  cd vendor/extensions/
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  git clone git://github.com/zapnap/radiant-multi-site-extension.git multi_site</div></div></pre></div></figure></p>
+
+<p><strong>2) Run the extension migrations</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>  rake db:migrate:extensions</div></div></pre></div></figure></p>
+
+<p><strong>3) Run the extension update task</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>  rake radiant:extensions:multi_site:update</div></div></pre></div></figure></p>
+
+<p><strong>4) Restart your server</strong></p>
+
+<p>This finishes our multisite installation. Open following URL in browser.</p>
+
+<p><code>http://localhost:3000/admin/sites</code></p>
+
+<p>Add multiple sites as you wanted
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'> Name        Domain pattern     Base domain name
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>================================================
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> site 1      sandip             sandip
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> site 2      gautam             gautam</div></div></pre></div></figure></p>
+
+<p>Don&rsquo;t forget to make dns entries in <code>/etc/hosts</code></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># /etc/hosts
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>127.0.0.1 localhost
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>&hellip;
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>127.0.0.1 sandip
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>127.0.0.1 gautam</div></div></pre></div></figure></p>
+
+<p>One more, by deault pages created for new sites added are not published.
+Please be sure to make them published and modify contents to identify them</p>
+
+<p>Now you can view different sites:</p>
+
+<ol>
+<li><a href="http://sandip:3000">http://sandip:3000</a></li>
+<li><a href="http://gautam:3000">http://gautam:3000</a></li>
+</ol>
+
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/spell-check-in-ruby-and-rails-using/">Spell Check in ruby and rails using BOSSMan</a></h1>
+    
+    
+      <p class="meta">
+        Aug 4, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Wrong English is an often problem while developing any website product as it gives bad view to website user and thus does direct impact on product. <strong>BOSSMan</strong> is a ruby gem that interacts with <strong>yahoo web service</strong> and provides a simplest way to overcome such errors.</p>
+
+<h4>Installation:</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem sources -a <a href="http://gems.github.com">http://gems.github.com</a>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install jpignata-bossman</div></div></pre></div></figure></p>
+
+<p>Apply and get Application ID from yahoo developer network</p>
+
+<p><code>URl https://developer.apps.yahoo.com/</code></p>
+
+<p>Make sure to note it for reference</p>
+
+<p>Usage in ruby app
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">require</span> <span class="s1">&lsquo;rubygems&rsquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">require</span> <span class="s1">&lsquo;bossman&rsquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="kp">include</span> <span class="no">BOSSMan</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">BOSSMan</span><span class="p">.</span><span class="nf">application_id</span> <span class="o">=</span> <span class="s2">&ldquo;Your Application ID here&rdquo;</span></div></div></pre></div></figure></p>
+
+<h4>Spelling Suggestions</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">text</span> <span class="o">=</span> <span class="no">BOSSMan</span><span class="o">::</span><span class="no">Search</span><span class="p">.</span><span class="nf">spelling</span><span class="p">(</span><span class="s2">&ldquo;gooogle&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="c1">#&#x7b;&ldquo;resultset_spell&rdquo;=&gt;[&#x7b;&ldquo;suggestion&rdquo;=&gt;&ldquo;google&rdquo;&#x7d;], &ldquo;responsecode&rdquo;=&gt;&ldquo;200&rdquo;, &ldquo;deephits&rdquo;=&gt;&ldquo;1&rdquo;, &ldquo;start&rdquo;=&gt;&ldquo;0&rdquo;, &ldquo;count&rdquo;=&gt;&ldquo;1&rdquo;, &ldquo;totalhits&rdquo;=&gt;&ldquo;1&rdquo;&#x7d;&#x7d;&gt;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">text</span><span class="p">.</span><span class="nf">suggestion</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;google&rdquo;</span></div></div></pre></div></figure></p>
+
+<p>More sophisticated way of use -</p>
+
+<ol>
+<li>Create a YML file containing list of kewords</li>
+<li>Load YML file</li>
+<li>Iterate YML hash to find out spell suggestions
+<strong>Example: spelling.yml</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>  1 keywords:
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  2   gooogle:
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  3   Barack Oabama:
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  4   Indian:
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  5   Latuur:</div></div></pre></div></figure></li>
+</ol>
+
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">keywords</span> <span class="o">=</span> <span class="no">YAML</span><span class="p">.</span><span class="nf">load_file</span><span class="p">(</span><span class="s1">&lsquo;spelling.yml&rsquo;</span><span class="p">)[</span><span class="s1">&lsquo;keywords&rsquo;</span><span class="p">].</span><span class="nf">keys</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nb">puts</span> <span class="s2">&ldquo;Correction suggested&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">keywords</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">keyword</span><span class="o">|</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">text</span> <span class="o">=</span> <span class="no">BOSSMan</span><span class="o">::</span><span class="no">Search</span><span class="p">.</span><span class="nf">spelling</span><span class="p">(</span><span class="n">keyword</span><span class="p">)</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="n">defined?</span> <span class="n">text</span><span class="p">.</span><span class="nf">suggestion</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">puts</span> <span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="n">keyword</span><span class="si">&#x7d;</span><span class="s2"> =&gt; </span><span class="si">#&#x7b;</span><span class="n">text</span><span class="p">.</span><span class="nf">suggestion</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span></div></div></pre></div></figure></p>
+
+<h4>Output</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>Correction suggested
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>gooogle => google
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>Barack Oabama => Barack Obama
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>Latuur => Latour</div></div></pre></div></figure></p>
+
+<p>Analyze suggestions manually and make neccesary corrections..</p>
+</div>
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/8/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/6/">Newer &rarr;</a>
+    
+  </div>
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+<script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

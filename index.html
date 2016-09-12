@@ -1,22 +1,1113 @@
----
-layout: default
----
 
-<div class="blog-index">
-  {% assign index = true %}
-  {% for post in paginator.posts %}
-  {% assign content = post.content %}
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+  
+  
+  
+    
+      
+    
+      Grape API authentication using Devise Auth Token
+    
+    
+      
+        Mar 27, 2014
+        
+         | Comment...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
     <article>
-      {% include article.html %}
+      <header>
+    
+      <h1 class="entry-title"><a href="/2014/03/api-authentication-using-devise-token/">Grape API authentication using Devise Auth Token</a></h1>
+    
+    
+      <p class="meta">
+        Mar 27, 2014
+        
+         | <a href="/2014/03/api-authentication-using-devise-token/#disqus_thread/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In <a href="http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/">previous post</a> we saw how to buil RESTful API using Grape. In this post we will see how to add <em>devise auth token</em> to <em>users</em> and how to use it in <em>Grape API</em> authentication.</p>
+
+<p>Lets see how this can be done assuming you already have devise setup ready.</p>
+
+<h2>Add <em>token_authenticable</em> to devise modules (works with devise versions &lt;=3.2)</h2>
+
+<p>In <em>user.rb</em> add <em>:token_authenticatable</em> to the list of devise modules, it should look something like below:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># ..code..</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">devise</span> <span class="ss">:database_authenticatable</span><span class="p">,</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:token_authenticatable</span><span class="p">,</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:invitable</span><span class="p">,</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:registerable</span><span class="p">,</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:recoverable</span><span class="p">,</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:rememberable</span><span class="p">,</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:trackable</span><span class="p">,</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:validatable</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:authentication_token</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">before_save</span> <span class="ss">:ensure_authentication_token</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># ..code..</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<!-- more -->
+
+
+<h2>Generate Authentication token on your own (If devise version > 3.2)</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># ..code..</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">devise</span> <span class="ss">:database_authenticatable</span><span class="p">,</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:invitable</span><span class="p">,</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:registerable</span><span class="p">,</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:recoverable</span><span class="p">,</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:rememberable</span><span class="p">,</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:trackable</span><span class="p">,</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:validatable</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:authentication_token</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">before_save</span> <span class="ss">:ensure_authentication_token</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">ensure_authentication_token</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nb">self</span><span class="p">.</span><span class="nf">authentication_token</span> <span class="o">||=</span> <span class="n">generate_authentication_token</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">private</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">generate_authentication_token</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="kp">loop</span> <span class="k">do</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">token</span> <span class="o">=</span> <span class="no">Devise</span><span class="p">.</span><span class="nf">friendly_token</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">break</span> <span class="n">token</span> <span class="k">unless</span> <span class="no">User</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">authentication_token: </span><span class="n">token</span><span class="p">).</span><span class="nf">first</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Add migration for authentiction token</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rails g migration add_auth_token_to_users
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>      invoke  active_record
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>      create    db/migrate/20140326204628_add_auth_token_to_users.rb</div></div></pre></div></figure></p>
+
+<p>Edit migration file to add <code>:authentication_token</code> column to users
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># db/migrate/20140326204628_add_auth_token_to_users.rb
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>class AddAuthTokenToUsers &lt; ActiveRecord::Migration
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  def self.up
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    change_table :users do |t|
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      t.string :authentication_token
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    end
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    add_index  :users, :authentication_token, :unique => true
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  end
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  def self.down
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    remove_column :users, :authentication_token
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>  end
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>end</div></div></pre></div></figure></p>
+
+<h4>Run migrations</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake db:migrate</div></div></pre></div></figure></p>
+
+<h4>Generate token for existing users</h4>
+
+<p>We need to call save on every instance of user that will ensure authentication token is present for each user.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>User.all.each(&amp;:save)</div></div></pre></div></figure></p>
+
+<h4>Secure Grape API using auth token</h4>
+
+<p>You need to add below code to the <em>API::Root</em> in-order to add token based authentication. If you are unware of <em>API::Root</em> then please read <a href="http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/">Building RESTful API using Grape</a></p>
+
+<p>In below example, We are authenticating user based on two scenarios
+- If user is logged on to the web app then use the same session
+- If session is not available and <em>auth token</em> is passed then find user based on the token
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/root.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">prefix</span>    <span class="s1">&lsquo;api&rsquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nb">format</span>    <span class="ss">:json</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">rescue_from</span> <span class="ss">:all</span><span class="p">,</span> <span class="ss">:backtrace</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">error_formatter</span> <span class="ss">:json</span><span class="p">,</span> <span class="no">API</span><span class="o">::</span><span class="no">ErrorFormatter</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">before</span> <span class="k">do</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">error!</span><span class="p">(</span><span class="s2">&ldquo;401 Unauthorized&rdquo;</span><span class="p">,</span> <span class="mi">401</span><span class="p">)</span> <span class="k">unless</span> <span class="n">authenticated</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">helpers</span> <span class="k">do</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">def</span> <span class="nf">warden</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">env</span><span class="p">[</span><span class="s1">&lsquo;warden&rsquo;</span><span class="p">]</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">def</span> <span class="nf">authenticated</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="k">return</span> <span class="kp">true</span> <span class="k">if</span> <span class="n">warden</span><span class="p">.</span><span class="nf">authenticated?</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">params</span><span class="p">[</span><span class="ss">:access_token</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find_by_authentication_token</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:access_token</span><span class="p">])</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">def</span> <span class="nf">current_user</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">warden</span><span class="p">.</span><span class="nf">user</span> <span class="o">||</span> <span class="vi">@user</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">mount</span> <span class="no">API</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">Root</span>
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">mount</span> <span class="no">API</span><span class="o">::</span><span class="no">V2</span><span class="o">::</span><span class="no">Root</span>
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+</div>
     </article>
-  {% endfor %}
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2014/03/building-restful-api-using-grape-in-rails/">Building RESTful API using Grape in Rails</a></h1>
+    
+    
+      <p class="meta">
+        Mar 26, 2014
+        
+         | <a href="/2014/03/building-restful-api-using-grape-in-rails/#disqus_thread/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While developing a <em>rich client side web</em> application or <em>mobile app</em>, we need <em>RESTful JSON API</em> which interacts with the <em>front-end javascript framework</em>. Here you may use <strong>backbone.js</strong>, <strong>ember.js</strong> or <strong>angular.js</strong> on the front-end side of application.</p>
+
+<p>Here we&rsquo;ll be using <em>Ruby on Rails</em> on the <em>back-end</em> which will serve <em>JSON API</em> consumable by fron-end framework. If you look at the <a href="https://www.ruby-toolbox.com/categories/API_Builders">ruby toolbox</a> you&rsquo;ll see many API Builder gems available but it seems <em>grape</em> can be a good choice.</p>
+
+<p><img class="left no-border" src="https://raw.githubusercontent.com/wiki/intridea/grape/grape_logo.png" width="186" height="67" alt="Grape" > <em>Grape is a RESTful API microframework built to easily and quickly produce APIs for Ruby-rooted web applications.</em></p>
+
+<p style='clear:both'>
+Let's see how we can build RESTful JSON apis using <i>Grape</i> library:
+</p>
+
+
+<!--more-->
+
+
+<h2>Getting Started</h2>
+
+<p>Add <em>grape</em> to your <em>Gemfile</em> and then run <em>bundle</em> install
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem &lsquo;grape&rsquo;</div></div></pre></div></figure></p>
+
+<h2>Modularizing API directory structure</h2>
+
+<p>Place API files into <em>lib/api</em>. You need to create <em>api</em> folder inside <em>lib</em> directory.
+As we are placing api directory inside lib you don&rsquo;t need to explicitly load it inside <em>application.rb</em>
+If you want to place <em>api</em> directory at some other place then add below lines to to <em>application.rb</em>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">config</span><span class="p">.</span><span class="nf">paths</span><span class="p">.</span><span class="nf">add</span> <span class="s2">&ldquo;app/api&rdquo;</span><span class="p">,</span> <span class="ss">glob: </span><span class="s2">&ldquo;<em><em>/</em>.rb&rdquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">config</span><span class="p">.</span><span class="nf">autoload_paths</span> <span class="o">+=</span> <span class="no">Dir</span><span class="p">[</span><span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="no">Rails</span><span class="p">.</span><span class="nf">root</span><span class="si">&#x7d;</span><span class="s2">/app/api/</em>&rdquo;</span><span class="p">]</span></div></div></pre></div></figure></p>
+
+<p>First, Let&rsquo;s create <em>API::Root</em> class that will mount available api versions.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/root.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">prefix</span> <span class="s1">&lsquo;api&rsquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">mount</span> <span class="no">API</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">Root</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># mount API::V2::Root (next version)</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Now, create a <em>API::V1::Root</em> class that will mount resources for version 1
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/v1/root.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">V1</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">mount</span> <span class="no">API</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">Posts</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">mount</span> <span class="no">API</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">Authors</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Now, add resource <em>Posts</em> available for api access in json format
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/v1/posts.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">V1</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">class</span> <span class="nc">Posts</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">version</span> <span class="s1">&lsquo;v1&rsquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">format</span> <span class="ss">:json</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">resource</span> <span class="ss">:posts</span> <span class="k">do</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">desc</span> <span class="s2">&ldquo;Return list of recent posts&rdquo;</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">get</span> <span class="k">do</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>          <span class="no">Post</span><span class="p">.</span><span class="nf">recent</span><span class="p">.</span><span class="nf">all</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="k">end</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Now, lets add one more resource <code>Authors</code> to version v1
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/v1/authors.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">V1</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">class</span> <span class="nc">Authors</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">version</span> <span class="s1">&lsquo;v1&rsquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">format</span> <span class="ss">:json</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">resource</span> <span class="ss">:authors</span> <span class="k">do</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">desc</span> <span class="s2">&ldquo;Return list of authors&rdquo;</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">get</span> <span class="k">do</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>          <span class="no">Author</span><span class="p">.</span><span class="nf">all</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="k">end</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Mounting <em>API</em> under rails routes</h2>
+
+<p>Mount <em>API::Root</em> under routes pointing to rails root
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># config/routes.rb
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>SampleApp::Application.routes.draw do
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  mount API::Root => &lsquo;/&rsquo;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>end</div></div></pre></div></figure></p>
+
+<h2>Customize JSON API Errors</h2>
+
+<p>We can control the api raised errors and customize them so that response is in our own format whenever there are exceptions.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/error_formatter.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">ErrorFormatter</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">call</span> <span class="n">message</span><span class="p">,</span> <span class="n">backtrace</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">env</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="p">&#x7b;</span> <span class="ss">:response_type</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;error&rsquo;</span><span class="p">,</span> <span class="ss">:response</span> <span class="o">=&gt;</span> <span class="n">message</span> <span class="p">&#x7d;.</span><span class="nf">to_json</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Now, you can plug this module inside <em>API::Root</em>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/root.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#&hellip;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">error_formatter</span> <span class="ss">:json</span><span class="p">,</span> <span class="no">API</span><span class="o">::</span><span class="no">ErrorFormatter</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#&hellip;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>You can override error formatter for particular api version. Let&rsquo;s customize errors for <em>API::v1::Root</em>:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#lib/api/v1/error_formatter.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">V1</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">module</span> <span class="nn">ErrorFormatter</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">call</span> <span class="n">message</span><span class="p">,</span> <span class="n">backtrace</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">env</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">&#x7b;</span> <span class="ss">:response_type</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;error&rsquo;</span><span class="p">,</span> <span class="ss">:response</span> <span class="o">=&gt;</span> <span class="n">message</span> <span class="p">&#x7d;.</span><span class="nf">to_json</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/v1/root.rb</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">V1</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1">#&hellip;</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">error_formatter</span> <span class="ss">:json</span><span class="p">,</span> <span class="no">API</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">ErrorFormatter</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1">#&hellip;</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Accessing <em>API</em> routes</h2>
+
+<p>If you do <code>rake routes | grep api</code> then it will list only mount path for api but do not list all the paths.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake routes | grep api
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>    api_root        /api                API::Root</div></div></pre></div></figure></p>
+
+<p>So, in-order to list all api paths, you may have to create api routes task:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/tasks/routes.rake</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">namespace</span> <span class="ss">:api</span> <span class="k">do</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">desc</span> <span class="s2">&ldquo;API Routes&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">task</span> <span class="ss">:routes</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="no">API</span><span class="o">::</span><span class="no">Root</span><span class="p">.</span><span class="nf">routes</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">api</span><span class="o">|</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">method</span> <span class="o">=</span> <span class="n">api</span><span class="p">.</span><span class="nf">route_method</span><span class="p">.</span><span class="nf">ljust</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">path</span> <span class="o">=</span> <span class="n">api</span><span class="p">.</span><span class="nf">route_path</span><span class="p">.</span><span class="nf">gsub</span><span class="p">(</span><span class="s2">&ldquo;:version&rdquo;</span><span class="p">,</span> <span class="n">api</span><span class="p">.</span><span class="nf">route_version</span><span class="p">)</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">puts</span> <span class="s2">&ldquo;     </span><span class="si">#&#x7b;</span><span class="nb">method</span><span class="si">&#x7d;</span><span class="s2"> </span><span class="si">#&#x7b;</span><span class="n">path</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Now, run task and it should print routes like this:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake api:routes
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>    GET        /api/v1/posts(.:format)
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    GET        /api/v1/authors(.:format)</div></div></pre></div></figure></p>
+
+<h2>Securing API</h2>
+
+<p>Now we have got Grape <em>API</em> ready and working properly. Lets see how we can secure <em>API</em>. There are many approaches to authenticate API. Here lets first get it working with simple <em>HTTP Basic authentication</em>.</p>
+
+<h4>HTTP Basic authentication</h4>
+
+<p>In our case, lets add basic authentication to the <em>API::Root</em> and it will get applied to all versions of API.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/root.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#&hellip;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">http_basic</span> <span class="k">do</span> <span class="o">|</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">|</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">user</span> <span class="o">&amp;&amp;</span> <span class="n">user</span><span class="p">.</span><span class="nf">valid_password?</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#&hellip;</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Requesting API using basic http auth credentials:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>curl <a href="http://localhost:3000/api/products">http://localhost:3000/api/products</a> -u &ldquo;admin:secret&rdquo;</div></div></pre></div></figure></p>
+
+<h4>Authenticate using email and password</h4>
+
+<p>Grape provides us with <em>before block</em> inside that we can add authenctication code.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/root.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#&hellip;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">before</span> <span class="k">do</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">error!</span><span class="p">(</span><span class="s2">&ldquo;401 Unauthorized&rdquo;</span><span class="p">,</span> <span class="mi">401</span><span class="p">)</span> <span class="k">unless</span> <span class="n">authenticated</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">helpers</span> <span class="k">do</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">def</span> <span class="nf">authenticated</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find_by_email</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:email</span><span class="p">])</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">user</span> <span class="o">&amp;&amp;</span> <span class="n">user</span><span class="p">.</span><span class="nf">valid_password?</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:password</span><span class="p">])</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#&hellip;</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2014/03/understanding-restful-vs-soap-web-services/">Understanding RESTful vs SOAP web services</a></h1>
+    
+    
+      <p class="meta">
+        Mar 17, 2014
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p><strong>A Web service</strong> is a method of communications between two electronic devices over the World Wide Web.
+It is also defined as a software system designed to support <a href="http://en.wikipedia.org/wiki/Interoperability">interoperable</a> machine-to-machine interaction over a network.</p></blockquote>
+
+<p>In simple words, &ldquo;Web services are developed to use by other software applications&rdquo;</p>
+
+<p>Web services communicate via either SOAP or REST messages.</p>
+
+<h2>REST</h2>
+
+<p>REST stands for REpresentational State Transfer. It is a term coined by Roy Fielding in his Ph.D. dissertation
+It is an architecture style for designing networked applications which typycally runs runs over HTTP.</p>
+
+<p>REST is an architecture and not a &ldquo;standard&rdquo;. There is no w3c recommendation for REST. It is concept for better web and widely accepted.</p>
+
+<p>RESTful applications use HTTP requests to post data (create and/or update), read data (e.g., make queries), and delete data. Thus, REST uses HTTP for all four CRUD (Create/Read/Update/Delete) operations.</p>
+
+<p>It expects client to have knowlege of what to send and what to expect in response. It is focused on accessing named resources through a single consistent interface.</p>
+
+<h4>Highlights:</h4>
+
+<ol>
+<li>It is simple</li>
+<li>It is lightweight and faster</li>
+<li>Platform-independent</li>
+<li>Language-independent</li>
+<li>runs over HTTP</li>
+<li>Response can be returned in &ldquo;XML/JSON&rdquo; format</li>
+</ol>
+
+
+<!--more-->
+
+
+<p>Like Web Services, REST offers no built-in security features, encryption, session management, QoS guarantees, etc. But also as with Web Services, these can be added by building on top of <a href="HTTP:">HTTP:</a></p>
+
+<p>For security, username/password tokens are often used.
+For encryption, REST can be used on top of HTTPS (secure sockets).</p>
+
+<h4>Example:</h4>
+
+<p>The Web is comprised of resources. A resource is any item of interest. For example, A software company may have many products. Clients may access particular product with this URL:</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><a href="http://www.&amp;lt;company">http://www.&amp;lt;company</a>>.com/products/7</div></div></pre></div></figure></p>
+
+<h2>SOAP</h2>
+
+<p>SOAP, originally defined as Simple Object Access Protocol. It is a protocol specification for exchanging structured information in the implementation of Web Services in computer networks.</p>
+
+<p>SOAP is an XML based protocol for accessing Web Services.
+It is designed to handle distributed computing environments.</p>
+
+<p>It is well defined mechanism for describing the interface e.g. WSDL+XSD, WS-Policy. As it is standardised it becomes complex t
+It provides a large number of supporting standards for security, reliability, transactions.</p>
+
+<p>Here content of the message decides what to perform and reponse (payload) must comply with SOAP schema.</p>
+
+<h4>Example</h4>
+
+<p>It defines 3 fundamental properties:</p>
+
+<ol>
+<li>What service does: Operations provides</li>
+<li>How service is accessed: Data format and protocol details</li>
+<li>Where a service is located: Adress (URL) details</li>
+</ol>
+
+
+<h4>Sample SOAP request structure:</h4>
+
+<p>In the example below, a GetStockPrice request is sent to a server. The request has a StockName parameter, and a Price parameter that will be returned in the response. The namespace for the function is defined in &ldquo;<a href="http://www.example.org/stock">http://www.example.org/stock</a>&rdquo;.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>POST /InStock HTTP/1.1
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>Host: www.example.org
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>Content-Type: application/soap+xml; charset=utf-8
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>Content-Length: 299
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>SOAPAction: &ldquo;<a href="http://www.w3.org/2003/05/soap-envelope">http://www.w3.org/2003/05/soap-envelope</a>&rdquo;
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="cp">&lt;!- -&gt;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="cp">&lt;?xml version=&ldquo;1.0&rdquo;?&gt;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nt">&lt;soap:Envelope</span> <span class="na">xmlns:soap=</span><span class="s">&ldquo;<a href="http://www.w3.org/2003/05/soap-envelope">http://www.w3.org/2003/05/soap-envelope</a>&rdquo;</span><span class="nt">&gt;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">&lt;soap:Header&gt;</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">&lt;/soap:Header&gt;</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">&lt;soap:Body&gt;</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">&lt;m:GetStockPrice</span> <span class="na">xmlns:m=</span><span class="s">&ldquo;<a href="http://www.example.org/stock">http://www.example.org/stock</a>&rdquo;</span><span class="nt">&gt;</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nt">&lt;m:StockName&gt;</span>IBM<span class="nt">&lt;/m:StockName&gt;</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">&lt;/m:GetStockPrice&gt;</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">&lt;/soap:Body&gt;</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nt">&lt;/soap:Envelope&gt;</span></div></div></pre></div></figure></p>
+
+<h4>Sample SOAP response structure:</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>HTTP/1.1 200 OK
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>Content-Type: application/soap+xml; charset=utf-8
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>Content-Length: nnn
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>&lt;?xml version=&ldquo;1.0&rdquo;?>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>&lt;soap:Envelope
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>xmlns:soap=&ldquo;<a href="http://www.w3.org/2001/12/soap-envelope">http://www.w3.org/2001/12/soap-envelope</a>&rdquo;
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>soap:encodingStyle=&ldquo;<a href="http://www.w3.org/2001/12/soap-encoding">http://www.w3.org/2001/12/soap-encoding</a>&rdquo;>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>&lt;soap:Body xmlns:m=&ldquo;<a href="http://www.example.org/stock">http://www.example.org/stock</a>&rdquo;>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  &lt;m:GetStockPriceResponse>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    &lt;m:Price>34.5&lt;/m:Price>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>  &lt;/m:GetStockPriceResponse>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>&lt;/soap:Body>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>&lt;/soap:Envelope></div></div></pre></div></figure></p>
+
+<h4>Highlights</h4>
+
+<p>Here are few <strong>reasons</strong> for which you may want to use SOAP:</p>
+
+<ol>
+<li>Platform and laguage independent</li>
+<li>Follows W3C standard<br/>
+WSDL (Web services description language) is a W3C standard based on xml and is used to describe web services.</li>
+<li>Security<br/>
+It supports SSL (just like REST). It also provides a standard implementation of data integrity and data privacy. Being &ldquo;Enterprise&rdquo; it&rsquo;s more secure.</li>
+<li>Atomic Transactions<br/>
+It supports ACID Transactions (WS- Atomic Transactions) so it can provide two phase commit over distributed transactional resources.</li>
+<li>Reliable Messaging <br/>
+It has successful/retry logic built in and provides end-to-end reliability even through SOAP intermediaries</li>
+</ol>
+
+
+<p>Whenever complex or likely to change API getting developed then SOAP could be a good choice.</p>
+
+<h4>References used</h4>
+
+<ol>
+<li><a href="http://rest.elkstein.org/">http://rest.elkstein.org/</a></li>
+<li><a href="http://www.xfront.com/REST-Web-Services.html">http://www.xfront.com/REST-Web-Services.html</a></li>
+<li><a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm">http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm</a></li>
+<li><a href="http://www.w3schools.com/webservices/ws_soap_example.asp">http://www.w3schools.com/webservices/ws_soap_example.asp</a></li>
+<li><a href="http://www.slideshare.net/kverbert/soapbased-web-services">http://www.slideshare.net/kverbert/soapbased-web-services</a></li>
+</ol>
+
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2014/02/moving-from-blogspot-to-octopress/">Migrating from blogspot to octopress</a></h1>
+    
+    
+      <p class="meta">
+        Feb 9, 2014
+        
+         | <a href="/2014/02/moving-from-blogspot-to-octopress/#disqus_thread/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I was happily writing my blog at <code>blogspot</code> almost three plus years. From last 2-3 days, i was evaluating with <a href="http://octopress.org">octopress</a> for its way of writing posts, customizations, themes, and plugins. As a result of evaluation, found <code>octopress</code> blog as very quick &amp; easy to write hence decided to  <em>shift</em> from <em>blogger</em> to <em>octopress</em>.</p>
+
+<p>Below post explains steps involved in migration:</p>
+
+<h2>Export content from blogger</h2>
+
+<p>First, you need to export your posts from blogger.
+Goto <code>blogger admin area</code> and then go to <code>settings &gt;&gt; other &gt;&gt; Export Blog</code> and click on it. Please wait sometime and popup will comeup allowing you to download blog in <code>xml</code> format.</p>
+
+<p><img src="/images/export-blog.png" /></p>
+
+<p>If you still finding some problem with exporting then see <a href="http://www.freetech4teachers.com/2013/01/how-to-export-your-blogger-and.html">here</a></p>
+
+<!--more-->
+
+
+<h2>Formatting posts for octopress</h2>
+
+<p>Now the big challenge ! We have <code>xml posts</code> downloaded from blogger but octopress posts format is different.
+So, we need to convert xml posts to markdown formatted octopress posts.
+If you do it manually then its not an easy task but don&rsquo;t worry. There is already a ruby code that will do it for you.
+Thanks to <a href="https://gist.github.com/juniorz">Reinaldo de Souza </a> for sharing the script. Download the <code>import.rb</code> script from <a href="https://gist.github.com/baldowl/1578928">here</a></p>
+
+<h2>Run the script against downloaded xml file</h2>
+
+<p>Script requires <code>nokogiri</code>. if you not don&rsquo;t have already then install using <code>gem install nokogiri</code>
+After successful run, this will be creating static markdown octopress formatted posts inside <code>_posts</code> and <code>_drafts</code> directories.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby import.rb blog-02-09-2014.xml</div></div></pre></div></figure></p>
+
+<h2>Copy generated posts to octopress blog posts</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>mv <em>posts/* blog/</em>posts/<code>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;mv _drafts/* blog/_drafts/</code></div></div></pre></div></figure></p>
+
+<p>This finishes migration and run <code>rake preview</code> and you will start seeing your blogger posts.</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2014/02/writing-octopress-blog-posts-using-markdown/">Writing Octopress blog posts using markdown</a></h1>
+    
+    
+      <p class="meta">
+        Feb 7, 2014
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is an example post which shows various markdown syntax that can be used while writing octopress markdown posts.</p>
+
+<h2>Bold text</h2>
+
+<p><strong>Hello Octopress!</strong></p>
+
+<h2>Blockquote</h2>
+
+<p><figure class='quote'><blockquote><p>Don&rsquo;t stop when you&rsquo;re tired, stop when you&rsquo;re done.</p></blockquote><figcaption class='quote-source'><span class='quote-author'><a class='quote-link' href='http://twitter.com/TheJeetBanerjee'>@TheJeetBanerjee</a></span></figcaption></figure></p>
+
+<!--more-->
+
+
+<p><figure class='quote'><blockquote><p>We have to go for what we think we&rsquo;re fully capable of, not limit ourselves by what we&rsquo;ve been in the past.</p></blockquote><figcaption class='quote-source'><span class='quote-author'>@Vivek Paul </span></figcaption></figure></p>
+
+<h2>Ruby</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">A</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">abc</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nb">puts</span> <span class="s1">&lsquo;hii&rsquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Console</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>$ sudo apt-get install cakePHP</div></div></pre></div></figure></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>$ git clone git@github.com:imathis/octopress.git # fork octopress</div></div></pre></div></figure></p>
+
+<h2>Coffeescript</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nx">$</span><span class="p">(</span><span class="s">&lsquo;.help&rsquo;</span><span class="p">).</span><span class="na">html</span> <span class="s">&ldquo;(?)&rdquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="s">&ldquo;print something&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># sum function</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nx">sum</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+</div></div></pre></div></figure></p>
+
+<h2>Gist Embedding</h2>
+
+<p><figure class='code-highlight-figure'><figcaption class='code-highlight-caption'><span class='code-highlight-caption-title'>multiple-ssh-config</span><a class='code-highlight-caption-link' href='https://gist.github.com/cc14d6039f1ff35b4be3'>link</a></figcaption><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># Default GitHub user (sandip)
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>Host github.com
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  HostName github.com
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  User git
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  IdentityFile /home/sandip/.ssh/id_rsa
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'># github user (client)
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>Host github-client
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  HostName github.com
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  User git
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  IdentityFile /home/sandip/.ssh/id_rsa_client
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'># github user (friend)
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>Host github-swapnil
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>  HostName github.com
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>  User git
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>  IdentityFile /home/sandip/.ssh/id_dsa_swapnil
+</div></div></pre></div></figure></p>
+
+<h2>Include Code Snippets</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>&#x7b;% include_code path/to/file [title] [lang:language] [start:#] [end:#] [range:#-#] [mark:#,#-#] [linenos:false] %&#x7d;</div></div></pre></div></figure></p>
+
+<h2>Selecting tags from sentence</h2>
+
+<p>This is a <code>ruby</code> and <code>rails</code> blog</p>
+
+<h2>Pullquote</h2>
+
+<h2>Images</h2>
+
+<p><img src="http://placekitten.com/890/280"  ></p>
+
+<h2>AngularJS Tutorial - YouTube</h2>
+
+<p>AngularJS is a client-side JavaScript framework.A video tutorial to help you get started with AngularJS.
+<a href="http://youtube.com/watch?v=WuiHuZq_cg4"><img src="http://img.youtube.com/vi/WuiHuZq_cg4/0.jpg" alt="Angular JS" /></a></p>
+
+<h2>Inline HTML</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>&lt;div class=&lsquo;well&rsquo;>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  All is well. Way to go !!
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>&lt;/div></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2014/02/octopress-powered-and-github-hosted-blog/">Getting started: Octopress powered and Github hosted blog</a></h1>
+    
+    
+      <p class="meta">
+        Feb 7, 2014
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are various blogging sites like <code>blogspot</code>, <code>wordpress</code>, <code>posterous</code>, and many more.
+Each has their own pros and cons and none of the engine gives us full power of ehhance our blogging experience.
+Anyone who has atleast some technical knowledge can start with octopress powered blog. This gives us the power of freedom of doing anything.
+So, Lets first understand about octopress framework and its features.</p>
+
+<h2>Octopress</h2>
+
+<blockquote><p>Octopress is a framework designed by Brandon Mathis for Jekyll, the blog aware static site generator. If you wanted to know more then it can be found <a href="http://octopress.org/2011/07/23/octopress-20-surfaces/">here</a></p></blockquote>
+
+<!--more-->
+
+
+<h2>Octopress Setup</h2>
+
+<p><strong>1.  Before starting make sure you have <code>git</code> installed.</strong>
+If not then do install using,
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install git</div></div></pre></div></figure></p>
+
+<p><strong>2.  Install <code>ruby 1.9.3</code> or higher</strong>
+Make git clone of octopress source code
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>git clone git://github.com/imathis/octopress.git octopress
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>cd octopress
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>bundle install</div></div></pre></div></figure></p>
+
+<h2>Installing Octopress theme</h2>
+
+<p>Install the default Octopress theme using
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake install</div></div></pre></div></figure></p>
+
+<p>In order to install custom themes,
+Please <a href="http://opthemes.com/">browse through themes</a> and make a selection for your blog.
+Once choice is made, you need to do <code>git clone</code> of theme source and install it.</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cd octopress
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>git clone <a href="https://github.com/kAworu/octostrap3">https://github.com/kAworu/octostrap3</a> .themes/octostrap3
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>rake &lsquo;install[octostrap3]&rsquo;</div></div></pre></div></figure></p>
+
+<p>To genrate infrastrcture for your blog i.e. <code>layouts</code>, <code>js</code> and <code>css</code>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake generate</div></div></pre></div></figure></p>
+
+<p>Edit <code>_config.yml</code> to configure blog <code>title</code>, <code>header</code>, <code>metadata</code>, <code>plugins</code> and <code>3rd Party Settings</code>.
+more on configurations can be found <a href="http://octopress.org/docs/configuring/">here</a>.</p>
+
+<p>We are almost done, and now ready to create our first blog post -
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake new_post[&ldquo;My first octopress post&rdquo;]
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>mkdir -p source/<em>posts
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>Creating new post: source/</em>posts/2014-02-09-my-first-octopress-post.markdown</div></div></pre></div></figure></p>
+
+<p>Now you can open a post inside editor and change as you wanted. More on writing markdown can be found <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet#wiki-html">here</a> and <a href="http://daringfireball.net/projects/markdown/syntax">here too</a></p>
+
+<p>Well ! Now its time to see, how our blog looks like -
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cd octopress
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>rake watch
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>rake preview</div></div></pre></div></figure></p>
+
+<p>Visit browser <code>http://localhost:4000</code> and you should be seeing blog running there :-)</p>
+
+<h2>Deployment</h2>
+
+<p>There are ways to deploy octopress blog. You can either deploy this blog on <code>heroku</code> or on <code>github</code> using github pages.</p>
+
+<p><strong>1. Heroku</strong>:
+As heroku provides free hosting (1 node) you may want to deploy at heroku.
+More on this deployment can be found <a href="http://def.reyssi.net/blog/2012/01/14/get-blogging-with-octopress-on-heroku/">here</a></p>
+
+<p><strong>2. With Github Project Pages</strong>:
+Github provides free static website hosting using github pages and deployment is also very simple.</p>
+
+<p>Note: You should have a github repository called <code>username.github.io</code></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cd octopress
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>rake setup_github_pages
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>git remote add origin git@github.com:username/username.github.io.git
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>rake generate
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>rake deploy</div></div></pre></div></figure></p>
+
+<p>Visit <code>http://username.github.io</code> to see your blog hosted on github.
+Also, do not forget to commit and push your source code on github.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>git add .
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>git commit -m &lsquo;octopress first blog&rsquo;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>git push origin source</div></div></pre></div></figure></p>
+
+<h2>Adding custom domain</h2>
+
+<p>First create a <code>CNAME</code> file and add naked domain name to it.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>echo &lsquo;funonrails.com&rsquo; >> source/CNAME</div></div></pre></div></figure></p>
+
+<p>Then goto your domain provider website and point your <code>domain</code> i.e A record to github ip address <code>204.232.175.78</code>.</p>
+
+<h2>Adding subdomain</h2>
+
+<p>If you want to point subdomain to github blog then -
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>echo &lsquo;blog.sandipransing.in&rsquo; >> source/CNAME</div></div></pre></div></figure></p>
+
+<p>then go to your domain provider website and create a CNAME record for your <code>subdomain</code> i.e. <code>blog</code> pointing to <code>yourname.github.io.</code>
+If you want more help on this then please see <a href="http://octopress.org/docs/deploying/github/">here</a> and also <a href="http://help.github.com/pages/#custom_domains">here</a></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2013/03/what-is-new-in-rails-3/">what is new in rails 3</a></h1>
+    
+    
+      <p class="meta">
+        Mar 17, 2013
+        
+         | <a href="/2013/03/what-is-new-in-rails-3/#disqus_thread/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails 3 has released with various notable features and said that it&rsquo;s one of the best version rails community has released so far.</p>
+
+<p>Highlights of major features:</p>
+
+<h4>1. Brand new router with an emphasis on RESTful declarations</h4>
+
+<h4>2. New Action Mailer API modeled after Action Controller</h4>
+
+<h4>3. New Active Record chainable query language built on top of relational algebra</h4>
+
+<h4>4. Unobtrusive JavaScript helpers with drivers for Prototype, jQuery, and more coming (end of inline JS)</h4>
+
+<h4>5. Explicit dependency management with Bundler</h4>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2012/10/dynamic-conditions-to-rails-associations/">Dynamic conditions to rails associations</a></h1>
+    
+    
+      <p class="meta">
+        Oct 25, 2012
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We all know that rails models associations gets defined while class definitions are loaded and once defined can&rsquo;t be changed.</p>
+
+<p>But still you can make use of <code>block parameter</code> to conditions to have <code>dynamic query conditions</code> inside associations.</p>
+
+<p>Below line explains <strong>how to</strong> define dynamic associations :
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">has_one</span> <span class="ss">:code_sequence</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;Sequence&rsquo;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;kind = &ldquo;#&#x7b;self.kind&#x7d;&rdquo;&rsquo;</span></div></div></pre></div></figure></p>
+
+<p>Please make a note that below code will not work :
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">has_one</span> <span class="ss">:code_sequence</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;Sequence&rsquo;</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="nb">proc</span> <span class="p">&#x7b;</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="p">[</span><span class="s1">&lsquo;kind = ?&rsquo;</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="nf">kind</span><span class="p">]</span> <span class="p">&#x7d;</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2012/04/upgrading-from-rails-2-1-x-to-rails-2-3-11/">Upgrading from Rails 2.1.x to Rails 2.3.11</a></h1>
+    
+    
+      <p class="meta">
+        Apr 4, 2012
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If your application is currently on any version of Rails 2.1.x,
+Then following changes needs to be done for upgrading your application to Rails <code>2.3.11</code></p>
+
+<p><strong>1. First install Rails version <code>2.3.11</code></strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install rails -v2.3.11</div></div></pre></div></figure></p>
+
+<p><strong>2. Freeze app ruby gems</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake rails:freeze:gems</div></div></pre></div></figure></p>
+
+<p>Hopefully it should work for you but it gave me following error</p>
+
+<blockquote><p>undefined method `manage_gems' for Gem:Module</p></blockquote>
+
+<p><strong>3. Create sample rails 2.3.11 app</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rails <em>2.3.11</em> testsapp</div></div></pre></div></figure></p>
+
+<!--more-->
+
+
+<p>Now, Copy all missing &ldquo;config/initializers/<em>&rdquo; files from newly created &ldquo;testapp&rdquo; to the application that is to be upgraded.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cp testapp/config/initializers/</em> config/initializers</div></div></pre></div></figure></p>
+
+<p><strong>4. Change Rails version inside <code>environment.rb</code> to <code>Rails 2.3.11</code></strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># Specifies gem version of Rails to use when vendor/rails is not present</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">RAILS_GEM_VERSION</span> <span class="o">=</span> <span class="s1">&lsquo;2.3.11&rsquo;</span></div></div></pre></div></figure></p>
+
+<p><strong>5. Rename <i>app/controllers/application.rb</i> file to <i>app/controllers/application_controller.rb</i></strong></p>
+
+<p><strong>OR</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rails:update:application_controller</div></div></pre></div></figure></p>
+
+<p><strong>6. Start rails server and fix the issues one by one</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/server</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2012/02/ruby-enumerable-toproc-ampersond-colon/">ruby enumerable & to_proc (ampersond & symbol shortcut)</a></h1>
+    
+    
+      <p class="meta">
+        Feb 23, 2012
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods.</p>
+
+<p><strong>Understanding ruby blocks</strong></p>
+
+<blockquote><p>Blocks are statements of code written in ruby. one can take them as similar to c language macro&rsquo;s</p></blockquote>
+
+<p><strong>Different ways to define blocks</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">a</span> <span class="o">=</span> <span class="nb">proc</span> <span class="k">do</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nb">puts</span> <span class="s2">&ldquo;hello&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">a</span><span class="p">.</span><span class="nf">call</span> <span class="c1">#=&gt; hello</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">b</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">u</span><span class="o">|</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nb">puts</span> <span class="s2">&ldquo;hello </span><span class="si">#&#x7b;</span><span class="n">u</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">b</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="s1">&lsquo;sandip&rsquo;</span><span class="p">)</span><span class="c1">#=&gt; hello sandip</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">c</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">&#x7b;</span><span class="o">|</span><span class="n">user</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">user</span> <span class="p">&#x7d;</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">c</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="s1">&lsquo;sandip&rsquo;</span><span class="p">)</span> <span class="c1">#=&gt; sandip</span></div></div></pre></div></figure></p>
+
+<!--more-->
+
+
+<p><strong>Passing block to enumerator</strong></p>
+
+<p>Lets assume we have collection array of strings and we want to print it
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&lsquo;hi&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;sandip&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;how&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;you&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;doing&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;?&rsquo;</span><span class="p">]</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="p">[</span><span class="s2">&ldquo;hi&rdquo;</span><span class="p">,</span> <span class="s2">&ldquo;sandip&rdquo;</span><span class="p">,</span> <span class="s2">&ldquo;how&rdquo;</span><span class="p">,</span> <span class="s2">&ldquo;you&rdquo;</span><span class="p">,</span> <span class="s2">&ldquo;doing&rdquo;</span><span class="p">,</span> <span class="s2">&ldquo;?&rdquo;</span><span class="p">]</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">a</span><span class="p">.</span><span class="nf">each</span> <span class="p">&#x7b;</span><span class="o">|</span><span class="n">w</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">w</span> <span class="p">&#x7d;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">q</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">&#x7b;</span><span class="o">|</span><span class="n">w</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">w</span> <span class="p">&#x7d;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="c1">#&lt;Proc:0x00007f9d2be13140@(irb):89&gt;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">a</span><span class="p">.</span><span class="nf">each</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">)</span> <span class="c1">#=&gt;</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">hi</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">sandip</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">how</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">you</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">doing</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">?</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">a</span><span class="p">.</span><span class="nf">map</span><span class="p">&#x7b;</span><span class="o">|</span><span class="n">r</span><span class="o">|</span> <span class="n">q</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">r</span><span class="p">)&#x7d;</span> <span class="c1">#=&gt;</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">hi</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">sandip</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">how</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">you</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">doing</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">?</span></div></div></pre></div></figure></p>
+
+<p><strong>Understanding symbol#to_proc</strong></p>
+
+<blockquote><p>Symbol has method <code>to_proc</code> which converts symbol to block where symbol is taken as method to be executed on first argument of proc</p></blockquote>
+
+<p><strong> How to_proc got implemented inside Symbol class</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Symbol</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">to_proc</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="no">Proc</span><span class="p">.</span><span class="nf">new</span> <span class="p">&#x7b;</span> <span class="o">|<em></span><span class="n">args</span><span class="o">|</span> <span class="n">args</span><span class="p">.</span><span class="nf">shift</span><span class="p">.</span><span class="nf"><strong>send</strong></span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="o"></em></span><span class="n">args</span><span class="p">)</span> <span class="p">&#x7d;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p><strong>Lets have some examples:</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">v</span> <span class="o">=</span> <span class="ss">:even?</span><span class="p">.</span><span class="nf">to_proc</span> <span class="c1"># equivalent to proc &#x7b;|a| a.even?&#x7d; </span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; #&lt;Proc:0x00007f9d2bddcb90@(irb):97&gt; </span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="p">]</span><br/>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">q</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="kp">false</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="kp">false</span><span class="p">,</span> <span class="kp">false</span><span class="p">,</span> <span class="kp">false</span><span class="p">]</span></div></div></pre></div></figure></p>
+
+<p> <strong>Is there any shortcut?</strong>
+Yes, there is shortcut to have block passed to enumerators on the fly using ampersand followed by colon (i.e. symbol)
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="p">]</span><br/>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">q</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span> <span class="o">&lt;=&gt;</span> <span class="n">q</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">.</span><span class="nf">to_proc</span><span class="p">)</span><br/>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">q</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">.</span><span class="nf">to_proc</span><span class="p">)</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [false, true, false, false, false]  </span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">q</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [false, true, false, false, false]</span></div></div></pre></div></figure></p>
+
+<p><strong>Some handy examples</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="p">].</span><span class="nf">inject</span><span class="p">(</span><span class="o">&amp;</span><span class="p">:</span><span class="o">+</span><span class="p">)</span> <span class="c1">#=&gt; 78 </span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="p">].</span><span class="nf">inject</span><span class="p">(:</span><span class="o">+</span><span class="p">)</span> <span class="c1">#=&gt; 78 </span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="p">].</span><span class="nf">any?</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span> <span class="c1">#=&gt; true </span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">67</span><span class="p">].</span><span class="nf">detect</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span> <span class="c1">#=&gt; 2 </span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">[</span><span class="s1">&lsquo;ruby&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;on&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;rails&rsquo;</span><span class="p">].</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:upcase</span><span class="p">)</span> <span class="c1">#=&gt; [&ldquo;RUBY&rdquo;, &ldquo;ON&rdquo;, &ldquo;RAILS&rdquo;]</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
   <div class="pagination">
-    {% if paginator.next_page %}
-      <a class="prev" href="{{paginator.next_page_path}}">&larr; Older</a>
-    {% endif %}
-    <a href="/archives">Blog Archives</a>
-    {% if paginator.previous_page %}
-    <a class="next" href="{{paginator.previous_page_path}}">Newer &rarr;</a>
-    {% endif %}
+    
+      <a class="prev" href="/page/2/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
   </div>
 </div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+<script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

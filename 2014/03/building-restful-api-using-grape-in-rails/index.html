@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Building RESTful API using Grape in Rails - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      Building RESTful API using Grape in Rails
+    
+    
+      
+        
+        
+         | Comments
+        
+      
+    
+  
+
+
+While de...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">Building RESTful API using Grape in Rails</h1>
+    
+    
+      <p class="meta">
+        
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>While developing a <em>rich client side web</em> application or <em>mobile app</em>, we need <em>RESTful JSON API</em> which interacts with the <em>front-end javascript framework</em>. Here you may use <strong>backbone.js</strong>, <strong>ember.js</strong> or <strong>angular.js</strong> on the front-end side of application.</p>
+
+<p>Here we&rsquo;ll be using <em>Ruby on Rails</em> on the <em>back-end</em> which will serve <em>JSON API</em> consumable by fron-end framework. If you look at the <a href="https://www.ruby-toolbox.com/categories/API_Builders">ruby toolbox</a> you&rsquo;ll see many API Builder gems available but it seems <em>grape</em> can be a good choice.</p>
+
+<p><img class="left no-border" src="https://raw.githubusercontent.com/wiki/intridea/grape/grape_logo.png" width="186" height="67" alt="Grape" > <em>Grape is a RESTful API microframework built to easily and quickly produce APIs for Ruby-rooted web applications.</em></p>
+
+<p style='clear:both'>
+Let's see how we can build RESTful JSON apis using <i>Grape</i> library:
+</p>
+
+
+<!--more-->
+
+
+<h2>Getting Started</h2>
+
+<p>Add <em>grape</em> to your <em>Gemfile</em> and then run <em>bundle</em> install
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem &lsquo;grape&rsquo;</div></div></pre></div></figure></p>
+
+<h2>Modularizing API directory structure</h2>
+
+<p>Place API files into <em>lib/api</em>. You need to create <em>api</em> folder inside <em>lib</em> directory.
+As we are placing api directory inside lib you don&rsquo;t need to explicitly load it inside <em>application.rb</em>
+If you want to place <em>api</em> directory at some other place then add below lines to to <em>application.rb</em>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">config</span><span class="p">.</span><span class="nf">paths</span><span class="p">.</span><span class="nf">add</span> <span class="s2">&ldquo;app/api&rdquo;</span><span class="p">,</span> <span class="ss">glob: </span><span class="s2">&ldquo;<em><em>/</em>.rb&rdquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">config</span><span class="p">.</span><span class="nf">autoload_paths</span> <span class="o">+=</span> <span class="no">Dir</span><span class="p">[</span><span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="no">Rails</span><span class="p">.</span><span class="nf">root</span><span class="si">&#x7d;</span><span class="s2">/app/api/</em>&rdquo;</span><span class="p">]</span></div></div></pre></div></figure></p>
+
+<p>First, Let&rsquo;s create <em>API::Root</em> class that will mount available api versions.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/root.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">prefix</span> <span class="s1">&lsquo;api&rsquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">mount</span> <span class="no">API</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">Root</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># mount API::V2::Root (next version)</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Now, create a <em>API::V1::Root</em> class that will mount resources for version 1
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/v1/root.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">V1</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">mount</span> <span class="no">API</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">Posts</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">mount</span> <span class="no">API</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">Authors</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Now, add resource <em>Posts</em> available for api access in json format
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/v1/posts.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">V1</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">class</span> <span class="nc">Posts</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">version</span> <span class="s1">&lsquo;v1&rsquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">format</span> <span class="ss">:json</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">resource</span> <span class="ss">:posts</span> <span class="k">do</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">desc</span> <span class="s2">&ldquo;Return list of recent posts&rdquo;</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">get</span> <span class="k">do</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>          <span class="no">Post</span><span class="p">.</span><span class="nf">recent</span><span class="p">.</span><span class="nf">all</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="k">end</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Now, lets add one more resource <code>Authors</code> to version v1
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/v1/authors.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">V1</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">class</span> <span class="nc">Authors</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">version</span> <span class="s1">&lsquo;v1&rsquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">format</span> <span class="ss">:json</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">resource</span> <span class="ss">:authors</span> <span class="k">do</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">desc</span> <span class="s2">&ldquo;Return list of authors&rdquo;</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">get</span> <span class="k">do</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>          <span class="no">Author</span><span class="p">.</span><span class="nf">all</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="k">end</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Mounting <em>API</em> under rails routes</h2>
+
+<p>Mount <em>API::Root</em> under routes pointing to rails root
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># config/routes.rb
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>SampleApp::Application.routes.draw do
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  mount API::Root => &lsquo;/&rsquo;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>end</div></div></pre></div></figure></p>
+
+<h2>Customize JSON API Errors</h2>
+
+<p>We can control the api raised errors and customize them so that response is in our own format whenever there are exceptions.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/error_formatter.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">ErrorFormatter</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">call</span> <span class="n">message</span><span class="p">,</span> <span class="n">backtrace</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">env</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="p">&#x7b;</span> <span class="ss">:response_type</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;error&rsquo;</span><span class="p">,</span> <span class="ss">:response</span> <span class="o">=&gt;</span> <span class="n">message</span> <span class="p">&#x7d;.</span><span class="nf">to_json</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Now, you can plug this module inside <em>API::Root</em>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/root.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#&hellip;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">error_formatter</span> <span class="ss">:json</span><span class="p">,</span> <span class="no">API</span><span class="o">::</span><span class="no">ErrorFormatter</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#&hellip;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>You can override error formatter for particular api version. Let&rsquo;s customize errors for <em>API::v1::Root</em>:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#lib/api/v1/error_formatter.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">V1</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">module</span> <span class="nn">ErrorFormatter</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">call</span> <span class="n">message</span><span class="p">,</span> <span class="n">backtrace</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">env</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">&#x7b;</span> <span class="ss">:response_type</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;error&rsquo;</span><span class="p">,</span> <span class="ss">:response</span> <span class="o">=&gt;</span> <span class="n">message</span> <span class="p">&#x7d;.</span><span class="nf">to_json</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/v1/root.rb</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">V1</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1">#&hellip;</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">error_formatter</span> <span class="ss">:json</span><span class="p">,</span> <span class="no">API</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">ErrorFormatter</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1">#&hellip;</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Accessing <em>API</em> routes</h2>
+
+<p>If you do <code>rake routes | grep api</code> then it will list only mount path for api but do not list all the paths.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake routes | grep api
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>    api_root        /api                API::Root</div></div></pre></div></figure></p>
+
+<p>So, in-order to list all api paths, you may have to create api routes task:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/tasks/routes.rake</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">namespace</span> <span class="ss">:api</span> <span class="k">do</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">desc</span> <span class="s2">&ldquo;API Routes&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">task</span> <span class="ss">:routes</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="no">API</span><span class="o">::</span><span class="no">Root</span><span class="p">.</span><span class="nf">routes</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">api</span><span class="o">|</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">method</span> <span class="o">=</span> <span class="n">api</span><span class="p">.</span><span class="nf">route_method</span><span class="p">.</span><span class="nf">ljust</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">path</span> <span class="o">=</span> <span class="n">api</span><span class="p">.</span><span class="nf">route_path</span><span class="p">.</span><span class="nf">gsub</span><span class="p">(</span><span class="s2">&ldquo;:version&rdquo;</span><span class="p">,</span> <span class="n">api</span><span class="p">.</span><span class="nf">route_version</span><span class="p">)</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">puts</span> <span class="s2">&ldquo;     </span><span class="si">#&#x7b;</span><span class="nb">method</span><span class="si">&#x7d;</span><span class="s2"> </span><span class="si">#&#x7b;</span><span class="n">path</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Now, run task and it should print routes like this:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake api:routes
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>    GET        /api/v1/posts(.:format)
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    GET        /api/v1/authors(.:format)</div></div></pre></div></figure></p>
+
+<h2>Securing API</h2>
+
+<p>Now we have got Grape <em>API</em> ready and working properly. Lets see how we can secure <em>API</em>. There are many approaches to authenticate API. Here lets first get it working with simple <em>HTTP Basic authentication</em>.</p>
+
+<h4>HTTP Basic authentication</h4>
+
+<p>In our case, lets add basic authentication to the <em>API::Root</em> and it will get applied to all versions of API.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/root.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#&hellip;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">http_basic</span> <span class="k">do</span> <span class="o">|</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">|</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">user</span> <span class="o">&amp;&amp;</span> <span class="n">user</span><span class="p">.</span><span class="nf">valid_password?</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#&hellip;</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Requesting API using basic http auth credentials:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>curl <a href="http://localhost:3000/api/products">http://localhost:3000/api/products</a> -u &ldquo;admin:secret&rdquo;</div></div></pre></div></figure></p>
+
+<h4>Authenticate using email and password</h4>
+
+<p>Grape provides us with <em>before block</em> inside that we can add authenctication code.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/api/root.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">API</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">class</span> <span class="nc">Root</span> <span class="o">&lt;</span> <span class="no">Grape</span><span class="o">::</span><span class="no">API</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#&hellip;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">before</span> <span class="k">do</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">error!</span><span class="p">(</span><span class="s2">&ldquo;401 Unauthorized&rdquo;</span><span class="p">,</span> <span class="mi">401</span><span class="p">)</span> <span class="k">unless</span> <span class="n">authenticated</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">helpers</span> <span class="k">do</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">def</span> <span class="nf">authenticated</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find_by_email</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:email</span><span class="p">])</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">user</span> <span class="o">&amp;&amp;</span> <span class="n">user</span><span class="p">.</span><span class="nf">valid_password?</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:password</span><span class="p">])</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#&hellip;</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    RESTfulAPIGrapeRails
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/" data-via="sandipransing" data-counturl="http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/03/understanding-restful-vs-soap-web-services/" title="Previous Post: Understanding RESTful vs SOAP web services">&laquo; Understanding RESTful vs SOAP web services</a>
+      
+      
+        <a class="basic-alignment right" href="/2014/03/api-authentication-using-devise-token/" title="Next Post: Grape API authentication using Devise Auth Token">Grape API authentication using Devise Auth Token &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/';
+        var disqus_url = 'http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+<script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

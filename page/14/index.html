@@ -1,0 +1,757 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+  
+  
+  
+    
+      
+    
+      Managing multiple ruby versions with RVM
+    
+    
+      
+        Sep 30, 2009
+        
+      
+    
+  
+
+
+  We ofte...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/page/14/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/managing-multiple-ruby-versions-with-rvm/">Managing multiple ruby versions with RVM</a></h1>
+    
+    
+      <p class="meta">
+        Sep 30, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We often work on many projects at the same time and each may using different ruby and rails version.
+Now, the big problem arises that how to manage multiple ruby version on the same system.</p>
+
+<p>We know that managing multiple rails versions on same system is not a problem at all but what about ruby versions?
+How one can manage multiple ruby versions?
+Also, while upgrading or degrading ruby version we need to install gems all again including rails.
+i know this is a fucking pain in ass.. isn&rsquo;t it?</p>
+
+<p>Lets see, How we can overcome with this headache. meantime there also can be some incompatibilities between two different ruby and rails versions.</p>
+
+<p>Yesterday, i did some research and came to know that&hellip;</p>
+
+<ol>
+<li>ruby 1.8.7 and rails 2.3.3 got quite stability and effectively. we can use it in next developments.</li>
+<li>Also, after installing ruby 1.9.1 and dependent gems for my project, and wondering that there are many incompatibilities while installing new gems with ruby 1.9.1</li>
+</ol>
+
+
+<p>Some of the gems are mysql, ferret, acts_as_ferret, erubies, etc.</p>
+
+<p>Today, while google, i found <code>rvm</code> gem and that seems very nice to manage multiple ruby versions.</p>
+
+<p>Here are some steps explaining how to use it.</p>
+
+<h2>Install rvm gem to manage multiple ruby version</h2>
+
+<p>Before install make sure you already have ruby and rubygems installation
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo gem install rvm</div></div></pre></div></figure></p>
+
+<h2>Install rvm for a particular user</h2>
+
+<p>It will also show how to use gem
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rvm-install</div></div></pre></div></figure></p>
+
+<p>Now, Open new shell and show all ruby &amp; jruby installations
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rvm list</div></div></pre></div></figure></p>
+
+<h2>Installing ruby using rvm</h2>
+
+<p>Specify ruby version
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># rvm install RUBY_VERSION_TO_BE_INSTALLED
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>rvm install 1.9.1</div></div></pre></div></figure></p>
+
+<h2>Install jruby</h2>
+
+<p>By default it will install jruby-1.3.1
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rvm install jruby</div></div></pre></div></figure></p>
+
+<h2>Specify which ruby version to use on shell</h2>
+
+<p>Note: You should have specified version installed via rvm
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># rvm use RUBY_VERSION_TO_USE
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>rvm use 1.9.1</div></div></pre></div></figure></p>
+
+<h2>Default i.e. version before rvm gem installation</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rvm use default</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/jruby-rails-installation-on-ubuntu/">jruby rails installation on ubuntu interpid</a></h1>
+    
+    
+      <p class="meta">
+        Sep 29, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Installations</h2>
+
+<p>Install mysql if you dont have already installed</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install mysql-server mysql-client libhtml-template-perl mailx dbishell libcompress-zlib-perl mysql-doc-5.0 tinyca</div></div></pre></div></figure></p>
+
+<p>Install ant and jdk
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install ant sun-java6-jdk</div></div></pre></div></figure></p>
+
+<p>Install jruby
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>mkdir software
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>cd software
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>wget <a href="http://dist.codehaus.org/jruby/jruby-bin-1.1.5.tar.gz">http://dist.codehaus.org/jruby/jruby-bin-1.1.5.tar.gz</a>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>tar xvfz jruby-bin-1.1.5.tar.gz
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>ln -s jruby-1.1.5 jruby
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>export PATH=$PATH:$HOME/software/jruby/bin</div></div></pre></div></figure></p>
+
+<p>Install the version of rails wanted by jruby
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>jruby -S gem install jruby-openssl
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>jruby -S gem install rails</div></div></pre></div></figure></p>
+
+<h4>List your gems</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>jruby -S gem list</div></div></pre></div></figure></p>
+
+<h4>Install required gems</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>jruby -S gem install activerecord-jdbc-adapter activerecord-jdbcmysql-adapter</div></div></pre></div></figure></p>
+
+<h4>Create a rails app using mysql DB</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cd ~/scripts/ruby
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>jruby -S rails wherehaveyoubeen -d mysql
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>cd wherehaveyoubeen
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>jruby script/generate controller states index</div></div></pre></div></figure></p>
+
+<h4>Configure access to the database server</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># vi config/database.yml</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s">development</span><span class="pi">:</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="s">adapter</span><span class="pi">:</span> <span class="s">jdbcmysql &lt;- very important!</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="s">encoding</span><span class="pi">:</span> <span class="s">utf8</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="s">database</span><span class="pi">:</span> <span class="s">test_development</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="s">username</span><span class="pi">:</span> <span class="s">root</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="s">password</span><span class="pi">:</span> <span class="s">database</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="s">socket</span><span class="pi">:</span> <span class="s">/var/run/mysqld/mysqld.sock</span></div></div></pre></div></figure></p>
+
+<h4>Generate DB</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>jruby -S rake db:create:all
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>jruby -S rake db:migrate</div></div></pre></div></figure></p>
+
+<h4>Edit your app</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install emacs ruby-elisp irb1.8 emacs22-el
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>emacs -bg black -fg wheat app/views/states/index.html.erb</div></div></pre></div></figure></p>
+
+<h4>Uncomment the secret in app/controllers/application.rb</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>vi app/controllers/application.rb
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'># remove secret from this file</div></div></pre></div></figure></p>
+
+<h3>Run Server</h3>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>jruby script/server</div></div></pre></div></figure></p>
+
+<h2>Comments</h2>
+
+<p><strong>@Parag</strong></p>
+
+<p>Very helpful article. Please keep up the great work! :-)</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/upgrading-rails-version/">upgrading rails version to rails 2.3.3</a></h1>
+    
+    
+      <p class="meta">
+        Sep 29, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Here are the simple steps to be followed while upgrading rails version to use.</p>
+
+<h2>Install rails version</h2>
+
+<p>Please install rails version 2.3.3 if not already installed</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install rails 2.3.3</div></div></pre></div></figure></p>
+
+<h2>Upgrade <code>environment.rb</code> for newer rails version</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>RAILS_GEM_VERSION = ‘2.3.3’ unless defined? RAILS_GEM_VERSION</div></div></pre></div></figure></p>
+
+<h2>Upgrade necessary files for rails <code>2.3.3</code> version</h2>
+
+<p>Run below command to update necessary files for latest version</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake rails:upadte</div></div></pre></div></figure></p>
+
+<h2>Start rails server</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/server</div></div></pre></div></figure></p>
+
+<p>Thats, it !</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/installing-ruby-191/">Installing ruby 1.9.1</a></h1>
+    
+    
+      <p class="meta">
+        Sep 29, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Installing ruby <code>1.9.1</code> got very easy. Please follow these simple steps :</p>
+
+<h2>Download</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>wget <a href="ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.1-p0.tar.gz">ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.1-p0.tar.gz</a></div></div></pre></div></figure></p>
+
+<h2>Extract</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>tar -xvf ruby-1.9.1-p0.tar.gz</div></div></pre></div></figure></p>
+
+<h2>Configure</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cd ruby-1.9.1-p0
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>./configure</div></div></pre></div></figure></p>
+
+<h2>Install</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>make
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>make test
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo make install</div></div></pre></div></figure></p>
+
+<p>Thats, it !</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/migrating-project-from-rails-2-1-0-to-2-3-3/">Migrating project from rails 2.1.0 to edge rails 2.3.3</a></h1>
+    
+    
+      <p class="meta">
+        Sep 25, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I wanted to migrate my project from rails <code>2.1.0</code> to rails <code>2.3.3</code></p>
+
+<p>so, i performed following steps, but it shows me memcached-client error.</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># vi config/environment.rb
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'># Specifies gem version of Rails to use when vendor/rails is not present
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>RAILS_GEM_VERSION = &lsquo;2.3.3&rsquo; unless defined? RAILS_GEM_VERSION
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/server</div></div></pre></div></figure></p>
+
+<p>It shows me error
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>`install_memcached': &lsquo;memcache-client&rsquo; client requested but not installed. Try &lsquo;sudo gem install memcache-client&rsquo;. (Interlock::ConfigurationError)</div></div></pre></div></figure></p>
+
+<p>so i installed <code>memcache-client</code> gem
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install memcache-client</div></div></pre></div></figure></p>
+
+<p>but still i am showing same error, any ideas ??</p>
+
+<h2>Comments</h2>
+
+<p><strong>JimmyBean</strong></p>
+
+<p>I don&rsquo;t know If I said it already but …I&rsquo;m so glad I found this site…Keep up the good work I read a lot of blogs on a daily basis and for the most part, people lack substance but, I just wanted to make a quick comment to say GREAT blog. Thanks, :)</p>
+
+<p>A definite great read..Jim Bean</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/4-steps-to-install-nginx-with-passenger/">4 steps to install nginx with passenger</a></h1>
+    
+    
+      <p class="meta">
+        Sep 9, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Install passenger program</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo gem install passenger</div></div></pre></div></figure></p>
+
+<h2>Install nginx server with passenger enabled</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>passenger-install-nginx-module</div></div></pre></div></figure></p>
+
+<p>It will open <code>apt</code>, click <code>Enter</code> to contine then select option 1 for default install
+then it will ask, <em>&ldquo;Where do you want to install Nginx to?&rdquo;</em>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>Please specify a prefix directory [/opt/nginx]:</div></div></pre></div></figure></p>
+
+<p>press enter then copy following block
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>server &#x7b;
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  listen 80;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  server_name www.yourhost.com;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  root /somewhere/public;   # &lt;— be sure to point to ‘public’!
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  passenger_enabled on;
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>&#x7d;</div></div></pre></div></figure></p>
+
+<h2>Make nginx Configuration</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># vi /opt/nginx/conf/nginx.conf
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'># Make passenger_root and passenger_ruby path to configuration
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>http &#x7b;
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  passenger_root /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.4;
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  passenger_ruby /usr/local/bin/ruby;
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  &hellip;</div></div></pre></div></figure></p>
+
+<p>then add server configuration block inside http block
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>http &#x7b;
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  &hellip;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  server &#x7b;
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    listen 80;
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    server_name www.yourhost.com; //Make sure this dns entry inside /etc/hosts
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    root /carsonline/public;   # &lt;— be sure to point to ‘public’! //here carsonline is RAILS_ROOT
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    passenger_enabled on;
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  &#x7d;
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  &hellip;</div></div></pre></div></figure></p>
+
+<p>That&rsquo;s all, you are done !</p>
+
+<h2>Launch Server</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>  /opt/nginx/sbin/nginx</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/how-to-generate-seo-sitemap-in-rails/">How to generate SEO sitemap in rails ?</a></h1>
+    
+    
+      <p class="meta">
+        Sep 9, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>What is sitemap ?</h2>
+
+<p>Sitemap is nothing but a .xml file containing urls available on your website</p>
+
+<p>It contains URL, last modified date, frequency of content change and priority ( between 0..1 )</p>
+
+<h2>Why we need sitemap ?</h2>
+
+<p>We can submit sitemap file to search engine. It will help them in analysing what urls on your site are available for crawling.</p>
+
+<h2>What is xml pattern ?</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>   <span class="cp">&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?&gt;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nt">&lt;urlset</span> <span class="na">xmlns=</span><span class="s">&ldquo;<a href="http://www.sitemaps.org/schemas/sitemap/0.9">http://www.sitemaps.org/schemas/sitemap/0.9</a>&rdquo;</span><span class="nt">&gt;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="nt">&lt;url&gt;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>           <span class="nt">&lt;loc&gt;</span><a href="http://www.example.com/">http://www.example.com/</a><span class="nt">&lt;/loc&gt;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>           <span class="nt">&lt;lastmod&gt;</span>2005-01-01<span class="nt">&lt;/lastmod&gt;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>           <span class="nt">&lt;changefreq&gt;</span>monthly<span class="nt">&lt;/changefreq&gt;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>           <span class="nt">&lt;priority&gt;</span>0.8<span class="nt">&lt;/priority&gt;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="nt">&lt;/url&gt;</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>       &hellip;
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>       &hellip;
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">&lt;/urlset&gt;</span></div></div></pre></div></figure></p>
+
+<h2>What will be the path for sitemap ?</h2>
+
+<p><strong>&ldquo;www.example.com/sitemap.xml&rdquo;</strong></p>
+
+<h4>Are we going to generate sitemap manually ?</h4>
+
+<p>No&hellip; there is <code>mephisto sitemap plugin</code> and you can make can use it.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/plugin install <a href="http://svn.appelsiini.net/svn/rails/plugins/mephisto_sitemap/">http://svn.appelsiini.net/svn/rails/plugins/mephisto_sitemap/</a></div></div></pre></div></figure></p>
+
+<h4>Am i needed to generate to sitemap for each request ?</h4>
+
+<p>No&hellip; we can generate it in background task daily basis.</p>
+
+<h4>How it will be accessed for request to sitemap ?</h4>
+
+<p>We can define path to local file in routes</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>map.connect &ldquo;sitemap.xml&rdquo;, :controller => :sitemap</div></div></pre></div></figure></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">SitemapController</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">index</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">render</span> <span class="s2">&ldquo;some local file path&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">.</span><span class="nf">.</span><span class="o">.</span></div></div></pre></div></figure></p>
+
+<p>Here are some reference links :</p>
+
+<ol>
+<li><a href="http://www.fortytwo.gr/blog/19/Generating-Sitemaps-With-Rails">http://www.fortytwo.gr/blog/19/Generating-Sitemaps-With-Rails</a></li>
+<li><a href="http://www.bestechvideos.com/2008/07/04/ruby-plus-71-how-to-create-a-seo-sitemap-for-rails-apps">http://www.bestechvideos.com/2008/07/04/ruby-plus-71-how-to-create-a-seo-sitemap-for-rails-apps</a></li>
+</ol>
+
+
+<h2>Comments</h2>
+
+<p><strong>info ternak</strong></p>
+
+<p>i got lots of information from your site, thank for your sharing… :)</p>
+
+<p><strong>Elena Morgan</strong></p>
+
+<p>Search engines generate nearly 90% of all Internet traffic and are responsible for 55% of all E-commerce transactions. Today, it is essential for all online businesses to make SEO an integral part of their online business strategy.</p>
+
+<p>So I would like to recommend one of my client who helps you define, evolve and implement a powerful SEO strategy to leverage your online business potential</p>
+
+<p><a href="http://www.redalkemi.com/">http://www.redalkemi.com/</a></p>
+
+<p><strong>sandipransing</strong></p>
+
+<p>Link mentioned is very good !
+but it has limitation that we will not have any control over urls that will be submitted to search engines :)</p>
+
+<p><strong>Sethupathi</strong></p>
+
+<p><em>How to create sitemap.xml</em></p>
+
+<p>From the following link you can generate the site-map.xml if your application is not in https. Just by giving the application link it will generate the xml for you.</p>
+
+<p><a href="http://www.xml-sitemaps.com/">http://www.xml-sitemaps.com/</a></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/what-is-new-in-edge-rails-2-3-3/">What is new in edge rails 2.3.3 ?</a></h1>
+    
+    
+      <p class="meta">
+        Sep 2, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails community has released rails 2.3.3 recently with major upgrades and several bug fixes added.</p>
+
+<p>On the other hand, <code>rails 3</code> ( i.e. merge of rails and merb framework ) is supposed to be officially get released in this May.</p>
+
+<p>Lets see what are the notable features added in rails 2.3.3</p>
+
+<h2>1. Rack</h2>
+
+<p>Rack is an abstraction built on the top of rails framework</p>
+
+<p>It provides minimal interface between webservers supporting ruby ( like  apache-mongrel, nginx-passenger ) and rails framework.
+Gives access to middleware goodness i.e. wrapping HTML requests and response in simple way
+unifies and distills the API for web servers, web frameworks, and software in between</p>
+
+<p><a href="http://guides.rubyonrails.org/rails_on_rack.html">read more …</a></p>
+
+<h2>2. Metal</h2>
+
+<p>It is a subset of rack middleware specially designed to integrate with rails application.</p>
+
+<p>Whenever you need achieve raw speed for certain requests by skipping action controller stack.</p>
+
+<p><a href="http://weblog.rubyonrails.org/2008/12/17/introducing-rails-metal">read more …</a></p>
+
+<h2>3. Engines</h2>
+
+<p>It was a plugin that got merged in rails core.</p>
+
+<p>It is used for sharing controllers, models and views seamlessly from within a plugin to your rails application.</p>
+
+<p><a href="http://rails-engines.org/news/2009/02/02/engines-in-rails-2-3/">read more …</a></p>
+
+<h2>4. Templates</h2>
+
+<p>These are the ruby files which describes which gems, plugins and initiliazers  has to be added while creating new rails project.</p>
+
+<p><a href="http://rails-engines.org/news/2009/02/02/engines-in-rails-2-3/">read more …</a></p>
+
+<h2>5. Nested Forms</h2>
+
+<p>Earlier nested forms for has_one and has_many associations wasn’t there in rails.
+this release added nested forms complex associations in models.</p>
+
+<p><a href="http://weblog.rubyonrails.org/2009/1/26/nested-model-forms">read more here…</a> and <a href="http://ryandaigle.com/articles/2009/2/1/what-s-new-in-edge-rails-nested-attributes">also see here …</a></p>
+
+<h2>Edge rails Installation</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install rails &ndash;source <a href="http://gems.rubyonrails.org">http://gems.rubyonrails.org</a></div></div></pre></div></figure></p>
+
+<p>I am  always thankful to rails community for continuous improvements to rails core.
+Cheers, now rails is getting its way !</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/08/ruby-on-rails-search-engine/">Ruby On Rails Search Engine Optimization (SEO)</a></h1>
+    
+    
+      <p class="meta">
+        Aug 17, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Crawler</h2>
+
+<p>Search Engines ( like google, yahoo ) mainly uses crawlers for returning results.</p>
+
+<blockquote><p><code>Crawler</code> is the program which searches world wide web(www) and returns ranked pages.</p></blockquote>
+
+<h4>Techniques</h4>
+
+<p>Lets see what are the search engine optimization (SEO) techniques we can adopt so that your rails
+website pages will appear in search results.</p>
+
+<ol>
+<li>Title Of Page</li>
+<li>Meta tags</li>
+<li>Page URL</li>
+<li>Page Contents ( this includes anchors to other pages, headers, image titles and alt texts when image not found then normal texts )</li>
+</ol>
+
+
+<h4>robots.txt</h4>
+
+<p>We can easily skip some pages from search by mentioning them in <code>robots.txt</code> which is by default should be in application root.</p>
+
+<p>And Ofcourse, we can manage all this in rails very easily..</p>
+
+<h4>Howto?</h4>
+
+<p>We can have in rails :</p>
+
+<ol>
+<li>Dynamic page titles,</li>
+<li>Meta tags and</li>
+<li>Sexy perma URLs in rails</li>
+<li>Also, we can define some standard on page content development.</li>
+</ol>
+
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/08/easy-sphinx-install-on-ubuntu-interpid/">Easy sphinx install on ubuntu interpid</a></h1>
+    
+    
+      <p class="meta">
+        Aug 17, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>Download <code>sphinx source</code> from website</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install libmysqlclient15-dev
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>wget <a href="http://sphinxsearch.com/downloads/sphinx-0.9.8-rc2.tar.gz">http://sphinxsearch.com/downloads/sphinx-0.9.8-rc2.tar.gz</a></div></div></pre></div></figure></p>
+
+<h4>Extract source code</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>tar xvf sphinx-0.9.8-rc2.tar.gz &amp;&amp; rm sphinx-0.9.8-rc2.tar.gz</div></div></pre></div></figure></p>
+
+<h4>Configure</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cd sphinx-0.9.8-rc2
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>./configure</div></div></pre></div></figure></p>
+
+<h4>Install</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>make
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo make install</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/15/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/13/">Newer &rarr;</a>
+    
+  </div>
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+<script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

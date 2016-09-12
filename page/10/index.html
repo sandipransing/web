@@ -1,0 +1,559 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+  
+  
+  
+    
+      
+    
+      Vim editor for ruby on rails development using rails.vim
+    
+    
+      
+        Feb 19, 2010
+        
+      
+   ...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/page/10/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/vim-editor-for-ruby-on-rails/">Vim editor for ruby on rails development using rails.vim</a></h1>
+    
+    
+      <p class="meta">
+        Feb 19, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>Vim install On CentOS</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>yum install vim-enhanced</div></div></pre></div></figure></p>
+
+<h4>Vim install on Ubuntu machine</h4>
+
+<p>Install vim-full using command
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>apt-get install vim</div></div></pre></div></figure></p>
+
+<p>While coding with ruby, html, erb, haml, js and stylesheets.
+It is great pain to indent code. Using rails vim one can easily keep code always indented.</p>
+
+<p>This increases code readability and minimizes effort, bugs and finally proves ease of using vim editor.</p>
+
+<p><code>rails.vim</code> script contains lot of syntax highlighter and indentation plugins that really helps development needs.</p>
+
+<p>If you have git installed then clone it under .vim directory of your profile
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>git clone git://github.com/sandipransing/rails_vim.git ~/.vim</div></div></pre></div></figure></p>
+
+<h4>To install from zip file download and extract it inside <code>~/.vim</code> directory</h4>
+
+<p>Command to <a href="http://www.vim.org/scripts/download_script.php?src_id=11920">download</a> from console
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>wget <a href="http://www.vim.org/scripts/download_script.php?src_id=11920">http://www.vim.org/scripts/download_script.php?src_id=11920</a> /rails.vim </div></div></pre></div></figure></p>
+
+<p>This is how my editor looks like</p>
+
+<p><a href="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s1600-h/IDE.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="215" src="http://1.bp.blogspot.com/_WmOmsgqsanw/S5voyvHVstI/AAAAAAAAAJI/bi-mSfyN5no/s400/IDE.png" width="500" /></a></p>
+
+<p>Open your ~/.bashrc and at the bottom add:</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>alias vi=vim
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>export EDITOR=vim</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/extend-enumerable-to-add-method/">Extend enumerable to add method collect_with_index</a></h1>
+    
+    
+      <p class="meta">
+        Feb 18, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Extend enumerable functionality to iterate along with index</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">Enumerable</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">collect_with_index</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">collect</span><span class="p">&#x7b;</span><span class="o">|</span><span class="n">elm</span><span class="o">|</span> <span class="k">yield</span><span class="p">(</span><span class="n">elm</span><span class="p">,</span> <span class="n">i</span><span class="o">+=</span><span class="mi">1</span><span class="p">)&#x7d;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">alias</span> <span class="n">map_with_index</span> <span class="n">collect_with_index</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h4>Example use :</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'> [&lsquo;ruby&rsquo;, &lsquo;rails&rsquo;, &lsquo;sandip&rsquo;].map_with_index&#x7b; |w,i|  [w, i] &#x7d;
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> #=> [[&ldquo;ruby&rdquo;, 1], [&ldquo;rails&rdquo;, 2], [&ldquo;sandip&rdquo;, 3]]
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> [&lsquo;ruby&rsquo;, &lsquo;rails&rsquo;, &lsquo;sandip&rsquo;].collect_with_index&#x7b; |w,i|  [w,  i] &#x7d;
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> #=> [[&ldquo;ruby&rdquo;, 1], [&ldquo;rails&rdquo;, 2], [&ldquo;sandip&rdquo;, 3]]
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> #By default index starts from zero to specify custom index to start from,
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> #pass index to collect_with_index
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'> [&lsquo;ruby&rsquo;, &lsquo;rails&rsquo;, &lsquo;sandip&rsquo;].map_with_index(-1)&#x7b; |w,i|  [w, i] &#x7d;
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> #=> [[&ldquo;ruby&rdquo;, 0], [&ldquo;rails&rdquo;, 1], [&ldquo;sandip&rdquo;, 2]]
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'> [&lsquo;ruby&rsquo;, &lsquo;rails&rsquo;, &lsquo;sandip&rsquo;].map_with_index(5)&#x7b; |w,i|  [w, i] &#x7d;
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'> #=> [[&ldquo;ruby&rdquo;, 6], [&ldquo;rails&rdquo;, 7], [&ldquo;sandip&rdquo;, 8]]</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/fixsolution-for-nomethoderror-undefined/">Fix/Solution for NoMethodError? (undefined method `controller_name' for nil:NilClass)</a></h1>
+    
+    
+      <p class="meta">
+        Feb 16, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This error appears when same action gets called twice. There might be chances to have controller with same name twice inside app as well as plugins</p>
+
+<p>In my case the error appeared while migrating from <code>rails 2.1</code> to <code>2.3</code>
+Application was having <code>application.rb</code> and <code>application_controller.rb</code></p>
+
+<p>Files deleted:
+<code>trunk/app/controllers/application.rb</code></p>
+
+<p>And that solved problem !</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/online-ruby-programming-useful-website/">Online ruby Programming useful website links</a></h1>
+    
+    
+      <p class="meta">
+        Feb 16, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ol>
+<li><p>Ruby
+<a href="http://tryruby.org">http://tryruby.org</a></p></li>
+<li><p>Hpricot
+<a href="http://hpricot.com">http://hpricot.com</a></p></li>
+<li><p>Regular expressions
+<a href="http://rubular.com">http://rubular.com</a></p></li>
+<li><p>Exceptions
+<a href="http://hoptoadapp.com/">http://hoptoadapp.com/</a></p></li>
+<li><p>Application Performance
+<a href="http://newrelic.com">http://newrelic.com</a></p></li>
+<li><p>Ruby Doc
+<a href="http://www.ruby-doc.org/">http://www.ruby-doc.org/</a></p></li>
+<li><p>Rails API
+<a href="http://api.rubyonrails.org/">http://api.rubyonrails.org/</a></p></li>
+<li><p>Ruby gems sources
+<a href="http://rubyforge.org">http://rubyforge.org</a>  /
+<a href="http://gems.github.com">http://gems.github.com</a>  /
+<a href="http://gemcutter.org">http://gemcutter.org</a></p></li>
+<li><p>Listing remote gems from source
+gem list &ndash;remote &ndash;source <a href="http://gems.github.com">http://gems.github.com</a></p></li>
+<li><p>List of Rails Plugins
+<a href="http://wiki.rubyonrails.org/rails/pages/Plugins">http://wiki.rubyonrails.org/rails/pages/Plugins</a> /
+<a href="http://www.agilewebdevelopment.com/plugins">http://www.agilewebdevelopment.com/plugins</a></p></li>
+</ol>
+
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/copy-database-to-another-database/">Copy database to another database through command</a></h1>
+    
+    
+      <p class="meta">
+        Feb 16, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>1. Copy One database to another database on same host</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>mysqldump -uroot -p  | mysql -uroot</div></div></pre></div></figure></p>
+
+<h2>2. Copy database to another database on remote host</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>mysqldump -uroot -p  | ssh host2 &ldquo;mysql -uroot&rdquo;</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/dynamic-creation-of-variables-in-ruby/">Dynamic creation of variables in ruby</a></h1>
+    
+    
+      <p class="meta">
+        Feb 16, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>1. To create local variables in ruby dynamically</h2>
+
+<p>Using eval method in ruby
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&ldquo;local=4&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; 4 </span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">p</span> <span class="n">local</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; 4</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&ldquo;local_</span><span class="si">#&#x7b;</span><span class="mi">1</span><span class="si">&#x7d;</span><span class="s2">=4&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; 4 </span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">puts</span> <span class="n">local_1</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; 4</span></div></div></pre></div></figure></p>
+
+<h2>2. To create &amp; get instance variables dynamically in ruby</h2>
+
+<p><code>instance_varaiable_set</code> &amp; <code>instance_varaiable_get</code> methods are provided and no need to do it using eval</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="nf">.</span><span class="mi">3</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nb">instance_variable_set</span><span class="p">(</span><span class="s2">&ldquo;@instance_</span><span class="si">#&#x7b;</span><span class="n">i</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; 0..3 </span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@instance_0</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; 1 </span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@instance_2</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; 5 </span></div></div></pre></div></figure></p>
+
+<h2>3. Dynamic constant variable creation in ruby</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Example</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Example</span><span class="p">.</span><span class="nf">const_set</span><span class="p">(</span><span class="s1">&lsquo;A&rsquo;</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; 200 </span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Example</span><span class="o">::</span><span class="no">A</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; 200</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/eval-method-in-ruby/">Eval method in ruby</a></h1>
+    
+    
+      <p class="meta">
+        Feb 16, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Eval method in ruby executes string/expression passed as parameter.</p>
+
+<p>Example:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&ldquo;5+3&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; 8   </span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&ldquo;a=5&rdquo;</span><span class="p">)</span><br/>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; 5   </span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">eval</span><span class="p">(</span><span class="s2">&ldquo;b||=a&rdquo;</span><span class="p">)</span><br/>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; 5   </span></div></div></pre></div></figure></p>
+
+<p>Its part of ruby meta-programming and not recommended approach unless there is no any alternative to do.</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/hasmany-through-association-for-rails/">has_many => through association for rails polymorphic model</a></h1>
+    
+    
+      <p class="meta">
+        Feb 15, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Example of polymorphic association using has_many, through, source</p>
+
+<p>Here post is polymorphic resource which belongs to the author [can be student, teacher]</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/models/student.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Student</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">has_many</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="n">author</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/models/teacher.rb</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Teacher</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">has_many</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="n">author</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/models/post.rb</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">belongs</span> <span class="n">to</span> <span class="ss">:author</span><span class="p">,</span> <span class="ss">:polymorphic</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Has_many through association on polymorphic models</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/models/student.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Student</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">beloyngs_to</span> <span class="ss">:division</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">has_many</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="n">author</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/models/division.rb</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Division</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">has_many</span> <span class="ss">:students</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">has_many</span> <span class="ss">:student_posts</span><span class="p">,</span> <span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:students</span><span class="p">,</span> <span class="ss">:source</span> <span class="o">=&gt;</span> <span class="ss">:posts</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Examples</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">ruby</span> <span class="n">script</span><span class="o">/</span><span class="n">console</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">div</span> <span class="o">=</span> <span class="no">Division</span><span class="p">.</span><span class="nf">first</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">div</span><span class="p">.</span><span class="nf">student_posts</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/nginx-passenger-configuration-for-rails/">nginx passenger configuration for rails application</a></h1>
+    
+    
+      <p class="meta">
+        Feb 15, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>#user  nobody;
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>user www-data;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>worker_processes  2;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>#error_log  logs/error.log;
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>#error_log  logs/error.log  notice;
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>#error_log  logs/error.log  info;
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>#pid        logs/nginx.pid;
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>events &#x7b;
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    worker_connections  1024;
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>&#x7d;
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>http &#x7b;
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>    passenger_root /var/lib/gems/1.8/gems/passenger-2.2.8;
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>    passenger_ruby /usr/bin/ruby1.8;
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>    passenger_max_pool_size 3;
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>    include       mime.types;
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>default_type  application/octet-stream;
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>    #log_format  main  &lsquo;$remote_addr - $remote_user [$time_local] &ldquo;$request&rdquo; &rsquo;
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>    #                  &lsquo;$status $body_bytes_sent &ldquo;$http_referer&rdquo; &rsquo;
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>    #                  &lsquo;&ldquo;$http_user_agent&rdquo; &ldquo;$http_x_forwarded_for&rdquo;&rsquo;;
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>    #access_log  logs/access.log  main;
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>    sendfile        on;
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>    #tcp_nopush     on;
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'>    #keepalive_timeout  0;
+</div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'>    keepalive_timeout  65;
+</div></div><div data-line='34' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='35' class='code-highlight-row numbered'><div class='code-highlight-line'>    #gzip  on;
+</div></div><div data-line='36' class='code-highlight-row numbered'><div class='code-highlight-line'> server &#x7b;
+</div></div><div data-line='37' class='code-highlight-row numbered'><div class='code-highlight-line'>     listen 80;
+</div></div><div data-line='38' class='code-highlight-row numbered'><div class='code-highlight-line'>     server_name localhost;
+</div></div><div data-line='39' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='40' class='code-highlight-row numbered'><div class='code-highlight-line'>     root /home/josh/current/public;   # &lt;&mdash; be sure to point to &lsquo;public&rsquo;!
+</div></div><div data-line='41' class='code-highlight-row numbered'><div class='code-highlight-line'>     passenger_enabled on;
+</div></div><div data-line='42' class='code-highlight-row numbered'><div class='code-highlight-line'>     passenger_use_global_queue on;
+</div></div><div data-line='43' class='code-highlight-row numbered'><div class='code-highlight-line'>   &#x7d;
+</div></div><div data-line='44' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='45' class='code-highlight-row numbered'><div class='code-highlight-line'>    server &#x7b;
+</div></div><div data-line='46' class='code-highlight-row numbered'><div class='code-highlight-line'>        listen       80;
+</div></div><div data-line='47' class='code-highlight-row numbered'><div class='code-highlight-line'>        server_name  localhost;
+</div></div><div data-line='48' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='49' class='code-highlight-row numbered'><div class='code-highlight-line'>        #charset koi8-r;
+</div></div><div data-line='50' class='code-highlight-row numbered'><div class='code-highlight-line'>        #access_log  logs/host.access.log  main;
+</div></div><div data-line='51' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='52' class='code-highlight-row numbered'><div class='code-highlight-line'>        location / &#x7b;
+</div></div><div data-line='53' class='code-highlight-row numbered'><div class='code-highlight-line'>            root   html;
+</div></div><div data-line='54' class='code-highlight-row numbered'><div class='code-highlight-line'>            index  index.html index.htm;
+</div></div><div data-line='55' class='code-highlight-row numbered'><div class='code-highlight-line'>        &#x7d;
+</div></div><div data-line='56' class='code-highlight-row numbered'><div class='code-highlight-line'>     #error_page  404              /404.html;
+</div></div><div data-line='57' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='58' class='code-highlight-row numbered'><div class='code-highlight-line'>        # redirect server error pages to the static page /50x.html
+</div></div><div data-line='59' class='code-highlight-row numbered'><div class='code-highlight-line'>        #
+</div></div><div data-line='60' class='code-highlight-row numbered'><div class='code-highlight-line'>        error_page   500 502 503 504  /50x.html;
+</div></div><div data-line='61' class='code-highlight-row numbered'><div class='code-highlight-line'>        location = /50x.html &#x7b;
+</div></div><div data-line='62' class='code-highlight-row numbered'><div class='code-highlight-line'>            root   html;
+</div></div><div data-line='63' class='code-highlight-row numbered'><div class='code-highlight-line'>        &#x7d;
+</div></div><div data-line='64' class='code-highlight-row numbered'><div class='code-highlight-line'>   &#x7d;
+</div></div><div data-line='65' class='code-highlight-row numbered'><div class='code-highlight-line'>&#x7d;</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/02/activerecordreadonlyrecord-while/">ActiveRecord::ReadOnlyRecord while updating object fetched by joins</a></h1>
+    
+    
+      <p class="meta">
+        Feb 15, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>ActiveRecord find with join options retrieves object as readonly</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>station = Station.find( :first, :joins => :call, :conditions => [&ldquo;customer_id = ? and date(insurance_expiry_date) = ?&rdquo;, customer.id, insurance_expiry_date ] )</div></div></pre></div></figure></p>
+
+<p>Readonly object cannot modified and hence below line raises &ldquo;ActiveRecord::ReadOnlyRecord&rdquo; error.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>station.update_attributes(&#x7b; :customer_id => 12 &#x7d;)</div></div></pre></div></figure></p>
+
+<p>If you have to write on read only object then you can pass following option to find query
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>:readonly => false</div></div></pre></div></figure></p>
+
+<p>Now below find is permitted to do write on fetched object records.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>station = Station.find( :first, :joins => :call, :conditions => [&ldquo;customer_id = ? and date(insurance_expiry_date) = ?&rdquo;, customer.id, insurance_expiry_date ], :readonly => false )</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/11/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/9/">Newer &rarr;</a>
+    
+  </div>
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+<script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

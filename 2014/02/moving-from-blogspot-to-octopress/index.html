@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Migrating from blogspot to octopress - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      Migrating from blogspot to octopress
+    
+    
+      
+        
+        
+         | Comments
+        
+      
+    
+  
+
+
+I was happily...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2014/02/moving-from-blogspot-to-octopress/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">Migrating from blogspot to octopress</h1>
+    
+    
+      <p class="meta">
+        
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I was happily writing my blog at <code>blogspot</code> almost three plus years. From last 2-3 days, i was evaluating with <a href="http://octopress.org">octopress</a> for its way of writing posts, customizations, themes, and plugins. As a result of evaluation, found <code>octopress</code> blog as very quick &amp; easy to write hence decided to  <em>shift</em> from <em>blogger</em> to <em>octopress</em>.</p>
+
+<p>Below post explains steps involved in migration:</p>
+
+<h2>Export content from blogger</h2>
+
+<p>First, you need to export your posts from blogger.
+Goto <code>blogger admin area</code> and then go to <code>settings &gt;&gt; other &gt;&gt; Export Blog</code> and click on it. Please wait sometime and popup will comeup allowing you to download blog in <code>xml</code> format.</p>
+
+<p><img src="/images/export-blog.png" /></p>
+
+<p>If you still finding some problem with exporting then see <a href="http://www.freetech4teachers.com/2013/01/how-to-export-your-blogger-and.html">here</a></p>
+
+<!--more-->
+
+
+<h2>Formatting posts for octopress</h2>
+
+<p>Now the big challenge ! We have <code>xml posts</code> downloaded from blogger but octopress posts format is different.
+So, we need to convert xml posts to markdown formatted octopress posts.
+If you do it manually then its not an easy task but don&rsquo;t worry. There is already a ruby code that will do it for you.
+Thanks to <a href="https://gist.github.com/juniorz">Reinaldo de Souza </a> for sharing the script. Download the <code>import.rb</code> script from <a href="https://gist.github.com/baldowl/1578928">here</a></p>
+
+<h2>Run the script against downloaded xml file</h2>
+
+<p>Script requires <code>nokogiri</code>. if you not don&rsquo;t have already then install using <code>gem install nokogiri</code>
+After successful run, this will be creating static markdown octopress formatted posts inside <code>_posts</code> and <code>_drafts</code> directories.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby import.rb blog-02-09-2014.xml</div></div></pre></div></figure></p>
+
+<h2>Copy generated posts to octopress blog posts</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>mv <em>posts/* blog/</em>posts/<code>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;mv _drafts/* blog/_drafts/</code></div></div></pre></div></figure></p>
+
+<p>This finishes migration and run <code>rake preview</code> and you will start seeing your blogger posts.</p>
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    octopress,blogger
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2014/02/moving-from-blogspot-to-octopress/" data-via="sandipransing" data-counturl="http://funonrails.com/2014/02/moving-from-blogspot-to-octopress/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2014/02/writing-octopress-blog-posts-using-markdown/" title="Previous Post: Writing Octopress blog posts using markdown">&laquo; Writing Octopress blog posts using markdown</a>
+      
+      
+        <a class="basic-alignment right" href="/2014/03/understanding-restful-vs-soap-web-services/" title="Next Post: Understanding RESTful vs SOAP web services">Understanding RESTful vs SOAP web services &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://funonrails.com/2014/02/moving-from-blogspot-to-octopress/';
+        var disqus_url = 'http://funonrails.com/2014/02/moving-from-blogspot-to-octopress/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+<script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

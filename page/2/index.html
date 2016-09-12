@@ -1,0 +1,1071 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+  
+  
+  
+    
+      
+    
+      dynamic & bounded parameters and named routes
+    
+    
+      
+        Jan 31, 2012
+        
+      
+    
+  
+
+
+  Ra...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/page/2/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/dynamic-bounded-parameters-and-named-scopes/">dynamic & bounded parameters and named routes</a></h1>
+    
+    
+      <p class="meta">
+        Jan 31, 2012
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails routes can be customized to include your own parameters inside it. Lets first understand how named routes works:</p>
+
+<h2>Adding dynamic parameters to routes</h2>
+
+<p>Here exact parameters are matched to route and presence of each parameter is mandatory in order to construct urls. If blank parameter is supplied then it will raise <code>RoutingError</code> exception.</p>
+
+<h2>Exact matched named route declared as :</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">match</span> <span class="s1">&lsquo;:a/:b/:c&rsquo;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;home#index&rsquo;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:q</span></div></div></pre></div></figure></p>
+
+<h4>rails console :</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">app</span><span class="p">.</span><span class="nf">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &ldquo;<a href="http://www.example.com/a/b/c">http://www.example.com/a/b/c</a>&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">app</span><span class="p">.</span><span class="nf">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="s1">&lsquo;&rsquo;</span><span class="p">)</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; ActionController::RoutingError: No route matches &#x7b;:controller=&gt;&ldquo;home&rdquo;, :a=&gt;:a, :b=&gt;:b, :c=&gt;&ldquo;&rdquo;&#x7d;</span></div></div></pre></div></figure></p>
+
+<!--more-->
+
+
+<h2>Bound parameters to named routes</h2>
+
+<p>If you are sure that certain parameters can be blank then you can define them as optional parameter inside route</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">match</span> <span class="s1">&lsquo;:a/:b(/:c)&rsquo;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;home#index&rsquo;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:q</span></div></div></pre></div></figure></p>
+
+<h4>rails console :</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">app</span><span class="p">.</span><span class="nf">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="s1">&lsquo;&rsquo;</span><span class="p">)</span> <br/>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &ldquo;<a href="http://www.example.com/a/b?c=">http://www.example.com/a/b?c=</a>&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">app</span><span class="p">.</span><span class="nf">q_url</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">)</span> <br/>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &ldquo;<a href="http://www.example.com/a/b">http://www.example.com/a/b</a>&rdquo; </span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/puts-tos-and-inspect-on-ruby-object/">puts, to_s and inspect on ruby object</a></h1>
+    
+    
+      <p class="meta">
+        Jan 31, 2012
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><code>puts</code> converts ruby object into string by invoking to_s method on object. The default to_s prints the object&rsquo;s class and an encoding of the object id. In order to print human readable form of object use inspect
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">locs</span> <span class="o">=</span> <span class="no">Location</span><span class="p">.</span><span class="nf">find_by_sql</span><span class="p">(</span><span class="s1">&lsquo;select * from locations&rsquo;</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Location</span> <span class="no">Load</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="n">ms</span><span class="p">)</span>  <span class="nb">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">locations</span></div></div></pre></div></figure></p>
+
+<p>Puts Object internally invokes to_s method on object to print
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">locs</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># it calls to_s method on object</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nb">puts</span> <span class="n">l</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#&lt;Location:0x000000055bb328&gt;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#&lt;Location:0x000000055bb058&gt;</span></div></div></pre></div></figure></p>
+
+<!--more-->
+
+
+<p>puts object followed by subsequent invoke of inspect method outputs readable object
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">locs</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nb">puts</span> <span class="n">l</span><span class="p">.</span><span class="nf">inspect</span> <span class="c1"># prints actual object</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#&lt;Location id: 15, name: &ldquo;Annettaside3&rdquo;, street: &ldquo;71838 Ritchie Cape&rdquo;, city: &ldquo;East Destanystad&rdquo;, state: &ldquo;Utah&rdquo;, zip: &ldquo;58054&rdquo;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &ldquo;2012-01-25 11:17:26&rdquo;, updated_at: &ldquo;2012-01-25 11:17:26&rdquo;, country_name: &ldquo;Korea&rdquo;&gt;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#&lt;Location id: 16, name: &ldquo;Sporerbury4&rdquo;, street: &ldquo;73057 Jerad Shoal&rdquo;, city: &ldquo;South Kyliefurt&rdquo;, state: &ldquo;Delaware&rdquo;, zip: &ldquo;46553-3376&rdquo;, phone: 123456, other_phone: 987654, staff_strength: 40, is_active: true, created_at: &ldquo;2012-01-25 11:24:48&rdquo;, updated_at: &ldquo;2012-01-25 11:24:48&rdquo;, country_name: &ldquo;Australia&rdquo;&gt;</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/csv-file-import-export-in-rails-3/">csv file import / export in rails 3</a></h1>
+    
+    
+      <p class="meta">
+        Jan 27, 2012
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>CSV (comma separated values) files are frequently used to import/export data.</p>
+
+<p>In rails 3, <code>FasterCSV</code> comes as default and below is the way to upload csv files inside rails applications. The code below will also show you how to generate csv in memory, parse on csv data, skip header, iterate over records, save records inside db, export upload error file and many more.</p>
+
+<h4>Upload form</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">=</span> <span class="n">form_tag</span> <span class="n">upload_url</span><span class="p">,</span> <span class="ss">:multipart</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="k">do</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">%label</span><span class="p">&#x7b;</span><span class="ss">:for</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;file&rdquo;</span><span class="p">&#x7d;</span> File to Upload
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">file_field_tag</span> <span class="s2">&ldquo;file&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">submit_tag</span></div></div></pre></div></figure></p>
+
+<!--more-->
+
+
+<p>Assume <code>upload_url</code> maps to import action of customers controller</p>
+
+<h4>Controller code</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">CustomersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span><br/>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">[.</span><span class="nf">.</span><span class="o">.</span><span class="p">]</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">import</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="nf">post?</span> <span class="o">&amp;&amp;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:file</span><span class="p">].</span><span class="nf">present?</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">infile</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:file</span><span class="p">].</span><span class="nf">read</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">n</span><span class="p">,</span> <span class="n">errs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[]</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="no">CSV</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="c1"># SKIP: header i.e. first row OR blank row</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="k">next</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="n">or</span> <span class="n">row</span><span class="p">.</span><span class="nf">join</span><span class="p">.</span><span class="nf">blank?</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="c1"># build_from_csv method will map customer attributes &amp; </span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="c1"># build new customer record</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">customer</span> <span class="o">=</span> <span class="no">Customer</span><span class="p">.</span><span class="nf">build_from_csv</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="c1"># Save upon valid </span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="c1"># otherwise collect error records to export</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="k">if</span> <span class="n">customer</span><span class="p">.</span><span class="nf">valid?</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>          <span class="n">customer</span><span class="p">.</span><span class="nf">save</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="k">else</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>          <span class="n">errs</span> <span class="o">&lt;&lt;</span> <span class="n">row</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="k">end</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1"># Export Error file for later upload upon correction</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">if</span> <span class="n">errs</span><span class="p">.</span><span class="nf">any?</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">errFile</span> <span class="o">=</span><span class="s2">&ldquo;errors_</span><span class="si">#&#x7b;</span><span class="no">Date</span><span class="p">.</span><span class="nf">today</span><span class="p">.</span><span class="nf">strftime</span><span class="p">(</span><span class="s1">&lsquo;%d%b%y&rsquo;</span><span class="p">)</span><span class="si">&#x7d;</span><span class="s2">.csv&rdquo;</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">errs</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="no">Customer</span><span class="p">.</span><span class="nf">csv_header</span><span class="p">)</span>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">errCSV</span> <span class="o">=</span> <span class="no">CSV</span><span class="p">.</span><span class="nf">generate</span> <span class="k">do</span> <span class="o">|</span><span class="n">csv</span><span class="o">|</span>
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'>          <span class="n">errs</span><span class="p">.</span><span class="nf">each</span> <span class="p">&#x7b;</span><span class="o">|</span><span class="n">row</span><span class="o">|</span> <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="n">row</span><span class="p">&#x7d;</span>
+</div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="k">end</span>
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">send_data</span> <span class="n">errCSV</span><span class="p">,</span>
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>          <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;text/csv; charset=iso-8859-1; header=present&rsquo;</span><span class="p">,</span>
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'>          <span class="ss">:disposition</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;attachment; filename=</span><span class="si">#&#x7b;</span><span class="n">errFile</span><span class="si">&#x7d;</span><span class="s2">.csv&rdquo;</span>
+</div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">else</span>
+</div></div><div data-line='34' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">flash</span><span class="p">[</span><span class="ss">:notice</span><span class="p">]</span> <span class="o">=</span> <span class="no">I18n</span><span class="p">.</span><span class="nf">t</span><span class="p">(</span><span class="s1">&lsquo;customer.import.success&rsquo;</span><span class="p">)</span>
+</div></div><div data-line='35' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">redirect_to</span> <span class="n">import_url</span> <span class="c1">#GET</span>
+</div></div><div data-line='36' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='37' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='38' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='39' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">[.</span><span class="nf">.</span><span class="o">.</span><span class="p">]</span>
+</div></div><div data-line='40' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h4>Customer model</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Customer</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">scope</span> <span class="ss">:active</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:active</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">scope</span> <span class="ss">:latest</span><span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s1">&lsquo;created_at desc&rsquo;</span><span class="p">)</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">csv_header</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="s2">&ldquo;First Name,Last Name,Email,Phone,Mobile, Address, FAX, City&rdquo;</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">&lsquo;,&rsquo;</span><span class="p">)</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">build_from_csv</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># find existing customer from email or create new</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">cust</span> <span class="o">=</span> <span class="n">find_or_initialize_by_email</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">cust</span><span class="p">.</span><span class="nf">attributes</span> <span class="o">=</span><span class="p">&#x7b;</span><span class="ss">:first_name</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="ss">:last_name</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="ss">:phone</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="ss">:mobile</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="ss">:address</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="ss">:fax</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="ss">:city</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="p">[</span><span class="mi">8</span><span class="p">]&#x7d;</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="n">cust</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">to_csv</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">[</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">mobile</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">fax</span><span class="p">,</span> <span class="n">city</span><span class="p">]</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Export customer records in CSV format</h2>
+
+<p>Below code loads customer records from database then generate <code>csv_data</code> inside memory and exports data to browser using <code>send_data</code> method.</p>
+
+<p>Note: As we are not writing on file system hence code can easily work heroku.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">def</span> <span class="nf">export</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># CRITERIA : to select customer records</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1">#=&gt; Customer.active.latest.limit(100)</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">custs</span> <span class="o">=</span> <span class="no">Customer</span><span class="p">.</span><span class="nf">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">filename</span> <span class="o">=</span><span class="s2">&ldquo;customers_</span><span class="si">#&#x7b;</span><span class="no">Date</span><span class="p">.</span><span class="nf">today</span><span class="p">.</span><span class="nf">strftime</span><span class="p">(</span><span class="s1">&lsquo;%d%b%y&rsquo;</span><span class="p">)</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">csv_data</span> <span class="o">=</span> <span class="no">FasterCSV</span><span class="p">.</span><span class="nf">generate</span> <span class="k">do</span> <span class="o">|</span><span class="n">csv</span><span class="o">|</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="no">Customer</span><span class="p">.</span><span class="nf">csv_header</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">custs</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="n">c</span><span class="p">.</span><span class="nf">to_csv</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">send_data</span> <span class="n">csv_data</span><span class="p">,</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;text/csv; charset=iso-8859-1; header=present&rsquo;</span><span class="p">,</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:disposition</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;attachment; filename=</span><span class="si">#&#x7b;</span><span class="n">filename</span><span class="si">&#x7d;</span><span class="s2">.csv&rdquo;</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span> </div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/mongoid-embededin-and-array-field/">Mongoid embeded_in and Array field management</a></h1>
+    
+    
+      <p class="meta">
+        Jan 20, 2012
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Previous post explains on <a href="http://www.funonrails.com/2012/01/mongoid-array-field-and-rails-form">mongoid document array field and rails form implementation</a></p>
+
+<p>Below example shows rails form integration of array field of embedded mongoid document</p>
+
+<p>Lets consider scenario that <code>student</code> embeds one <code>family</code> who has many <code>assets</code>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Student</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">include</span> <span class="no">Mongoid</span><span class="o">::</span><span class="no">Document</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">field</span> <span class="ss">:name</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">field</span> <span class="ss">:phone</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">embeds_one</span>  <span class="ss">:family</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">validates_associated</span> <span class="ss">:family</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">accepts_nested_attributes_for</span> <span class="ss">:family</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p><figure class='code-highlight-figure'><figcaption class='code-highlight-caption'><span class='code-highlight-caption-title'>more</span></figcaption><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Family</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">include</span> <span class="no">Mongoid</span><span class="o">::</span><span class="no">Document</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">ASSETS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&lsquo;flat&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;car&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;business&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;bunglow&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;cash&rsquo;</span><span class="p">]</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">field</span> <span class="ss">:members</span><span class="p">,</span> <span class="ss">type: </span><span class="no">Integer</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">field</span> <span class="ss">:assets</span><span class="p">,</span> <span class="ss">type: </span><span class="no">Array</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">field</span> <span class="ss">:religon</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">embedded_in</span> <span class="ss">:student</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Brief controller code
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">StudentsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="k">def</span> <span class="nf">new</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>   <span class="vi">@student</span> <span class="o">=</span> <span class="no">Student</span><span class="p">.</span><span class="nf">new</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>   <span class="vi">@student</span><span class="p">.</span><span class="nf">family</span> <span class="o">||=</span> <span class="vi">@student</span><span class="p">.</span><span class="nf">build_family</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="k">end</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="k">def</span> <span class="nf">create</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>   <span class="vi">@student</span> <span class="o">=</span> <span class="no">Student</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:student</span><span class="p">])</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>   <span class="vi">@student</span><span class="p">.</span><span class="nf">family</span><span class="p">.</span><span class="nf">assets</span><span class="p">.</span><span class="nf">reject!</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:blank?</span><span class="p">)</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>   <span class="k">if</span> <span class="vi">@student</span><span class="p">.</span><span class="nf">save</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="p">[.</span><span class="nf">.</span><span class="o">.</span><span class="p">]</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>   <span class="k">else</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>   <span class="k">end</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="k">end</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>view form will look like-
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@student</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">s</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:name</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">s</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:phone</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">-</span> <span class="n">s</span><span class="p">.</span><span class="nf">fields_for</span> <span class="ss">:family</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:members</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:religion</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">-</span> <span class="no">Family</span><span class="o">::</span><span class="no">ASSETS</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">asset</span><span class="o">|</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c">/Here f.object_name #=&gt; student[family]</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">check_box</span> <span class="ss">:assets</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="n">f</span><span class="p">.</span><span class="nf">object_name</span><span class="si">&#x7d;</span><span class="s2">[assets][]&rdquo;</span><span class="p">,</span> <span class="n">asset</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/mongoid-array-field-and-rails-form/">mongoid array field and rails form</a></h1>
+    
+    
+      <p class="meta">
+        Jan 19, 2012
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Mongoid document supports <code>array</code> field. Mongoid array field is a ruby <code>array</code> but it becomes quite complex to manage array field in rails forms.</p>
+
+<p>I didn&rsquo;t find anything matching on google as well on stackoverflow hence decided to dig into rails form helpers (<code>form_for</code>, <code>fields_for</code>).</p>
+
+<p>Finally i am pleased to get it working as expected :)</p>
+
+<p>In below example, <code>product</code> can have multiple <code>categories</code> :
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Product</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nc">CATEGORIES</span> <span class="o">=</span> <span class="sx">%w(Apparel Media Software Sports Agri Education)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">include</span> <span class="no">Mongoid</span><span class="o">::</span><span class="no">Document</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">field</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="no">String</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">field</span> <span class="ss">:categories</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="no">Array</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<!--more-->
+
+
+<p>Here is form code
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@product</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:name</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">-</span> <span class="no">Product</span><span class="o">::</span><span class="no">CATEGORIES</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">check_box</span> <span class="ss">:categories</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;product[categories][]&rdquo;</span><span class="p">,</span> <span class="n">category</span></div></div></pre></div></figure></p>
+
+<p>Here is products controller code
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">ProductsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">before_filter</span> <span class="ss">:load_product</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:new</span><span class="p">,</span> <span class="ss">:create</span><span class="p">]</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">[.</span><span class="nf">.</span><span class="o">.</span><span class="p">]</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># We don&rsquo;t need new action to be defined</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">create</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@product</span><span class="p">.</span><span class="nf">attributes</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:product</span><span class="p">]</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># Here we need to reject blank categories</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@product</span><span class="p">.</span><span class="nf">categories</span><span class="p">.</span><span class="nf">reject!</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:blank?</span><span class="p">)</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="vi">@product</span><span class="p">.</span><span class="nf">save</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">flash</span><span class="p">[</span><span class="ss">:notice</span><span class="p">]</span> <span class="o">=</span> <span class="no">I18n</span><span class="p">.</span><span class="nf">t</span><span class="p">(</span><span class="s1">&lsquo;product.create.success&rsquo;</span><span class="p">)</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">redirect_to</span><span class="p">(</span><span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:index</span><span class="p">)</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">else</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">[.</span><span class="nf">.</span><span class="o">.</span><span class="p">]</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">private</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">load_product</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@product</span> <span class="o">=</span> <span class="no">Product</span><span class="p">.</span><span class="nf">new</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/twitter-bootstrap-form-builder-for-rails/">twitter-bootstrap form builder for rails</a></h1>
+    
+    
+      <p class="meta">
+        Jan 17, 2012
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="twitter.github.com/bootstrap/">twitter-bootstrap</a> is pluggable css suit provided by twitter.
+To know more about how to get started on it click <a href="http://www.funonrails.com/2011/11/rails-311-haml-sass-jquery-coffee-rails">here</a>.</p>
+
+<p>Below post will help you out in getting started bootstrap css with rails app. One need to add below files to helpers directory.
+MainForm can be used as base version of form builder and can be overriden for its subsequent use inside other custom form builders.</p>
+
+<ol>
+<li>Main Form
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/helpers/main_form.rb </span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">MainForm</span> <span class="o">&lt;</span> <span class="no">ActionView</span><span class="o">::</span><span class="no">Helpers</span><span class="o">::</span><span class="no">FormBuilder</span> <span class="c1"># NestedForm::Builder</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">CSS</span> <span class="o">=</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:label</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;label-control&rsquo;</span><span class="p">,</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:hint</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;hint&rsquo;</span><span class="p">,</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:hint_ptr</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;hint-pointer&rsquo;</span><span class="p">,</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;help-inline&rsquo;</span><span class="p">,</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:field_error</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;error&rsquo;</span><span class="p">,</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="ss">:main_class</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;clearfix&rsquo;</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">&#x7d;</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">FIELDS</span> <span class="o">=</span> <span class="sx">%w(radio_button check_box text_field text_area password_field select file_field collection_select email_field date_select)</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">main_class</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="kp">nil</span><span class="p">)</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="no">CSS</span><span class="p">[</span><span class="ss">:main_class</span><span class="p">]</span> <span class="k">unless</span> <span class="n">error</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">[</span><span class="no">CSS</span><span class="p">[</span><span class="ss">:main_class</span><span class="p">],</span> <span class="no">CSS</span><span class="p">[</span><span class="ss">:field_error</span><span class="p">]].</span><span class="nf">join</span><span class="p">(</span><span class="s1">&lsquo; &rsquo;</span><span class="p">)</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">required</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">object</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">validators_on</span><span class="p">(</span><span class="nb">name</span><span class="p">).</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:class</span><span class="p">).</span><span class="nf">include?</span><span class="p">(</span><span class="no">ActiveModel</span><span class="o">::</span><span class="no">Validations</span><span class="o">::</span><span class="no">PresenceValidator</span><span class="p">)</span> <span class="k">rescue</span> <span class="kp">nil</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">&#x7b;&#x7d;)</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">link</span> <span class="o">=</span> <span class="n">options</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="ss">:return</span><span class="p">,</span> <span class="s2">&ldquo;/&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="s2">&ldquo;Cancel&rdquo;</span><span class="p">,</span> <span class="ss">:href</span> <span class="o">=&gt;</span> <span class="n">link</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;btn_form button np_cancel_btn </span><span class="si">#&#x7b;</span><span class="n">options</span><span class="p">[</span><span class="ss">:class</span><span class="p">]</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">submit</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&ldquo;Save&rdquo;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">&#x7b;&#x7d;)</span>
+</div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">options</span><span class="p">[</span><span class="ss">:class</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&ldquo;send_form_btn </span><span class="si">#&#x7b;</span><span class="n">options</span><span class="p">[</span><span class="ss">:class</span><span class="p">]</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">super</span>
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">label_class</span>
+</div></div><div data-line='34' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">&#x7b;</span><span class="ss">:class</span> <span class="o">=&gt;</span> <span class="no">CSS</span><span class="p">[</span><span class="ss">:label</span><span class="p">]&#x7d;</span>
+</div></div><div data-line='35' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='36' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='37' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">label_tag</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+</div></div><div data-line='38' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># Incase its a mandatory field, the &lsquo;<em>&rsquo; is added to the field.</span>
+</div></div><div data-line='39' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">txt</span> <span class="o">=</span> <span class="n">arg</span><span class="p">[</span><span class="ss">:label</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">arg</span><span class="p">[</span><span class="ss">:label</span><span class="p">].</span><span class="nf">to_s</span> <span class="o">||</span> <span class="n">attribute</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">titleize</span>
+</div></div><div data-line='40' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">txt</span><span class="o">&lt;&lt;</span> <span class="s1">&lsquo;</em>&rsquo;</span> <span class="k">if</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="ss">:required</span><span class="p">]</span> <span class="o">||</span> <span class="n">required</span><span class="p">(</span><span class="n">attribute</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="n">arg</span><span class="p">[</span><span class="ss">:required</span><span class="p">]</span> <span class="o">!=</span> <span class="kp">false</span>
+</div></div><div data-line='41' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">label</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">txt</span><span class="p">,</span> <span class="n">label_class</span><span class="p">)</span>
+</div></div><div data-line='42' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='43' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='44' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">error_tag</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+</div></div><div data-line='45' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">errs</span> <span class="o">=</span> <span class="n">field_error</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+</div></div><div data-line='46' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="n">errs</span><span class="p">.</span><span class="nf">first</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="no">CSS</span><span class="p">[</span><span class="ss">:error</span><span class="p">])</span> <span class="k">if</span> <span class="n">errs</span><span class="p">.</span><span class="nf">present?</span>
+</div></div><div data-line='47' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='48' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='49' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">field_error</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+</div></div><div data-line='50' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="k">if</span> <span class="vi">@object</span> <span class="o">&amp;&amp;</span> <span class="vi">@object</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">blank?</span>
+</div></div><div data-line='51' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="vi">@object</span><span class="p">.</span><span class="nf">errors</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="k">if</span> <span class="n">method_name</span> <span class="o">!=</span> <span class="s1">&lsquo;file_field&rsquo;</span>
+</div></div><div data-line='52' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@object</span><span class="p">.</span><span class="nf">errors</span><span class="p">[</span><span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="n">attribute</span><span class="p">.</span><span class="nf">to_s</span><span class="si">&#x7d;</span><span class="s2"><em>file_name&rdquo;</span><span class="p">]</span> <span class="o">|</span> <span class="vi">@object</span><span class="p">.</span><span class="nf">errors</span><span class="p">[</span><span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="n">attribute</span><span class="p">.</span><span class="nf">to_s</span><span class="si">&#x7d;</span><span class="s2"></em>file_size&rdquo;</span><span class="p">]</span> <span class="o">|</span> <span class="vi">@object</span><span class="p">.</span><span class="nf">errors</span><span class="p">[</span><span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="n">attribute</span><span class="p">.</span><span class="nf">to_s</span><span class="si">&#x7d;</span><span class="s2">_content_type&rdquo;</span><span class="p">]</span>
+</div></div><div data-line='53' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='54' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='55' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">hint_tag</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+</div></div><div data-line='56' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">hintPtr</span> <span class="o">=</span> <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="s1">&lsquo;&rsquo;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="no">CSS</span><span class="p">[</span><span class="ss">:hint_ptr</span><span class="p">])</span>
+</div></div><div data-line='57' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">hintT</span> <span class="o">=</span> <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="n">txt</span> <span class="o">+</span> <span class="n">hintPtr</span><span class="p">,</span> <span class="p">&#x7b;</span><span class="ss">:class</span> <span class="o">=&gt;</span> <span class="no">CSS</span><span class="p">[</span><span class="ss">:hint</span><span class="p">]&#x7d;,</span> <span class="kp">false</span><span class="p">)</span>
+</div></div><div data-line='58' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='59' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='60' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">spinner_tag</span>
+</div></div><div data-line='61' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@template</span><span class="p">.</span><span class="nf">image_tag</span><span class="p">(</span><span class="s1">&lsquo;spinner.gif&rsquo;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="ss">:spinner</span><span class="p">,</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:spinner</span><span class="p">)</span>
+</div></div><div data-line='62' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='63' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>  </div></div></pre></div></figure></li>
+</ol>
+
+
+<!--more-->
+
+
+<p>ZeroForm is custom form builder which is inherited from <code>main_form</code> and its going to be actually used inside forms.
+Feel free to make custom form related changes inside this</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/helpers/zero_form.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">ZeroForm</span> <span class="o">&lt;</span> <span class="no">MainForm</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># Overridden label_class here as we dont need class to be applied</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">label_class</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">&#x7b;&#x7d;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">create_tagged_field</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">define_method</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">attribute</span><span class="p">,</span> <span class="o"><em></span><span class="n">args</span><span class="o">|</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">arg</span> <span class="o">=</span> <span class="n">args</span><span class="p">.</span><span class="nf">last</span> <span class="o">&amp;&amp;</span> <span class="n">args</span><span class="p">.</span><span class="nf">last</span><span class="p">.</span><span class="nf">is_a?</span><span class="p">(</span><span class="no">Hash</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">args</span><span class="p">.</span><span class="nf">last</span> <span class="o">||</span> <span class="p">&#x7b;&#x7d;</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1"># Bypass form-builder and do your own custom stuff!</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">return</span> <span class="k">super</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="o"></em></span><span class="n">args</span><span class="p">)</span> <span class="k">if</span> <span class="n">arg</span><span class="p">[</span><span class="ss">:skip</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">args</span><span class="p">.</span><span class="nf">last</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="ss">:skip</span><span class="p">)</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">errT</span> <span class="o">=</span> <span class="n">error_tag</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">labelT</span> <span class="o">=</span> <span class="n">label_tag</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">mainT</span> <span class="o">=</span> <span class="k">super</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">baseT</span> <span class="o">=</span> <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="n">mainT</span> <span class="o">+</span> <span class="n">errT</span><span class="p">)</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">hintT</span> <span class="o">=</span> <span class="n">hint_tag</span><span class="p">(</span><span class="n">arg</span><span class="p">[</span><span class="ss">:hint</span><span class="p">])</span> <span class="k">if</span> <span class="n">arg</span><span class="p">[</span><span class="ss">:hint</span><span class="p">]</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">spinnerT</span> <span class="o">=</span> <span class="n">spinner_tag</span> <span class="k">if</span> <span class="n">arg</span><span class="p">[</span><span class="ss">:spinner</span><span class="p">]</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">allT</span> <span class="o">=</span> <span class="n">labelT</span> <span class="o">+</span> <span class="n">baseT</span> <span class="o">+</span> <span class="n">spinnerT</span> <span class="o">+</span> <span class="n">hintT</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="n">allT</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="n">main_class</span><span class="p">(</span><span class="n">errT</span><span class="p">))</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">FIELDS</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">create_tagged_field</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>In order to use Nested Forms you need to extend MainForm with NestedForm Builder</p>
+
+<p><strong>Integrate NestedForm with FormBuilder</strong></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">MainForm</span> <span class="o">&lt;</span> <span class="no">NestedForm</span><span class="o">::</span><span class="no">Builder</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p><strong>View Form</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@address</span> <span class="o">||=</span> <span class="no">Address</span><span class="p">.</span><span class="nf">new</span><span class="p">,</span> <span class="ss">:builder</span> <span class="o">=&gt;</span> <span class="no">ZeroForm</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:street_address</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">text_area</span> <span class="ss">:detail_address</span><span class="p">,</span> <span class="ss">:rows</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:city</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">select</span> <span class="ss">:state</span><span class="p">,</span> <span class="sx">%w(US IN AUS UK UKRAINE)</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">submit</span> <span class="s1">&lsquo;Save &amp; Continue&rsquo;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;btn primary&rsquo;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="n">link_to</span> <span class="s1">&lsquo;Skip »&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;#&rsquo;</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/get-models-used-in-rails-app/">Get models list inside rails app</a></h1>
+    
+    
+      <p class="meta">
+        Jan 17, 2012
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>How to get collection of models inside your application. Certainly there are many ways to do it.
+Lets have a look at different ways starting from worst -</p>
+
+<p>Get table names inside database and then iterating over to get model name
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@models</span> <span class="o">=</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">connection</span><span class="p">.</span><span class="nf">tables</span><span class="p">.</span><span class="nf">collect</span><span class="p">&#x7b;</span><span class="o">|</span><span class="n">t</span><span class="o">|</span> <span class="n">t</span><span class="p">.</span><span class="nf">underscore</span><span class="p">.</span><span class="nf">singularize</span><span class="p">.</span><span class="nf">camelize</span><span class="p">&#x7d;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [&ldquo;AdhearsionAudit&rdquo;, &ldquo;AudioLog&rdquo;, &ldquo;AuditDetail&rdquo;,&ldquo;TinyPrint&rdquo;, &ldquo;TinyVideo&rdquo;, &ldquo;UnknownCall&rdquo;, &ldquo;UserAudit&rdquo;, &ldquo;User&rdquo;]</span></div></div></pre></div></figure></p>
+
+<p>Select those with associated class
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@models</span><span class="p">.</span><span class="nf">delete_if</span><span class="p">&#x7b;</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="nf">constantize</span> <span class="k">rescue</span> <span class="kp">true</span><span class="p">&#x7d;</span></div></div></pre></div></figure></p>
+
+<p>Load models dir
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@models</span> <span class="o">=</span> <span class="no">Dir</span><span class="p">[</span><span class="s1">&lsquo;app/models/<em>.rb&rsquo;</span><span class="p">].</span><span class="nf">map</span> <span class="p">&#x7b;</span><span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="no">File</span><span class="p">.</span><span class="nf">basename</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&lsquo;.</em>&rsquo;</span><span class="p">).</span><span class="nf">camelize</span><span class="p">.</span><span class="nf">constantize</span><span class="p">.</span><span class="nf">name</span> <span class="p">&#x7d;</span></div></div></pre></div></figure></p>
+
+<p>Select ActiveRecord::Base extended class only
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@models</span><span class="p">.</span><span class="nf">reject!</span><span class="p">&#x7b;</span><span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="n">m</span><span class="p">.</span><span class="nf">constantize</span><span class="p">.</span><span class="nf">superclass</span> <span class="o">!=</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> <span class="p">&#x7d;</span></div></div></pre></div></figure></p>
+
+<p>Get Active Record subclasses
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># make sure relevant models are loaded otherwise</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># require them prior</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># Dir.glob(RAILS_ROOT + &lsquo;/app/models/*.rb&rsquo;).each &#x7b; |file| require file &#x7d;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">A</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">B</span> <span class="o">&lt;</span> <span class="no">A</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="ss">:subclasses</span><span class="p">).</span><span class="nf">collect</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:name</span><span class="p">)</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [&hellip;., A]</span></div></div></pre></div></figure></p>
+
+<p>How to get Inherited models too
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">A</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">B</span> <span class="o">&lt;</span> <span class="no">A</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">descendants</span><span class="p">.</span><span class="nf">collect</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:name</span><span class="p">)</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [&hellip;., A, B]</span></div></div></pre></div></figure></p>
+
+<p>Below is more elegant solution provide by <a href="http://stackoverflow.com/users/268/vincent-robert">Vincent-robert</a> over stack overflow which recursively looks for subsequent descendent&rsquo;s of class and gives you list from all over application
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Class</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">extend?</span><span class="p">(</span><span class="n">klass</span><span class="p">)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">not</span> <span class="n">superclass</span><span class="p">.</span><span class="nf">nil?</span> <span class="n">and</span> <span class="p">(</span> <span class="n">superclass</span> <span class="o">==</span> <span class="n">klass</span> <span class="n">or</span> <span class="n">superclass</span><span class="p">.</span><span class="nf">extend?</span> <span class="n">klass</span> <span class="p">)</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">def</span> <span class="nf">models</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">Module</span><span class="p">.</span><span class="nf">constants</span><span class="p">.</span><span class="nf">select</span> <span class="k">do</span> <span class="o">|</span><span class="n">constant_name</span><span class="o">|</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">constant</span> <span class="o">=</span> <span class="nb">eval</span> <span class="n">constant_name</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="n">not</span> <span class="n">constant</span><span class="p">.</span><span class="nf">nil?</span> <span class="n">and</span> <span class="n">constant</span><span class="p">.</span><span class="nf">is_a?</span> <span class="no">Class</span> <span class="n">and</span> <span class="n">constant</span><span class="p">.</span><span class="nf">extend?</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">constant</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/stripe-gateway-payment-integration-with-rails/">stripe payment gateway integration with rails</a></h1>
+    
+    
+      <p class="meta">
+        Jan 15, 2012
+        
+         | <a href="/2012/01/stripe-gateway-payment-integration-with-rails/#disqus_thread/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Stripe is simple website payment solution and its very easy to easy setup.
+It currently supports only in US and seems to be very popular compared to other payment gateways because of its api &amp; pricing</p>
+
+<p>Stripe API provides -</p>
+
+<ol>
+<li>charge (regular payments)</li>
+<li>subscription (recurring payments)</li>
+<li>managing customers (via stripe_customer_token)</li>
+</ol>
+
+
+<p><strong>What you need to do ?</strong></p>
+
+<p>Create a stripe account by providing email address and password. There after go to the <a href="https://manage.stripe.com/account">manage account page</a> to obtain stripe public &amp; api keys.
+Rails Integration</p>
+
+<p>Rails Integration
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># Gemfile
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>gem stripe</div></div></pre></div></figure></p>
+
+<p>Add api key and public key
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># config/initializers/stripe.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Stripe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">&ldquo;rGaNWsIG3Gy6zvXB8wv4rEcizJp6XjF5&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">STRIPE_PUBLIC_KEY</span> <span class="o">=</span> <span class="s2">&ldquo;vk_BcSyS2qPWdT5SdrwkQg0vTSyhZgqN&rdquo;</span></div></div></pre></div></figure></p>
+
+<p>View
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># app/views/layouts/application.html.haml
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">=</span> <span class="n">javascript_include_tag</span> <span class="s1">&lsquo;<a href="https://js.stripe.com/v1/">https://js.stripe.com/v1/</a>&rsquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">=</span> <span class="n">tag</span> <span class="ss">:meta</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;stripe-key&rsquo;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="no">STRIPE_PUBLIC_KEY</span></div></div></pre></div></figure></p>
+
+<p>Payment Form
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># app/views/payments/new.html.haml
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nf">#stripe_error</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">%noscript</span> JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@payment</span> <span class="o">||=</span> <span class="no">Payment</span><span class="p">.</span><span class="nf">new</span><span class="p">,</span> <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">&#x7b;</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:payForm</span><span class="p">&#x7d;</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="nb">p</span><span class="p">.</span><span class="nf">hidden_field</span> <span class="ss">:stripe_card_token</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nc">.field</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">=</span> <span class="nb">p</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:amount</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nc">.credit_card_form</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">%h3</span><span class="nc">.title</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>      Enter Credit Card
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">-</span> <span class="k">if</span> <span class="vi">@payment</span><span class="p">.</span><span class="nf">stripe_card_token</span><span class="p">.</span><span class="nf">present?</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>      Credit card has been provided.
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">-</span> <span class="k">else</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nc">.field</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">=</span> <span class="n">label_tag</span> <span class="ss">:card_number</span><span class="p">,</span> <span class="s2">&ldquo;Credit Card Number&rdquo;</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">=</span> <span class="n">text_field_tag</span> <span class="ss">:card_number</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="ss">name: </span><span class="kp">nil</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nc">.field</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">=</span> <span class="n">label_tag</span> <span class="ss">:card_code</span><span class="p">,</span> <span class="s2">&ldquo;Security Code (CVV)&rdquo;</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">=</span> <span class="n">text_field_tag</span> <span class="ss">:card_code</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="ss">name: </span><span class="kp">nil</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nc">.field</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">=</span> <span class="n">label_tag</span> <span class="ss">:card_month</span><span class="p">,</span> <span class="s2">&ldquo;Expiry Date&rdquo;</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">=</span> <span class="n">select_month</span> <span class="kp">nil</span><span class="p">,</span> <span class="p">&#x7b;</span><span class="ss">add_month_numbers: </span><span class="kp">true</span><span class="p">&#x7d;,</span> <span class="p">&#x7b;</span><span class="ss">name: </span><span class="kp">nil</span><span class="p">,</span> <span class="ss">id: </span><span class="s2">&ldquo;card_month&rdquo;</span><span class="p">&#x7d;</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">=</span> <span class="n">select_year</span> <span class="kp">nil</span><span class="p">,</span> <span class="p">&#x7b;</span><span class="ss">start_year: </span><span class="no">Date</span><span class="p">.</span><span class="nf">today</span><span class="p">.</span><span class="nf">year</span><span class="p">,</span> <span class="ss">end_year: </span><span class="no">Date</span><span class="p">.</span><span class="nf">today</span><span class="p">.</span><span class="nf">year</span><span class="o">+</span><span class="mi">15</span><span class="p">&#x7d;,</span> <span class="p">&#x7b;</span><span class="ss">name: </span><span class="kp">nil</span><span class="p">,</span> <span class="ss">id: </span><span class="s2">&ldquo;card_year&rdquo;</span><span class="p">&#x7d;</span></div></div></pre></div></figure></p>
+
+<p>Javascript Code
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="err">#</span> <span class="nx">app</span><span class="o">/</span><span class="nx">views</span><span class="o">/</span><span class="nx">payments</span><span class="o">/</span><span class="k">new</span><span class="p">.</span><span class="nx">js</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="kd">var</span> <span class="nx">payment</span><span class="p">;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nx">jQuery</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nx">Stripe</span><span class="p">.</span><span class="nx">setPublishableKey</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;meta[name=&ldquo;stripe-key&rdquo;]&rsquo;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&lsquo;content&rsquo;</span><span class="p">));</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">return</span> <span class="nx">payment</span><span class="p">.</span><span class="nx">setupForm</span><span class="p">();</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">&#x7d;);</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nx">payment</span> <span class="o">=</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="na">setupForm</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;.head&rsquo;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&lsquo;disabled&rsquo;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#payment_stripe_card_token&rsquo;</span><span class="p">).</span><span class="nx">val</span><span class="p">())&#x7b;</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#payForm&rsquo;</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="p">&#x7d;</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">else</span><span class="p">&#x7b;</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="nx">payment</span><span class="p">.</span><span class="nx">processCard</span><span class="p">();</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="p">&#x7d;</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">&#x7d;);</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">&#x7d;,</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="na">processCard</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="kd">var</span> <span class="nx">card</span><span class="p">;</span>
+</div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nx">card</span> <span class="o">=</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="na">number</span><span class="p">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#card_number&rsquo;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="na">cvc</span><span class="p">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#card_code&rsquo;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="na">expMonth</span><span class="p">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#card_month&rsquo;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+</div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="na">expYear</span><span class="p">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#card_year&rsquo;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
+</div></div><div data-line='34' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">&#x7d;;</span>
+</div></div><div data-line='35' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="nx">Stripe</span><span class="p">.</span><span class="nx">createToken</span><span class="p">(</span><span class="nx">card</span><span class="p">,</span> <span class="nx">payment</span><span class="p">.</span><span class="nx">handleStripeResponse</span><span class="p">);</span>
+</div></div><div data-line='36' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">&#x7d;,</span>
+</div></div><div data-line='37' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="na">handleStripeResponse</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">status</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='38' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='39' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#payment_stripe_card_token&rsquo;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+</div></div><div data-line='40' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#stripe_error&rsquo;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+</div></div><div data-line='41' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#payForm&rsquo;</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+</div></div><div data-line='42' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">&#x7d;</span> <span class="k">else</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='43' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#stripe_error&rsquo;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&lsquo;error&rsquo;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+</div></div><div data-line='44' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;.head&rsquo;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&lsquo;disabled&rsquo;</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</div></div><div data-line='45' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">&#x7d;</span>
+</div></div><div data-line='46' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">&#x7d;</span>
+</div></div><div data-line='47' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">&#x7d;;</span></div></div></pre></div></figure></p>
+
+<p>Generate &amp; Migrate Payment Model
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rails g model payment status:string amount:float email:string transaction_number:string
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>rake db:migrate</div></div></pre></div></figure></p>
+
+<p>Payment Model
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/models/payment.rb </span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">attr_accessible</span> <span class="ss">:stripe_card_token</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">validates</span> <span class="ss">:amount</span><span class="p">,</span> <span class="ss">:stripe_card_token</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:numericality</span> <span class="o">=&gt;</span> <span class="p">&#x7b;</span> <span class="ss">:greater_than</span> <span class="o">=&gt;</span> <span class="mi">0</span> <span class="p">&#x7d;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">purchase</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="no">PROCESSING</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">customer</span> <span class="o">=</span> <span class="no">Stripe</span><span class="o">::</span><span class="no">Customer</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">description</span><span class="ss">:email</span><span class="p">,</span> <span class="ss">card: </span><span class="n">stripe_card_token</span><span class="p">)</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># OPTIONAL: save customer token for further reference</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">stripe_customer_token</span> <span class="o">=</span> <span class="n">customer</span><span class="p">.</span><span class="nf">id</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># Charge</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">charge</span> <span class="o">=</span> <span class="no">Stripe</span><span class="o">::</span><span class="no">Charge</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="ss">:amount</span> <span class="o">=&gt;</span> <span class="n">amount</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="c1"># $15.00 this time</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="ss">:currency</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;usd&rdquo;</span><span class="p">,</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="ss">:customer</span> <span class="o">=&gt;</span> <span class="n">stripe_customer_token</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">)</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="n">charge</span><span class="p">.</span><span class="nf">paid</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">self</span><span class="p">.</span><span class="nf">transaction_num</span> <span class="o">=</span> <span class="n">charge</span><span class="p">.</span><span class="nf">id</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="no">SUCCESS</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">else</span>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="no">FAILED</span>
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="nb">self</span>
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">errors</span><span class="p">.</span><span class="nf">add</span> <span class="ss">:base</span><span class="p">,</span> <span class="s2">&ldquo;There was a problem with your credit card.&rdquo;</span>
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="no">FAILED</span>
+</div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="nb">self</span>
+</div></div><div data-line='34' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='35' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Payments Controller
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/controllers/payments_controller.rb </span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">PaymentsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">create</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:payment</span><span class="p">])</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="vi">@payment</span><span class="p">.</span><span class="nf">valid?</span> <span class="o">&amp;&amp;</span> <span class="vi">@payment</span><span class="p">.</span><span class="nf">purchase</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">flash</span><span class="p">[</span><span class="ss">:notice</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&lsquo;Thanks for Purchase!&rsquo;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">redirect_to</span> <span class="n">root_url</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">else</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/understanding-rails-uri/">understanding rails uri</a></h1>
+    
+    
+      <p class="meta">
+        Jan 14, 2012
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><code>rails-uri</code> module provides us with url manipulation methods</p>
+
+<h2>Parse string url</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s1">&lsquo;<a href="http://funonrails.com/categories/rails-3">http://funonrails.com/categories/rails-3</a>&rsquo;</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">url</span><span class="p">.</span><span class="nf">host</span> <span class="c1">#=&gt; &ldquo;<a href="http://funonrails.com">http://funonrails.com</a>&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">url</span><span class="p">.</span><span class="nf">port</span> <span class="c1">#=&gt; 80</span></div></div></pre></div></figure></p>
+
+<h2>URL with Basic Authentication</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s1">&lsquo;<a href="http://sandip:2121@funonrails.com/categories/rails-3">http://sandip:2121@funonrails.com/categories/rails-3</a>&rsquo;</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">url</span><span class="p">.</span><span class="nf">user</span> <span class="c1">#=&gt; &ldquo;sandip&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">url</span><span class="p">.</span><span class="nf">password</span> <span class="c1">#=&gt; &ldquo;2121&rdquo;</span></div></div></pre></div></figure></p>
+
+<h2>Extracting urls form string paragraph</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">URI</span><span class="p">.</span><span class="nf">extract</span><span class="p">(</span><span class="s1">&lsquo;<a href="http://funonrails.com">http://funonrails.com</a> is rails blog authored by <a href="http://sandipransing.github.com">http://sandipransing.github.com</a> contact <a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#x2f;&#x2f;&#115;&#97;&#110;&#100;&#x69;&#x70;&#64;&#102;&#x75;&#x6e;&#111;&#110;&#x72;&#x61;&#105;&#x6c;&#x73;&#x2e;&#99;&#111;&#109;">&#47;&#47;&#x73;&#x61;&#x6e;&#100;&#x69;&#x70;&#x40;&#102;&#x75;&#110;&#111;&#x6e;&#x72;&#x61;&#x69;&#x6c;&#x73;&#x2e;&#99;&#x6f;&#109;</a>&rsquo;</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [&ldquo;<a href="http://funonrails.com">http://funonrails.com</a>&rdquo;, &ldquo;<a href="http://sandipransing.github.com">http://sandipransing.github.com</a>&rdquo;, &ldquo;<a href="&#x6d;&#x61;&#105;&#108;&#116;&#111;&#x3a;&#47;&#47;&#x73;&#x61;&#110;&#100;&#105;&#x70;&#x40;&#x66;&#117;&#x6e;&#x6f;&#110;&#114;&#97;&#105;&#108;&#115;&#x2e;&#x63;&#111;&#109;">&#x2f;&#x2f;&#x73;&#x61;&#x6e;&#x64;&#x69;&#112;&#x40;&#102;&#x75;&#x6e;&#111;&#x6e;&#x72;&#x61;&#x69;&#108;&#x73;&#46;&#99;&#111;&#109;</a>&rdquo;]</span></div></div></pre></div></figure></p>
+
+<h2>Split &amp; Join URI</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">URI</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">&lsquo;<a href="http://sandip:2121@funonrails.com/categories/rails-3">http://sandip:2121@funonrails.com/categories/rails-3</a>&rsquo;</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [&ldquo;http&rdquo;, &ldquo;sandip:2121&rdquo;, &ldquo;funonrails.com&rdquo;, nil, nil, &ldquo;/categories/rails-3&rdquo;, nil, nil, nil]</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&lt;=&gt;</span> <span class="p">[</span><span class="no">Scheme</span><span class="p">,</span> <span class="no">Userinfo</span><span class="p">,</span> <span class="no">Host</span><span class="p">,</span> <span class="no">Port</span><span class="p">,</span> <span class="no">Registry</span><span class="p">,</span> <span class="no">Path</span><span class="p">,</span> <span class="no">Opaque</span><span class="p">,</span> <span class="no">Query</span><span class="p">,</span> <span class="no">Fragment</span><span class="p">]</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">URI</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s1">&lsquo;<a href="http://funonrails.com">http://funonrails.com</a>&rsquo;</span><span class="p">,</span><span class="s1">&lsquo;categories/rails-3&rsquo;</span><span class="p">)</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; #&lt;URI::<a href="HTTP:0x7fbf9202efc8">HTTP:0x7fbf9202efc8</a> URL:<a href="http://funonrails.com/categories/rails-3&amp;gt;">http://funonrails.com/categories/rails-3&amp;gt;</a></span></div></div></pre></div></figure></p>
+
+<h2>Escape &amp; Unescape alias encode/decode URI</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">URI</span><span class="p">.</span><span class="nf">escape</span> <span class="s2">&ldquo;<a href="http://funonrails.com/categories/named">http://funonrails.com/categories/named</a> scopes&rdquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &ldquo;<a href="http://funonrails.com/categories/named%20scopes">http://funonrails.com/categories/named%20scopes</a>&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">URI</span><span class="p">.</span><span class="nf">encode</span> <span class="s2">&ldquo;<a href="http://funonrails.com/categories/named">http://funonrails.com/categories/named</a> scopes&rdquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &ldquo;<a href="http://funonrails.com/categories/named%20scopes">http://funonrails.com/categories/named%20scopes</a>&rdquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">URI</span><span class="p">.</span><span class="nf">decode</span> <span class="s2">&ldquo;<a href="http://funonrails.com/categories/named%20scopes">http://funonrails.com/categories/named%20scopes</a>&rdquo;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &ldquo;<a href="http://funonrails.com/categories/named">http://funonrails.com/categories/named</a> scopes&rdquo;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">URI</span><span class="p">.</span><span class="nf">unescape</span> <span class="s2">&ldquo;<a href="http://funonrails.com/categories/named%20scopes">http://funonrails.com/categories/named%20scopes</a>&rdquo;</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &ldquo;<a href="http://funonrails.com/categories/named">http://funonrails.com/categories/named</a> scopes&rdquo;</span></div></div></pre></div></figure></p>
+
+<h2>Match urls using regular expressions</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># extract first URI from html_string
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>&ldquo;<a href="ftp://localhost">ftp://localhost</a> <a href="http://funonrails.com/categories/rails-3">http://funonrails.com/categories/rails-3</a>&rdquo;.slice(URI.regexp)
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>#=> &ldquo;<a href="ftp://localhost">ftp://localhost</a>&rdquo;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'># remove ftp URIs
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>&ldquo;<a href="ftp://localhost">ftp://localhost</a> <a href="http://funonrails.com/categories/rails-3">http://funonrails.com/categories/rails-3</a>&rdquo;.sub(URI.regexp([&lsquo;ftp&rsquo;]))
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>#=> &ldquo; <a href="http://funonrails.com/categories/rails-3">http://funonrails.com/categories/rails-3</a>&rdquo;
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'># You should not rely on the number of parentheses
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>&ldquo;<a href="ftp://localhost">ftp://localhost</a> <a href="http://funonrails.com/categories/rails-3">http://funonrails.com/categories/rails-3</a>&rdquo;.scan(URI.regexp([&lsquo;ftp&rsquo;])) do |*matchs|
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  p $&amp;
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  #=> <a href="ftp://localhost">ftp://localhost</a>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>end</div></div></pre></div></figure></p>
+
+<h2>Getting requested url inside rails</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">request</span><span class="p">.</span><span class="nf">request_uri</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="p">[</span><span class="s1">&lsquo;REQUEST_URI&rsquo;</span><span class="p">]</span></div></div></pre></div></figure></p>
+
+<h2>Getting previous page url inside rails</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>request.referrer</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2011/12/paypal-payments-integration-with-rails/">Paypal payments integration with rails</a></h1>
+    
+    
+      <p class="meta">
+        Dec 30, 2011
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Paypal standard website payment service allows online payment transactions for websites.
+Before implementing payments inside rails app needs to have following things in place -</p>
+
+<ol>
+<li><a href="http://developer.paypal.com/">Register Paypal sandbox account</a></li>
+<li>Paypal Merchant account api credentials i.e. login, password, signature, application_id</li>
+<li>Paypal Buyer account creds to test payments</li>
+</ol>
+
+
+<p>Bundle Install
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># Gemfile   <br/>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>gem &lsquo;activemerchant </div></div></pre></div></figure></p>
+
+<p>Gateway config
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># config/gateway.yml
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>development: &amp;development   <br/>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  mode: test   <br/>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  login: rana_1317365002_biz_api1.gmail.com   <br/>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  password: &lsquo;1311235050&rsquo;   <br/>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  signature: ACxcVrB3mFChvPIe8aDWQlLhAPN46oPBQCj7rJWPza6CDZmBURg.   <br/>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  application_id: APP-76y884485P519543T<br/>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>production:  <br/>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  &lt;&lt;: <em>development
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>test:
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>  &lt;&lt;: </em>development</div></div></pre></div></figure></p>
+
+<p>New Payment Form
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@payment</span> <span class="o">||=</span> <span class="no">Payment</span><span class="p">.</span><span class="nf">new</span><span class="p">,</span> <span class="ss">:url</span> <span class="o">=&gt;</span> <span class="n">pay_bill_url</span><span class="p">,</span> <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">&#x7b;</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:payForm</span><span class="p">&#x7d;</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span><span class="err">    </span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="nb">p</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:amount</span><span class="err">   </span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="nb">p</span><span class="p">.</span><span class="nf">submit</span> <span class="s1">&lsquo;Pay&rsquo;</span><span class="err"> </span></div></div></pre></div></figure></p>
+
+<p>Generate &amp; Migrate Payment Model
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rails g model payment status:string amount:float transaction_number:string <br/>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>rake db:migrate </div></div></pre></div></figure></p>
+
+<p>Payment Model
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/models/payment.rb  </span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">validates</span> <span class="ss">:amount</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:numericality</span> <span class="o">=&gt;</span> <span class="p">&#x7b;</span> <span class="ss">:greater_than</span> <span class="o">=&gt;</span> <span class="mi">0</span> <span class="p">&#x7d;</span>  <br/>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">conf</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vc">@@gateway_conf</span> <span class="o">||=</span> <span class="no">YAML</span><span class="p">.</span><span class="nf">load_file</span><span class="p">(</span><span class="no">Rails</span><span class="p">.</span><span class="nf">root</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s1">&lsquo;config/gateway.yml&rsquo;</span><span class="p">).</span><span class="nf">to_s</span><span class="p">)[</span><span class="no">Rails</span><span class="p">.</span><span class="nf">env</span><span class="p">]</span> <br/>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>  <br/>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1">## Paypal    </span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">setup_purchase</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>   <br/>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">gateway</span><span class="p">.</span><span class="nf">setup_purchase</span><span class="p">(</span><span class="n">amount</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span> <br/>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>  <br/>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">redirect_url_for</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>    <br/>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">gateway</span><span class="p">.</span><span class="nf">redirect_url_for</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <br/>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">purchase</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">&#x7b;&#x7d;)</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="no">PROCESSING</span><br/>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#:ip       =&gt; request.remote_ip,</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#:payer_id =&gt; params[:payer_id],</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1">#:token    =&gt; params[:token]</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">response</span> <span class="o">=</span> <span class="n">gateway</span><span class="p">.</span><span class="nf">purchase</span><span class="p">(</span><span class="n">amt</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>    <br/>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="n">response</span><span class="p">.</span><span class="nf">success?</span>     <br/>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">self</span><span class="p">.</span><span class="nf">transaction_num</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">params</span><span class="p">[</span><span class="s1">&lsquo;transaction_id&rsquo;</span><span class="p">]</span>     <br/>
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="no">SUCCESS</span>   <br/>
+</div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">else</span>     <br/>
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="no">FAILED</span>   <br/>
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>   <br/>
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="nb">self</span> <br/>
+</div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>   <br/>
+</div></div><div data-line='34' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="no">FAILED</span>   <br/>
+</div></div><div data-line='35' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="nb">self</span> <br/>
+</div></div><div data-line='36' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>  <br/>
+</div></div><div data-line='37' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='38' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">private</span> <br/>
+</div></div><div data-line='39' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">gateway</span>
+</div></div><div data-line='40' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="no">ActiveMerchant</span><span class="o">::</span><span class="no">Billing</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">mode</span> <span class="o">=</span> <span class="n">auth</span><span class="p">[</span><span class="s1">&lsquo;mode&rsquo;</span><span class="p">].</span><span class="nf">to_sym</span>
+</div></div><div data-line='41' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="no">ActiveMerchant</span><span class="o">::</span><span class="no">Billing</span><span class="o">::</span><span class="no">PaypalExpressGateway</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span>
+</div></div><div data-line='42' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="ss">:login</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="p">[</span><span class="s1">&lsquo;login&rsquo;</span><span class="p">],</span> <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="p">[</span><span class="s1">&lsquo;password&rsquo;</span><span class="p">],</span>
+</div></div><div data-line='43' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="ss">:signature</span> <span class="o">=&gt;</span> <span class="n">auth</span><span class="p">[</span><span class="s1">&lsquo;signature&rsquo;</span><span class="p">])</span>
+</div></div><div data-line='44' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='45' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='46' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">auth</span>
+</div></div><div data-line='47' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">conf</span>
+</div></div><div data-line='48' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='49' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span> </div></div></pre></div></figure></p>
+
+<p>Billing routes
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">## Callback URL   </span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">match</span> <span class="s1">&lsquo;/billing/paypal/:id/confirm&rsquo;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;billing#paypal&rsquo;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:confirm_paypal</span> <br/>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">## Create payment   </span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">match</span> <span class="s1">&lsquo;/billing&rsquo;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;billing#create&rsquo;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:pay_bill</span> <br/>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">## Request URL   </span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">match</span> <span class="s1">&lsquo;/billing/paypal/:id&rsquo;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;billing#checkout&rsquo;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:billing</span> <br/>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">match</span> <span class="s1">&lsquo;/billing/thank_you/:id&rsquo;</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;billing#checkout&rsquo;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:billing_thank_you</span> </div></div></pre></div></figure></p>
+
+<p>Billing Controller
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/controllers/billing_controller.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">BillingController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">before_filter</span> <span class="ss">:get_payment</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:checkout</span><span class="p">,</span> <span class="ss">:paypal</span><span class="p">,</span> <span class="ss">:thank_you</span><span class="p">]</span>    <br/>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">create</span>   <br/>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="p">.</span><span class="nf">new</span> <span class="n">params</span><span class="p">[</span><span class="ss">:payment</span><span class="p">]</span>   <br/>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="vi">@payment</span><span class="p">.</span><span class="nf">save</span>     <br/>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1">## Paypal Checkout page       </span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">redirect_to</span> <span class="n">billing_url</span>  <br/>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">else</span>   <br/>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>  <br/>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>  <br/>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># ASSUMPTION   # payment is valid i.e. amount is entered   </span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">checkout</span>  <br/>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">response</span> <span class="o">=</span> <span class="vi">@payment</span><span class="p">.</span><span class="nf">setup_purchase</span><span class="p">(</span><span class="ss">:return_url</span> <span class="o">=&gt;</span> <span class="n">confirm_paypal_url</span><span class="p">(</span><span class="vi">@payment</span><span class="p">),</span> <span class="ss">:cancel_return_url</span> <span class="o">=&gt;</span> <span class="n">root_url</span><span class="p">)</span>   <br/>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">redirect_to</span> <span class="vi">@payment</span><span class="p">.</span><span class="nf">redirect_url_for</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">token</span><span class="p">)</span> <br/>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>  <br/>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1">## CALL BACK   </span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">paypal</span>  <br/>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="vi">@payment</span><span class="p">.</span><span class="nf">purchase</span><span class="p">(</span><span class="ss">:token</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:token</span><span class="p">],</span> <span class="ss">:payer_id</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:PayerID</span><span class="p">],</span> <span class="ss">:ip</span> <span class="o">=&gt;</span> <span class="n">request</span><span class="p">.</span><span class="nf">remote_ip</span><span class="p">)</span>  <br/>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@payment</span><span class="p">.</span><span class="nf">save</span>  <br/>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">redirect_to</span> <span class="n">thank_you_billing_url</span><span class="p">(</span><span class="vi">@order</span><span class="p">)</span><br/>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>  <br/>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">private</span> <br/>
+</div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">get_payment</span>   <br/>
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="p">.</span><span class="nf">find_by_id</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>   <br/>
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@payment</span> <span class="o">&amp;&amp;</span> <span class="vi">@payment</span><span class="p">.</span><span class="nf">valid?</span> <span class="o">||</span> <span class="n">invalid_url</span> <br/>
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Views
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># app/views/billing/thank_you.html.haml<br/>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">-</span> <span class="k">if</span> <span class="vi">@payment</span><span class="p">.</span><span class="nf">success?</span><span class="err">   </span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">%p</span> The transaction is successfully completed
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">-</span> <span class="k">else</span><span class="err">   </span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">%p</span> The transaction failed </div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/3/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/"/>Newer &rarr;</a>
+    
+  </div>
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+<script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

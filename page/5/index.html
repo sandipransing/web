@@ -1,0 +1,825 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+  
+  
+  
+    
+      
+    
+      How to get started with tata photon on ubuntu machine
+    
+    
+      
+        Jul 5, 2011
+        
+      
+    
+  ...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/page/5/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2011/07/how-to-get-started-with-tata-photon-on-ubuntu/">How to get started with tata photon on ubuntu machine</a></h1>
+    
+    
+      <p class="meta">
+        Jul 5, 2011
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In order to get tata photon working on ubuntu machine you need to install following packages</p>
+
+<p><strong>1. usb-modeswitch-data 2. usb-modeswitch</strong></p>
+
+<p>Either you can download them from ubuntu site and install locally or install using apt manager</p>
+
+<p>Download links
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><a href="http://packages.debian.org/squeeze/usb-modeswitch-data">http://packages.debian.org/squeeze/usb-modeswitch-data</a>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><a href="http://packages.debian.org/squeeze/usb-modeswitch">http://packages.debian.org/squeeze/usb-modeswitch</a></div></div></pre></div></figure></p>
+
+<p>apt installation
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install usb-modeswitch-data usb-modeswitch usb-modeswitch</div></div></pre></div></figure></p>
+
+<p>After successful installation,</p>
+
+<ol>
+<li>Connect photon usb card</li>
+<li>Execute following commands one after another</li>
+</ol>
+
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1:1446
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>wvdial</div></div></pre></div></figure></p>
+
+<p>..and you should get connected via photon!</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2011/04/setup-active-scaffold-with-rails-3/">Setup Active Scaffold with rails 3 using jQuery</a></h1>
+    
+    
+      <p class="meta">
+        Apr 8, 2011
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Create new rails project
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rails new demo -d mysql</div></div></pre></div></figure></p>
+
+<p>Add active_scaffold gem to bundler
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem &ldquo;active_scaffold_vho&rdquo;</div></div></pre></div></figure></p>
+
+<p>Run bundle install command
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>bundle install</div></div></pre></div></figure></p>
+
+<p>Setup active scaffold to use jQuery
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rails g active_scaffold_setup jquery
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>      create  public/javascripts/rails_jquery.js
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>      create  public/javascripts/jquery-ui-timepicker-addon.js
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>      create  config/initializers/active_scaffold.rb
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      insert  app/views/layouts/application.html.erb
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      insert  config/locales/en.yml
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      gsub  app/views/layouts/application.html.erb</div></div></pre></div></figure></p>
+
+<p>Generate active scaffold for resource city &amp; zone
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rails g active_scaffold City name:string
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>      invoke  active_record
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>      create    db/migrate/20110408123206_create_cities.rb
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>      create    app/models/city.rb
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      invoke    test_unit
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      create      test/unit/city_test.rb
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      create      test/fixtures/cities.yml
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      route  resources :cities do as_routes end
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>      invoke  active_scaffold_controller
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>      create    app/controllers/cities_controller.rb
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>      create    app/helpers/cities_helper.rb
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>      invoke    test_unit
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>      create    test/functional/cities_controller_test.rb
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>      create    app/views/cities</div></div></pre></div></figure></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rails g active_scaffold Zone name:string city:references    <br/>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>      invoke  active_record
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>      create    db/migrate/20110408123531_create_zones.rb
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>      create    app/models/zone.rb
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      invoke    test_unit
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      create      test/unit/zone_test.rb
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      create      test/fixtures/zones.yml
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>       route  resources :zones do as_routes end
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>      invoke  active_scaffold_controller
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>      create    app/controllers/zones_controller.rb
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>      create    app/helpers/zones_helper.rb
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>      invoke    test_unit
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>      create      test/functional/zones_controller_test.rb
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>      create    app/views/zones</div></div></pre></div></figure></p>
+
+<p>Add Associations
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>class City &lt; ActiveRecord::Base
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> end
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> class Zone &lt; ActiveRecord::Base
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>   belongs_to :city
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> end
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> class City &lt; ActiveRecord::Base
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>   has_many :zones
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'> end</div></div></pre></div></figure></p>
+
+<p>Migrate database
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake db:create
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>rake db:migrate
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  ==  CreateCities: migrating ===================================
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  &ndash; create_table(:cities)
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>   -> 0.1411s
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  ==  CreateCities: migrated (0.1413s) ==========================
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  ==  CreateZones: migrating ====================================
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  &ndash; create_table(:zones)
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>   -> 0.1507s
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  ==  CreateZones: migrated (0.1510s) ===========================</div></div></pre></div></figure></p>
+
+<p>Start Server
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rails s</div></div></pre></div></figure></p>
+
+<p>Visit Browser URL: <a href="http://localhost:3000/cities">http://localhost:3000/cities</a></p>
+
+<p><img class="left" src="http://4.bp.blogspot.com/-CJgSXg5EJyE/TZ8EDHwCwaI/AAAAAAAABPs/81dNxWDwYm0/s1600/active_scaffold.png"  ></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2011/04/ghostype-input-placeholder-for-search-inputs-using-jquery/">Ghost-Type input Placeholder for search text fields using jQuery</a></h1>
+    
+    
+      <p class="meta">
+        Apr 7, 2011
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Placeholder Demo:
+<input type=text placeholder='Enter search text here'/>
+Click on input box and placeholder text will disappear.</p>
+
+<p>Ghost-type Demo:
+<input id='home-search' class="query" placeholder='Enter search text here' type="search"/>
+After page load observe inside input box to enter placeholder text char by char.</p>
+
+<p>jQuery placeholder plugin can be used to display default text inside input text fields. HTML5 introduced type search fields with placeholder attribute support.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>&lt;input class=&ldquo;query&rdquo; id=&ldquo;home-search&rdquo; placeholder=&ldquo;Enter search text here&rdquo; type=&ldquo;search&rdquo; /></div></div></pre></div></figure></p>
+
+<p>It should display default text &ldquo;Enter search text here&rdquo; inside text-field and when user tries to type something it disappears.
+In order to achieve text marquee like effect to default text value with jQery use following jQuery code. It will type text character by character from left to right.</p>
+
+<p>Same effect can be achieved by creating gif image of typing and placing it as background-image to text field with certain drawbacks like changing default text on the fly.</p>
+
+<p>Place below code inside javascript tag in your html file
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="err">#</span><span class="nx">jQuery</span> <span class="nx">Code</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()&#x7b;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span> <span class="s2">&ldquo;#home-search&rdquo;</span><span class="p">;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kd">var</span> <span class="nx">chars</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">search</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&lsquo;placeholder&rsquo;</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s1">&lsquo;&rsquo;</span><span class="p">);</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">chars</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">v</span><span class="p">)&#x7b;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nx">$</span><span class="p">(</span><span class="nx">search</span><span class="p">).</span><span class="nx">val</span><span class="p">((</span><span class="nx">chars</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&lsquo;&rsquo;</span><span class="p">)));</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">&#x7d;,</span> <span class="mi">100</span><span class="o">*</span><span class="nx">i</span><span class="p">);</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">&#x7d;);</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">&#x7d;);</span></div></div></pre></div></figure></p>
+
+<script type='text/javascript'>
+$(document).ready(function(){
+  var search = "#home-search";
+  var chars = $(search).attr('placeholder').split('');
+  $.each(chars, function(i, v){
+    setTimeout(function() {
+      $(search).val((chars.slice(0, i+1).join('')));
+    }, 1000*i);
+  });
+});
+</script>
+
+
+<p>Got easy ??</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/setting-up-nginx-maximum-upload-size/">Setting up nginx maximum upload size</a></h1>
+    
+    
+      <p class="meta">
+        Mar 31, 2011
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Edit nginx configuration and look for <code>http</code> block inside it.</p>
+
+<p>Then inside <code>htttp</code> block add following lines.</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>http &#x7b;
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>    include conf/mime.types;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    default_type application/octet-stream;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    client_max_body_size 10m;
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    &hellip;.
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>&#x7d;</div></div></pre></div></figure></p>
+
+<p>In above configuration <em>application/octet-stream</em> supports any kind of file upload.</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/twitter-share-and-facebook-like-button/">Twitter share and facebook like button for haml-rails, html/erb</a></h1>
+    
+    
+      <p class="meta">
+        Mar 17, 2011
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Twitter share and facebook like button for <code>html/erb</code>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&lsquo;spread&rsquo;</span><span class="nt">&gt;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&lsquo;twshare left&rsquo;</span><span class="nt">&gt;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&ldquo;<a href="http://twitter.com/share">http://twitter.com/share</a>&rdquo;</span> <span class="na">class=</span><span class="s">&ldquo;twitter-share-button&rdquo;</span> <span class="na">data-count=</span><span class="s">&ldquo;horizontal&rdquo;</span> <span class="na">data-via=</span><span class="s">&ldquo;funonrails&rdquo;</span><span class="nt">&gt;</span>Tweet<span class="nt">&lt;/a&gt;&lt;script </span><span class="na">type=</span><span class="s">&ldquo;text/javascript&rdquo;</span> <span class="na">src=</span><span class="s">&ldquo;<a href="http://platform.twitter.com/widgets.js">http://platform.twitter.com/widgets.js</a>&rdquo;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">&lt;/div&gt;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&ldquo;<a href="http://connect.facebook.net/en_US/all.js#xfbml=1">http://connect.facebook.net/en_US/all.js#xfbml=1</a>&rdquo;</span><span class="nt">&gt;&lt;/script&gt;&lt;fb:like</span> <span class="na">href=</span><span class="s">&ldquo;&rdquo;</span> <span class="na">layout=</span><span class="s">&ldquo;button_count&rdquo;</span> <span class="na">show_faces=</span><span class="s">&ldquo;false&rdquo;</span> <span class="na">width=</span><span class="s">&ldquo;450&rdquo;</span> <span class="na">font=</span><span class="s">&ldquo;&rdquo;</span><span class="nt">&gt;&lt;/fb:like&gt;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nt">&lt;/div&gt;</span></div></div></pre></div></figure></p>
+
+<p>Twitter share and facebook like button for <code>haml</code>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nc">.spread</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nc">.twshare.left</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">%a</span><span class="nc">.twitter-share-button.left</span><span class="p">&#x7b;</span><span class="s2">&ldquo;data-count&rdquo;</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;horizontal&rdquo;</span><span class="p">,</span> <span class="s2">&ldquo;data-via&rdquo;</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;fuonrails&rdquo;</span><span class="p">,</span> <span class="ss">:href</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;<a href="http://twitter.com/share">http://twitter.com/share</a>&rdquo;</span><span class="p">&#x7d;</span> Tweet
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">%script</span><span class="p">&#x7b;</span><span class="ss">:src</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;<a href="http://platform.twitter.com/widgets.js">http://platform.twitter.com/widgets.js</a>&rdquo;</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;text/javascript&rdquo;</span><span class="p">&#x7d;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nc">.fshare.left</span><span class="p">&#x7b;</span><span class="ss">:style</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;padding-left: 0px; margin-left: 10px;&rsquo;</span><span class="p">&#x7d;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">%script</span><span class="p">&#x7b;</span><span class="ss">:src</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;<a href="http://connect.facebook.net/en_US/all.js#xfbml=1">http://connect.facebook.net/en_US/all.js#xfbml=1</a>&rdquo;</span><span class="p">&#x7d;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">%fb:like</span><span class="p">&#x7b;</span><span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;button_count&rdquo;</span><span class="p">,</span> <span class="ss">:show_faces</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;false&rdquo;</span><span class="p">,</span> <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;450&rdquo;</span><span class="p">&#x7d;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nc">.CLR</span></div></div></pre></div></figure></p>
+
+<p>See example Buttons listed below:</p>
+
+<div class='spread'>
+  <div class='twshare left'>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="funonrails">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+  </div>
+  <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="" layout="button_count" show_faces="false" width="450" font=""></fb:like>
+</div>
+
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/number-to-indian-currency-helper-for-rails/">number to indian currency helper for rails with WebRupee</a></h1>
+    
+    
+      <p class="meta">
+        Mar 17, 2011
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>rails has built in <code>number_to_currency</code> helper which takes options like unit, delimeter, seperator which displays foreign currency correctly but somehow it is not best suited for indian currency.</p></blockquote>
+
+<p>Below is how we managed 2 years ago to display indian currency formatted properly with comma as seperator. personally i think it could be more better than what it is currently ;)</p>
+
+<h2>Number to indian currency(rupees) helper</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="n">number</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">string</span> <span class="o">=</span> <span class="n">number</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">&lsquo;.&rsquo;</span><span class="p">)</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">number</span> <span class="o">=</span> <span class="n">string</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">gsub</span><span class="p">(</span><span class="sr">/(\d+)(\d&#x7b;3&#x7d;)$/</span><span class="p">)&#x7b;</span> <span class="nb">p</span> <span class="o">=</span> <span class="vg">$2</span><span class="p">;</span><span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="vg">$1</span><span class="p">.</span><span class="nf">reverse</span><span class="p">.</span><span class="nf">gsub</span><span class="p">(</span><span class="sr">/(\d&#x7b;2&#x7d;)/</span><span class="p">,</span><span class="s1">&lsquo;\1,&rsquo;</span><span class="p">).</span><span class="nf">reverse</span><span class="si">&#x7d;</span><span class="s2">,</span><span class="si">#&#x7b;</span><span class="nb">p</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span><span class="p">&#x7d;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">number</span> <span class="o">=</span> <span class="n">number</span><span class="p">.</span><span class="nf">gsub</span><span class="p">(</span><span class="sr">/^,/</span><span class="p">,</span> <span class="s1">&lsquo;&rsquo;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&lsquo;.&rsquo;</span> <span class="o">+</span> <span class="n">string</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">string</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1"># remove leading comma</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">number</span> <span class="o">=</span> <span class="n">number</span><span class="p">[</span><span class="mi">1</span><span class="p">.</span><span class="nf">.</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">number</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">44</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="s2">&ldquo;Rs.</span><span class="si">#&#x7b;</span><span class="n">number</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Sample Output for different combinations</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="p">.</span><span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;Rs.2,000&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="p">.</span><span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="mi">2040</span><span class="p">)</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;Rs.2,040&rdquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="p">.</span><span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="mi">2040</span><span class="o">.</span><span class="mi">50</span><span class="p">)</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;Rs.2,040.5&rdquo;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="p">.</span><span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="mi">2040</span><span class="o">.</span><span class="mi">54</span><span class="p">)</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;Rs.2,040.54&rdquo;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="p">.</span><span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="mi">1222040</span><span class="o">.</span><span class="mi">54</span><span class="p">)</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;Rs.12,22,040.54&rdquo;</span></div></div></pre></div></figure></p>
+
+<p>After doing google today found from Piyush Ranjan&rsquo;s Blog that yes there are ways to optimize code.</p>
+
+<h2>Optimized Version</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="s2">&ldquo;Rs.</span><span class="si">#&#x7b;</span><span class="n">number</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">gsub</span><span class="p">(</span><span class="sr">/(\d+?)(?=(\d\d)+(\d)(?!\d))(.\d+)?/</span><span class="p">,</span> <span class="s2">&rdquo;</span><span class="se">\</span><span class="s2">1,&ldquo;</span><span class="p">)</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Waw one line of code, Look at the beauty of regular expression :) Truely amazing !</p>
+
+<h2>Integrating Webrupee symbol</h2>
+
+<p>First include follwing stylesheet in your layout
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">//</span><span class="nt">public</span><span class="o">/</span><span class="nt">stylesheets</span><span class="o">/</span><span class="nt">font</span><span class="nc">.css</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">@font-face</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nl">font-family</span><span class="p">:</span> <span class="s1">&ldquo;WebRupee&rdquo;</span><span class="p">;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nl">font-style</span><span class="p">:</span> <span class="nb">normal</span><span class="p">;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nl">font-weight</span><span class="p">:</span> <span class="nb">normal</span><span class="p">;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nl">src</span><span class="p">:</span> <span class="n">local</span><span class="p">(</span><span class="s1">&ldquo;WebRupee&rdquo;</span><span class="p">),</span> <span class="sx">url(&ldquo;<a href="http://cdn.webrupee.com/WebRupee.V2.0.ttf">http://cdn.webrupee.com/WebRupee.V2.0.ttf</a>&rdquo;)</span> <span class="n">format</span><span class="p">(</span><span class="s1">&ldquo;truetype&rdquo;</span><span class="p">),</span> <span class="sx">url(&ldquo;<a href="http://cdn.webrupee.com/WebRupee.V2.0.woff">http://cdn.webrupee.com/WebRupee.V2.0.woff</a>&rdquo;)</span> <span class="n">format</span><span class="p">(</span><span class="s1">&ldquo;woff&rdquo;</span><span class="p">),</span> <span class="sx">url(&ldquo;<a href="http://cdn.webrupee.com/WebRupee.V2.0.svg">http://cdn.webrupee.com/WebRupee.V2.0.svg</a>&rdquo;)</span> <span class="n">format</span><span class="p">(</span><span class="s1">&ldquo;svg&rdquo;</span><span class="p">);</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">&#x7d;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nc">.WebRupee</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nl">font-family</span><span class="p">:</span> <span class="s2">&lsquo;WebRupee&rsquo;</span><span class="p">;</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">&#x7d;</span></div></div></pre></div></figure></p>
+
+<h2>Improved Version of Helper</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="kp">true</span><span class="p">)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">txt</span> <span class="o">=</span> <span class="n">html</span> <span class="p">?</span> <span class="n">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="s1">&lsquo;Rs.&rsquo;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="ss">:WebRupee</span><span class="p">)</span> <span class="p">:</span> <span class="s1">&lsquo;Rs.&rsquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="n">txt</span><span class="si">&#x7d;</span><span class="s2"> </span><span class="si">#&#x7b;</span><span class="n">number</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">gsub</span><span class="p">(</span><span class="sr">/(\d+?)(?=(\d\d)+(\d)(?!\d))(.\d+)?/</span><span class="p">,</span> <span class="s2">&rdquo;</span><span class="se">\</span><span class="s2">1,&ldquo;</span><span class="p">)</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Usage</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="p">.</span><span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;&lt;span class=&rdquo;</span><span class="no">WebRupee</span><span class="s2">&ldquo;&gt;Rs.&lt;/span&gt; 400&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="p">.</span><span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="mi">5921</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;Rs. 5,921&rdquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="p">.</span><span class="nf">number_to_indian_currency</span><span class="p">(</span><span class="mi">9921</span><span class="p">)</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;&lt;span class=&rdquo;</span><span class="no">WebRupee</span><span class="s2">&ldquo;&gt;Rs.&lt;/span&gt; 9,921&rdquo;</span></div></div></pre></div></figure></p>
+
+<p>This will show you rupees symbol on your webpages.</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/accessing-view-helpers-routes-in-rails/">Accessing View Helpers & Routes in Rails Console, Rake Tasks and Mailers</a></h1>
+    
+    
+      <p class="meta">
+        Mar 17, 2011
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While looking for accessing rails template tags to be accessed on rails console in order to examine whatever written needs to be correct, found that - rails template tags can be tested on rails console using <em>helper</em> object</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">display_amount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">number_to_currency</span> <span class="n">amount</span><span class="p">,</span> <span class="ss">:precision</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span><br/>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Helpers on rails console</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">rails</span> <span class="n">c</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="p">.</span><span class="nf">text_field_tag</span> <span class="ss">:name</span><span class="p">,</span> <span class="s1">&lsquo;sandip&rsquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;&lt;input id=&rdquo;</span><span class="nb">name</span><span class="s2">&ldquo; name=&rdquo;</span><span class="nb">name</span><span class="s2">&ldquo; type=&rdquo;</span><span class="n">text</span><span class="s2">&ldquo; value=&rdquo;</span><span class="n">sandip</span><span class="s2">&ldquo; /&gt;&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="p">.</span><span class="nf">link_to</span> <span class="s1">&lsquo;my blog&rsquo;</span><span class="p">,</span> <span class="s1">&lsquo;<a href="http://funonrails.com">http://funonrails.com</a>&rsquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;&lt;a href=&lsquo;'<a href="http://funonrails.com&amp;gt;my">http://funonrails.com&amp;gt;my</a> blog&lt;/a&gt;&rdquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">helper</span><span class="p">.</span><span class="nf">display_amount</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;$2,000&rdquo;</span></div></div></pre></div></figure></p>
+
+<p>isn&rsquo;t it cool ? though it&rsquo;s not finished yet. we can include helper files on console and access custom helper methods too
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="no">ActionView</span><span class="o">::</span><span class="no">Helpers</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="no">Object</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="no">ApplicationHelper</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="no">Object</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="kp">include</span> <span class="no">ActionView</span><span class="o">::</span><span class="no">Helpers</span><span class="o">::</span><span class="no">ApplicationHelper</span><span class="o">^</span><span class="no">C</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">display_amount</span> <span class="mi">2500</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;$2,500&rdquo;</span></div></div></pre></div></figure></p>
+
+<p>Using same way one can make use helpers in rake tasks file. Make sure environment is getting loaded into rake task.</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="n">lib</span><span class="o">/</span><span class="n">tasks</span><span class="o">/</span><span class="n">helper_task</span><span class="p">.</span><span class="nf">rake</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">namespace</span> <span class="ss">:helper</span> <span class="k">do</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="n">desc</span> <span class="s1">&lsquo;Access helper methods in rake tasks&rsquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="n">task</span> <span class="ss">:test</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">include</span> <span class="no">ActionView</span><span class="o">::</span><span class="no">Helpers</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">include</span> <span class="no">ApplicationHelper</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nb">puts</span> <span class="n">display_amount</span> <span class="mi">2500</span>  <span class="c1">#=&gt; &ldquo;$2,500&rdquo;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="k">end</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Accessing helpers in Action Mailers</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Notifier</span> <span class="o">&lt;</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">add_template_helper</span><span class="p">(</span><span class="no">ApplicationHelper</span><span class="p">)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">subject</span> <span class="s2">&ldquo;Hello </span><span class="si">#&#x7b;</span><span class="n">user</span><span class="p">.</span><span class="nf">name</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">from</span>          <span class="s1">&lsquo;<a href="&#109;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#110;&#x6f;&#45;&#114;&#x65;&#112;&#108;&#121;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#x6e;&#111;&#45;&#x72;&#101;&#x70;&#108;&#x79;&#64;&#101;&#120;&#97;&#109;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#109;</a>&rsquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">recipients</span>    <span class="n">user</span><span class="p">.</span><span class="nf">email</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">sent_on</span>       <span class="no">Time</span><span class="p">.</span><span class="nf">now</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@user</span> <span class="o">=</span> <span class="n">user</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span></div></div></pre></div></figure></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># app/views/notifier/greet.html.erb
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>Hi <span class="err">&lt;</span>%= @user.try(:name)%&gt;,
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>Greetings !!!
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>You have got <span class="err">&lt;</span>%= display_amount(3000) %&gt;</div></div></pre></div></figure></p>
+
+<h2>Rails routes on rails console</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">rails</span> <span class="n">c</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="p">.</span><span class="nf">root_url</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;<a href="http://www.example.com/">http://www.example.com/</a>&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="p">.</span><span class="nf">change_password_path</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;/change/password&rdquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="n">app</span><span class="p">.</span><span class="nf">change_password_url</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="s2">&ldquo;<a href="http://www.example.com/change/password">http://www.example.com/change/password</a>&rdquo;</span></div></div></pre></div></figure></p>
+
+<p>Now you may have got requirement to access routes inside rake tasks. Here is the way to do that -
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/tasks/route_test.rake</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">namespace</span> <span class="ss">:routes</span> <span class="k">do</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="n">desc</span> <span class="s1">&lsquo;Access helper methods in rake tasks&rsquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="n">task</span> <span class="ss">:test</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">include</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">UrlWriter</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">default_url_options</span><span class="p">[</span><span class="ss">:host</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&ldquo;myroutes.check&rdquo;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nb">puts</span> <span class="n">root_url</span>  <span class="c1">#=&gt; &ldquo;<a href="http://myroutes.check">http://myroutes.check</a>&rdquo;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="k">end</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Optionally you can set value of host parameter from action mailer host configuration using</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">default_url_options</span><span class="p">[</span><span class="ss">:host</span><span class="p">]</span> <span class="o">=</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">default_url_options</span><span class="p">[</span><span class="ss">:host</span><span class="p">]</span></div></div></pre></div></figure></p>
+
+<p>Attention: This is my preferred way to use helpers and routes when needed and there may have other choices to do same. Anyone having better approach please feel free to add your valuable comment. I will definitely incorporate that in further developments.
+Got Easy, Cheers ;)</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/monitor-delayed-job-in-rails/">Monitor Delayed Job in rails</a></h1>
+    
+    
+      <p class="meta">
+        Mar 1, 2011
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Delayed Job &amp; Monit configuration</h2>
+
+<p>We were struggling through how to monit delayed_job from past few months because monit doesn&rsquo;t work seamlessly with delayed_job start/stop commands and finally we got able to monit delayed_job.</p>
+
+<p>Here is our old configuration that wasn&rsquo;t working anyhow-</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>    stop program = &ldquo;/bin/bash -c &lsquo;cd /home/sandip/current &amp;&amp; RAILS_ENV=production script/delayed_job stop&rsquo;&rdquo;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    start program = &ldquo;/bin/bash -c &lsquo;cd /home/sandip/current &amp;&amp; RAILS_ENV=production script/delayed_job start&rsquo;&rdquo;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    if totalmem > 100.0 MB for 3 cycles then restart
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    if cpu usage > 95% for 3 cycles then restart</div></div></pre></div></figure></p>
+
+<p>After doing google &amp; looking at stackoverflow, we found different solutions to work with but none of them found useful to me. :(</p>
+
+<p>After reading google group someone (not remembering exactly) directed to write a init script for delayed_job server and that perfectly worked for me and my headache of self moniting delayed_job ended up ;)</p>
+
+<h4>Delayed Job init script</h4>
+
+<p><em>/etc/init.d/delayed_job</em>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>#! /bin/sh
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>set_path=&ldquo;cd /home/sandip/current&rdquo;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>case &ldquo;$1&rdquo; in
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    start)
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    echo -n &ldquo;Starting delayed_job: &rdquo;
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    su - root -c &ldquo;$set_path; RAILS_ENV=production script/delayed_job start&rdquo; >> /var/log/delayed_job.log 2>&amp;1
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    echo &ldquo;done.&rdquo;
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    ;;
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    stop)
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>    echo -n &ldquo;Stopping delayed_job: &rdquo;
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    su - root -c &ldquo;$set_path; RAILS_ENV=production script/delayed_job stop&rdquo; >> /var/log/delayed_job.log 2>&amp;1
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>    echo &ldquo;done.&rdquo;
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    ;;
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>    *)
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>    echo &ldquo;Usage: $N &#x7b;start|stop&#x7d;&rdquo; >&amp;2
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>    exit 1
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>    ;;
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>esac
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>exit 0</div></div></pre></div></figure></p>
+
+<p>finally here is the working monit delayed_job configuration</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>check process delayed_job with pidfile /home/sandip/shared/pids/delayed_job.pid
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>    stop program = &ldquo;/etc/init.d/delayed_job stop&rdquo;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    start program = &ldquo;/etc/init.d/delayed_job start&rdquo;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    if totalmem > 100.0 MB for 3 cycles then restart
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    if cpu usage > 95% for 3 cycles then restart</div></div></pre></div></figure></p>
+
+<h4>Thinking Sphinx monit configuration</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>check process sphinx with pidfile /home/sandip/shared/pids/searchd.pid
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>    stop program = &ldquo;/bin/bash -c &lsquo;cd /home/sandip/current &amp;&amp; /usr/bin/rake RAILS_ENV=production ts:stop&rsquo;&rdquo;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    start program = &ldquo;/bin/bash -c &lsquo;cd /home/sandip/current &amp;&amp; /usr/bin/rake RAILS_ENV=production ts:start&rsquo;&rdquo;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    if totalmem > 85.0 MB for 3 cycles then restart
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    if cpu usage > 95% for 3 cycles then restart</div></div></pre></div></figure></p>
+
+<h4>Adhearsion (ahn) monit confiuration</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>check process ahn with pidfile /home/josh/shared/pids/ahnctl.pid
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>    stop program = &ldquo;/bin/bash -c &lsquo;cd /home/sandip/current &amp;&amp; /usr/bin/ahnctl stop adhearsion&rsquo;&rdquo;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    start program = &ldquo;/bin/bash -c &lsquo;cd /home/sandip/current &amp;&amp; /usr/bin/ahnctl start adhearsion&rsquo;&rdquo;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    if totalmem > 100.0 MB for 3 cycles then restart
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    if cpu usage > 95% for 3 cycles then restart</div></div></pre></div></figure></p>
+
+<h4>Nginx monit configuration</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>check process nginx with pidfile /opt/nginx/logs/nginx.pid
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>    start program = &ldquo;/opt/nginx/sbin/nginx&rdquo;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    stop  program = &ldquo;/opt/nginx/sbin/nginx -s stop&rdquo;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    if cpu is greater than 70% for 3 cycles then alert
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    if cpu > 80% for 5 cycles then restart
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    if 10 restarts within 10 cycles then timeout</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/getting-started-with-rails-3-postgres/">Getting started with rails 3 & postgres database</a></h1>
+    
+    
+      <p class="meta">
+        Mar 1, 2011
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails 3 Installation
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo gem install rails -v3.0.4</div></div></pre></div></figure></p>
+
+<p>Postgres as <code>DB</code> installation
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install postgresql</div></div></pre></div></figure></p>
+
+<p>Rails 3 App with postgres as database
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rails new pg -d postgres</div></div></pre></div></figure></p>
+
+<p>Bundle installation
+It will install dependency gems &amp; postgres adapter for db connection
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>bundle install</div></div></pre></div></figure></p>
+
+<p>Here by default <code>postgres</code> database user gets created while installation but i recommend to create new db user with name same as of system user owning project directory permissions.</p>
+
+<p>User owning file permission can be found using
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ls -l pg
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>drwxr-xr-x 7 sandip sandip 4096 2011-02-23 15:38 app
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>drwxr-xr-x 5 sandip sandip 4096 2011-02-23 18:14 config
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>-rw-r&ndash;r&ndash; 1 sandip sandip  152 2011-02-23 15:38 config.ru
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>&hellip;</div></div></pre></div></figure></p>
+
+<p>Default &lsquo;postgres&rsquo; database user gets created while installation
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>## Snap of database.yml
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>development:
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  adapter: postgresql
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  encoding: unicode
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  database: pg_development
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  username: sandip
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  pool: 5</div></div></pre></div></figure></p>
+
+<p>Create new database user
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>pg $ sudo su postgres
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>pg $ createuser sandip
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>Shall the new role be a superuser? (y/n) y
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>pg $ exit
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>exit</div></div></pre></div></figure></p>
+
+<p>Create a first development database:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>pg $ psql template1
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>Welcome to psql 8.4.6, the PostgreSQL interactive terminal.
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>&hellip;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>template1=# \l
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>        List of databases
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>   Name    |  Owner   | Encoding
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;-+&mdash;&mdash;&mdash;-
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> postgres  | postgres | UTF8
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'> template0 | postgres | UTF8
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> template1 | postgres | UTF8
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>(3 rows)
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>template1=# CREATE DATABASE pg_development;
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>CREATE DATABASE
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>template1=# \l
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>            List of databases
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>       Name        |  Owner   | Encoding
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-+&mdash;&mdash;&mdash;-+&mdash;&mdash;&mdash;-
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'> postgres          | postgres | UTF8
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'> pg_development | sandip   | UTF8
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'> template0         | postgres | UTF8
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'> template1         | postgres | UTF8
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>(4 rows)
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>template1=# \q</div></div></pre></div></figure></p>
+
+<p>Start rails server
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>pg $ rails s</div></div></pre></div></figure></p>
+
+<h3>Getting hands on postgres terminal</h3>
+
+<p><strong>1.  Login onto terminal</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>psql -U DB_USERNAME -d DB_NAME -W DB_PASSWORD</div></div></pre></div></figure></p>
+
+<p><strong>2.  List databases</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>\l</div></div></pre></div></figure></p>
+
+<p><strong>3.  Display tables</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>\dt</div></div></pre></div></figure></p>
+
+<p><strong>4.  Exit from terminal</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>\q</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2011/02/auto-login-remote-server-by-copying-ssh/">Auto login remote server by copying ssh public key to authorized keys</a></h1>
+    
+    
+      <p class="meta">
+        Feb 3, 2011
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While working on remote machine we often get headache of entering password for ssh login, scp files from one server to another server. Adding public key as authorized_keys on remote server solves this problem.</p>
+
+<h2>Copying from my system to remote server</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cat ~/.ssh/id_rsa.pub | ssh sandip@server &lsquo;cat >> ~/.ssh/authorized_keys&rsquo;</div></div></pre></div></figure></p>
+
+<h2>Copying from remote server to my system</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ssh server &lsquo;cat ~/.ssh/id_rsa.pub&rsquo; | cat >> ~/.ssh/id_rsa_client.pub</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/6/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/4/">Newer &rarr;</a>
+    
+  </div>
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+<script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

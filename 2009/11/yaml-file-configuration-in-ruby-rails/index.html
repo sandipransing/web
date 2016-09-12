@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>YAML file configuration in ruby & rails - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      YAML file configuration in ruby & rails
+    
+    
+      
+        
+        
+      
+    
+  
+
+
+While coding in ruby and rails, we ofte...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2009/11/yaml-file-configuration-in-ruby-rails/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">YAML file configuration in ruby & rails</h1>
+    
+    
+      <p class="meta">
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>While coding in ruby and rails, we often requires variables to be initialized that can be used across application. There are many ways to define configuration variables</p>
+
+<h2>Initialize variables inside environment</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># This agencies can be used across application
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>AGENCIES = [&lsquo;TIMES NEWS NETWORK&rsquo;, &lsquo;AGENCIES&rsquo;, &lsquo;AFP&rsquo;, &lsquo;PTI&rsquo;]
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'># Configuration for html nodes
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>Article_title_tag = &ldquo;h1.heading&rdquo;
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>Date_auth_agency_tag = &ldquo;span[@class=&lsquo;byline&rsquo;]&rdquo;
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>Location_content_tag = &ldquo;div[@class=&lsquo;Normal&rsquo;]&rdquo;</div></div></pre></div></figure></p>
+
+<h2>Create config inside initializers</h2>
+
+<p>Just make <code>config.rb</code> inside initializers and add variables to it.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>#config/initializers/config.rb
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'># This agencies can be used across application
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>AGENCIES = [&lsquo;TIMES NEWS NETWORK&rsquo;, &lsquo;AGENCIES&rsquo;, &lsquo;AFP&rsquo;, &lsquo;PTI&rsquo;]
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'># Configuration for html nodes
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>Article_title_tag = &ldquo;h1.heading&rdquo;
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>Date_auth_agency_tag = &ldquo;span[@class=&lsquo;byline&rsquo;]&rdquo;
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>Location_content_tag = &ldquo;div[@class=&lsquo;Normal&rsquo;]&rdquo;</div></div></pre></div></figure></p>
+
+<h2>Load config using YML</h2>
+
+<p>But most efficient way to organize variables is YML file
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># config/config.yml</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s">the_times_of_india</span><span class="pi">:</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">article_title_tag</span><span class="pi">:</span> <span class="s">h1.heading</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">date_auth_agency_tag</span><span class="pi">:</span> <span class="s">span[@class=&lsquo;byline&rsquo;]</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">loc_content_tag</span><span class="pi">:</span> <span class="s">div[@class=&lsquo;Normal&rsquo;]</span></div></div></pre></div></figure></p>
+
+<h2>Accessing YML files</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">APP_CONFIG</span> <span class="o">=</span> <span class="no">YAML</span><span class="p">.</span><span class="nf">load_file</span><span class="p">(</span><span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="no">RAILS_ROOT</span><span class="si">&#x7d;</span><span class="s2">/config/config.yml&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; true</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &#x7b;&ldquo;the_times_of_india&rdquo;=&gt;&#x7b;&ldquo;article_title_tag&rdquo;=&gt;&ldquo;h1.heading&rdquo;, &ldquo;loc_content_tag&rdquo;=&gt;&ldquo;div[@class=&lsquo;Normal&rsquo;]&rdquo;, &ldquo;date_auth_agency_tag&rdquo;=&gt;&ldquo;span[@class=&lsquo;byline&rsquo;]&rdquo;&#x7d;&#x7d;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="p">[</span><span class="ss">:the_times_of_india</span><span class="p">]</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; nil</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="p">[</span><span class="s1">&lsquo;the_times_of_india&rsquo;</span><span class="p">]</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &#x7b;&ldquo;article_title_tag&rdquo;=&gt;&ldquo;h1.heading&rdquo;, &ldquo;loc_content_tag&rdquo;=&gt;&ldquo;div[@class=&lsquo;Normal&rsquo;]&rdquo;, &ldquo;date_auth_agency_tag&rdquo;=&gt;&ldquo;span[@class=&lsquo;byline&rsquo;]&rdquo;&#x7d;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="p">[</span><span class="s1">&lsquo;the_times_of_india&rsquo;</span><span class="p">][</span><span class="s1">&lsquo;article_title_tag&rsquo;</span><span class="p">]</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &ldquo;h1.heading&rdquo;</span></div></div></pre></div></figure></p>
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    railsYAML
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2009/11/yaml-file-configuration-in-ruby-rails/" data-via="sandipransing" data-counturl="http://funonrails.com/2009/11/yaml-file-configuration-in-ruby-rails/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/11/pidgin-install-and-update-pidgin/" title="Previous Post: pidgin install and update pidgin messenger on ubuntu interpid">&laquo; pidgin install and update pidgin messenger on ubuntu interpid</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/11/vim-cheatsheet/" title="Next Post: VI/ VIM cheats">VI/ VIM cheats &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>stripe payment gateway integration with rails - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      stripe payment gateway integration with rails
+    
+    
+      
+        
+        
+         | Comments
+        
+      
+    
+  
+
+
+Stri...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2012/01/stripe-gateway-payment-integration-with-rails/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">stripe payment gateway integration with rails</h1>
+    
+    
+      <p class="meta">
+        
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Stripe is simple website payment solution and its very easy to easy setup.
+It currently supports only in US and seems to be very popular compared to other payment gateways because of its api &amp; pricing</p>
+
+<p>Stripe API provides -</p>
+
+<ol>
+<li>charge (regular payments)</li>
+<li>subscription (recurring payments)</li>
+<li>managing customers (via stripe_customer_token)</li>
+</ol>
+
+
+<p><strong>What you need to do ?</strong></p>
+
+<p>Create a stripe account by providing email address and password. There after go to the <a href="https://manage.stripe.com/account">manage account page</a> to obtain stripe public &amp; api keys.
+Rails Integration</p>
+
+<p>Rails Integration
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># Gemfile
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>gem stripe</div></div></pre></div></figure></p>
+
+<p>Add api key and public key
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># config/initializers/stripe.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Stripe</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s2">&ldquo;rGaNWsIG3Gy6zvXB8wv4rEcizJp6XjF5&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">STRIPE_PUBLIC_KEY</span> <span class="o">=</span> <span class="s2">&ldquo;vk_BcSyS2qPWdT5SdrwkQg0vTSyhZgqN&rdquo;</span></div></div></pre></div></figure></p>
+
+<p>View
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># app/views/layouts/application.html.haml
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">=</span> <span class="n">javascript_include_tag</span> <span class="s1">&lsquo;<a href="https://js.stripe.com/v1/">https://js.stripe.com/v1/</a>&rsquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">=</span> <span class="n">tag</span> <span class="ss">:meta</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;stripe-key&rsquo;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="no">STRIPE_PUBLIC_KEY</span></div></div></pre></div></figure></p>
+
+<p>Payment Form
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># app/views/payments/new.html.haml
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nf">#stripe_error</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">%noscript</span> JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">=</span> <span class="n">form_for</span> <span class="vi">@payment</span> <span class="o">||=</span> <span class="no">Payment</span><span class="p">.</span><span class="nf">new</span><span class="p">,</span> <span class="ss">:html</span> <span class="o">=&gt;</span> <span class="p">&#x7b;</span><span class="ss">:id</span> <span class="o">=&gt;</span> <span class="ss">:payForm</span><span class="p">&#x7d;</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">=</span> <span class="nb">p</span><span class="p">.</span><span class="nf">hidden_field</span> <span class="ss">:stripe_card_token</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nc">.field</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">=</span> <span class="nb">p</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:amount</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nc">.credit_card_form</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">%h3</span><span class="nc">.title</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>      Enter Credit Card
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">-</span> <span class="k">if</span> <span class="vi">@payment</span><span class="p">.</span><span class="nf">stripe_card_token</span><span class="p">.</span><span class="nf">present?</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>      Credit card has been provided.
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">-</span> <span class="k">else</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nc">.field</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">=</span> <span class="n">label_tag</span> <span class="ss">:card_number</span><span class="p">,</span> <span class="s2">&ldquo;Credit Card Number&rdquo;</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">=</span> <span class="n">text_field_tag</span> <span class="ss">:card_number</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="ss">name: </span><span class="kp">nil</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nc">.field</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">=</span> <span class="n">label_tag</span> <span class="ss">:card_code</span><span class="p">,</span> <span class="s2">&ldquo;Security Code (CVV)&rdquo;</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">=</span> <span class="n">text_field_tag</span> <span class="ss">:card_code</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="ss">name: </span><span class="kp">nil</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nc">.field</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">=</span> <span class="n">label_tag</span> <span class="ss">:card_month</span><span class="p">,</span> <span class="s2">&ldquo;Expiry Date&rdquo;</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">=</span> <span class="n">select_month</span> <span class="kp">nil</span><span class="p">,</span> <span class="p">&#x7b;</span><span class="ss">add_month_numbers: </span><span class="kp">true</span><span class="p">&#x7d;,</span> <span class="p">&#x7b;</span><span class="ss">name: </span><span class="kp">nil</span><span class="p">,</span> <span class="ss">id: </span><span class="s2">&ldquo;card_month&rdquo;</span><span class="p">&#x7d;</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="p">=</span> <span class="n">select_year</span> <span class="kp">nil</span><span class="p">,</span> <span class="p">&#x7b;</span><span class="ss">start_year: </span><span class="no">Date</span><span class="p">.</span><span class="nf">today</span><span class="p">.</span><span class="nf">year</span><span class="p">,</span> <span class="ss">end_year: </span><span class="no">Date</span><span class="p">.</span><span class="nf">today</span><span class="p">.</span><span class="nf">year</span><span class="o">+</span><span class="mi">15</span><span class="p">&#x7d;,</span> <span class="p">&#x7b;</span><span class="ss">name: </span><span class="kp">nil</span><span class="p">,</span> <span class="ss">id: </span><span class="s2">&ldquo;card_year&rdquo;</span><span class="p">&#x7d;</span></div></div></pre></div></figure></p>
+
+<p>Javascript Code
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="err">#</span> <span class="nx">app</span><span class="o">/</span><span class="nx">views</span><span class="o">/</span><span class="nx">payments</span><span class="o">/</span><span class="k">new</span><span class="p">.</span><span class="nx">js</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="kd">var</span> <span class="nx">payment</span><span class="p">;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nx">jQuery</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nx">Stripe</span><span class="p">.</span><span class="nx">setPublishableKey</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;meta[name=&ldquo;stripe-key&rdquo;]&rsquo;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&lsquo;content&rsquo;</span><span class="p">));</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">return</span> <span class="nx">payment</span><span class="p">.</span><span class="nx">setupForm</span><span class="p">();</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">&#x7d;);</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nx">payment</span> <span class="o">=</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="na">setupForm</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;.head&rsquo;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&lsquo;disabled&rsquo;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#payment_stripe_card_token&rsquo;</span><span class="p">).</span><span class="nx">val</span><span class="p">())&#x7b;</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#payForm&rsquo;</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="p">&#x7d;</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">else</span><span class="p">&#x7b;</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="nx">payment</span><span class="p">.</span><span class="nx">processCard</span><span class="p">();</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="p">&#x7d;</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">&#x7d;);</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">&#x7d;,</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="na">processCard</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="kd">var</span> <span class="nx">card</span><span class="p">;</span>
+</div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nx">card</span> <span class="o">=</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="na">number</span><span class="p">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#card_number&rsquo;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="na">cvc</span><span class="p">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#card_code&rsquo;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="na">expMonth</span><span class="p">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#card_month&rsquo;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span>
+</div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="na">expYear</span><span class="p">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#card_year&rsquo;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
+</div></div><div data-line='34' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">&#x7d;;</span>
+</div></div><div data-line='35' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="nx">Stripe</span><span class="p">.</span><span class="nx">createToken</span><span class="p">(</span><span class="nx">card</span><span class="p">,</span> <span class="nx">payment</span><span class="p">.</span><span class="nx">handleStripeResponse</span><span class="p">);</span>
+</div></div><div data-line='36' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">&#x7d;,</span>
+</div></div><div data-line='37' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="na">handleStripeResponse</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">status</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='38' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='39' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#payment_stripe_card_token&rsquo;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+</div></div><div data-line='40' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#stripe_error&rsquo;</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+</div></div><div data-line='41' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#payForm&rsquo;</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+</div></div><div data-line='42' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">&#x7d;</span> <span class="k">else</span> <span class="p">&#x7b;</span>
+</div></div><div data-line='43' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;#stripe_error&rsquo;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&lsquo;error&rsquo;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+</div></div><div data-line='44' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&lsquo;.head&rsquo;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&lsquo;disabled&rsquo;</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</div></div><div data-line='45' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">&#x7d;</span>
+</div></div><div data-line='46' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="p">&#x7d;</span>
+</div></div><div data-line='47' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">&#x7d;;</span></div></div></pre></div></figure></p>
+
+<p>Generate &amp; Migrate Payment Model
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rails g model payment status:string amount:float email:string transaction_number:string
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>rake db:migrate</div></div></pre></div></figure></p>
+
+<p>Payment Model
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/models/payment.rb </span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Payment</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">PROCESSING</span><span class="p">,</span> <span class="no">FAILED</span><span class="p">,</span> <span class="no">SUCCESS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">attr_accessible</span> <span class="ss">:stripe_card_token</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">validates</span> <span class="ss">:amount</span><span class="p">,</span> <span class="ss">:stripe_card_token</span><span class="p">,</span> <span class="ss">:presence</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:numericality</span> <span class="o">=&gt;</span> <span class="p">&#x7b;</span> <span class="ss">:greater_than</span> <span class="o">=&gt;</span> <span class="mi">0</span> <span class="p">&#x7d;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">purchase</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="no">PROCESSING</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">customer</span> <span class="o">=</span> <span class="no">Stripe</span><span class="o">::</span><span class="no">Customer</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">description</span><span class="ss">:email</span><span class="p">,</span> <span class="ss">card: </span><span class="n">stripe_card_token</span><span class="p">)</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># OPTIONAL: save customer token for further reference</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">stripe_customer_token</span> <span class="o">=</span> <span class="n">customer</span><span class="p">.</span><span class="nf">id</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># Charge</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">charge</span> <span class="o">=</span> <span class="no">Stripe</span><span class="o">::</span><span class="no">Charge</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="ss">:amount</span> <span class="o">=&gt;</span> <span class="n">amount</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="c1"># $15.00 this time</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="ss">:currency</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;usd&rdquo;</span><span class="p">,</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="ss">:customer</span> <span class="o">=&gt;</span> <span class="n">stripe_customer_token</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="p">)</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="n">charge</span><span class="p">.</span><span class="nf">paid</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">self</span><span class="p">.</span><span class="nf">transaction_num</span> <span class="o">=</span> <span class="n">charge</span><span class="p">.</span><span class="nf">id</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="no">SUCCESS</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">else</span>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="no">FAILED</span>
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="nb">self</span>
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">errors</span><span class="p">.</span><span class="nf">add</span> <span class="ss">:base</span><span class="p">,</span> <span class="s2">&ldquo;There was a problem with your credit card.&rdquo;</span>
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="no">FAILED</span>
+</div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">return</span> <span class="nb">self</span>
+</div></div><div data-line='34' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='35' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>Payments Controller
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/controllers/payments_controller.rb </span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">PaymentsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">create</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@payment</span> <span class="o">=</span> <span class="no">Payment</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:payment</span><span class="p">])</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">if</span> <span class="vi">@payment</span><span class="p">.</span><span class="nf">valid?</span> <span class="o">&amp;&amp;</span> <span class="vi">@payment</span><span class="p">.</span><span class="nf">purchase</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">flash</span><span class="p">[</span><span class="ss">:notice</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&lsquo;Thanks for Purchase!&rsquo;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">redirect_to</span> <span class="n">root_url</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">else</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">render</span> <span class="ss">:action</span> <span class="o">=&gt;</span> <span class="ss">:new</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    payment gatewaystriperails 3
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2012/01/stripe-gateway-payment-integration-with-rails/" data-via="sandipransing" data-counturl="http://funonrails.com/2012/01/stripe-gateway-payment-integration-with-rails/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/01/understanding-rails-uri/" title="Previous Post: understanding rails uri">&laquo; understanding rails uri</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/01/get-models-used-in-rails-app/" title="Next Post: Get models list inside rails app">Get models list inside rails app &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://funonrails.com/2012/01/stripe-gateway-payment-integration-with-rails/';
+        var disqus_url = 'http://funonrails.com/2012/01/stripe-gateway-payment-integration-with-rails/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+<script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

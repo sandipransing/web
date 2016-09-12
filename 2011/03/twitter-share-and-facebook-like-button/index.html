@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Twitter share and facebook like button for haml-rails, html/erb - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      Twitter share and facebook like button for haml-rails, html/erb
+    
+    
+      
+        
+        
+      
+    
+  
+
+
+Twitter share a...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2011/03/twitter-share-and-facebook-like-button/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">Twitter share and facebook like button for haml-rails, html/erb</h1>
+    
+    
+      <p class="meta">
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Twitter share and facebook like button for <code>html/erb</code>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&lsquo;spread&rsquo;</span><span class="nt">&gt;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&lsquo;twshare left&rsquo;</span><span class="nt">&gt;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&ldquo;<a href="http://twitter.com/share">http://twitter.com/share</a>&rdquo;</span> <span class="na">class=</span><span class="s">&ldquo;twitter-share-button&rdquo;</span> <span class="na">data-count=</span><span class="s">&ldquo;horizontal&rdquo;</span> <span class="na">data-via=</span><span class="s">&ldquo;funonrails&rdquo;</span><span class="nt">&gt;</span>Tweet<span class="nt">&lt;/a&gt;&lt;script </span><span class="na">type=</span><span class="s">&ldquo;text/javascript&rdquo;</span> <span class="na">src=</span><span class="s">&ldquo;<a href="http://platform.twitter.com/widgets.js">http://platform.twitter.com/widgets.js</a>&rdquo;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">&lt;/div&gt;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&ldquo;<a href="http://connect.facebook.net/en_US/all.js#xfbml=1">http://connect.facebook.net/en_US/all.js#xfbml=1</a>&rdquo;</span><span class="nt">&gt;&lt;/script&gt;&lt;fb:like</span> <span class="na">href=</span><span class="s">&ldquo;&rdquo;</span> <span class="na">layout=</span><span class="s">&ldquo;button_count&rdquo;</span> <span class="na">show_faces=</span><span class="s">&ldquo;false&rdquo;</span> <span class="na">width=</span><span class="s">&ldquo;450&rdquo;</span> <span class="na">font=</span><span class="s">&ldquo;&rdquo;</span><span class="nt">&gt;&lt;/fb:like&gt;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nt">&lt;/div&gt;</span></div></div></pre></div></figure></p>
+
+<p>Twitter share and facebook like button for <code>haml</code>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nc">.spread</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nc">.twshare.left</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">%a</span><span class="nc">.twitter-share-button.left</span><span class="p">&#x7b;</span><span class="s2">&ldquo;data-count&rdquo;</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;horizontal&rdquo;</span><span class="p">,</span> <span class="s2">&ldquo;data-via&rdquo;</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;fuonrails&rdquo;</span><span class="p">,</span> <span class="ss">:href</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;<a href="http://twitter.com/share">http://twitter.com/share</a>&rdquo;</span><span class="p">&#x7d;</span> Tweet
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">%script</span><span class="p">&#x7b;</span><span class="ss">:src</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;<a href="http://platform.twitter.com/widgets.js">http://platform.twitter.com/widgets.js</a>&rdquo;</span><span class="p">,</span> <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;text/javascript&rdquo;</span><span class="p">&#x7d;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nc">.fshare.left</span><span class="p">&#x7b;</span><span class="ss">:style</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;padding-left: 0px; margin-left: 10px;&rsquo;</span><span class="p">&#x7d;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">%script</span><span class="p">&#x7b;</span><span class="ss">:src</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;<a href="http://connect.facebook.net/en_US/all.js#xfbml=1">http://connect.facebook.net/en_US/all.js#xfbml=1</a>&rdquo;</span><span class="p">&#x7d;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">%fb:like</span><span class="p">&#x7b;</span><span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;button_count&rdquo;</span><span class="p">,</span> <span class="ss">:show_faces</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;false&rdquo;</span><span class="p">,</span> <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;450&rdquo;</span><span class="p">&#x7d;</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nc">.CLR</span></div></div></pre></div></figure></p>
+
+<p>See example Buttons listed below:</p>
+
+<div class='spread'>
+  <div class='twshare left'>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="funonrails">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+  </div>
+  <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="" layout="button_count" show_faces="false" width="450" font=""></fb:like>
+</div>
+
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    socialgeneral
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2011/03/twitter-share-and-facebook-like-button/" data-via="sandipransing" data-counturl="http://funonrails.com/2011/03/twitter-share-and-facebook-like-button/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/03/number-to-indian-currency-helper-for-rails/" title="Previous Post: number to indian currency helper for rails with WebRupee">&laquo; number to indian currency helper for rails with WebRupee</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/03/setting-up-nginx-maximum-upload-size/" title="Next Post: Setting up nginx maximum upload size">Setting up nginx maximum upload size &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

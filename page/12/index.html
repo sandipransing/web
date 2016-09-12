@@ -1,0 +1,843 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+  
+  
+  
+    
+      
+    
+      Upgrading openoffice in ubuntu interpid
+    
+    
+      
+        Nov 23, 2009
+        
+      
+    
+  
+
+
+  Follow s...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/page/12/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/upgrading-openoffice-in-ubuntu-interpid/">Upgrading openoffice in ubuntu interpid</a></h1>
+    
+    
+      <p class="meta">
+        Nov 23, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Follow simple steps defined <a href="http://ubuntumanual.org/posts/175/upgrade-to-open-office-3-1-in-ubuntu-jaunty-intrepid-hardy">in this post</a> for smooth upgrade of openoffice in linux.</p>
+
+<p>click <a href="http://ubuntumanual.org/posts/175/upgrade-to-open-office-3-1-in-ubuntu-jaunty-intrepid-hardy">here</a></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/bundling-gems-in-rails-application/">bundling gems in rails application</a></h1>
+    
+    
+      <p class="meta">
+        Nov 23, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Gem Bundling is basically used to maintain all required gems at your application level and its very easy to use.
+It downloads necessary gems and maintain it under <code>/vender/gems</code> directory.</p>
+
+<h2>Install gemcutter</h2>
+
+<p>gemcutter provides hosting for ruby gems
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install gemcutter</div></div></pre></div></figure></p>
+
+<h2>Install bundler</h2>
+
+<p>bundler is a tool that manages gem dependencies for your ruby application
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install bundler</div></div></pre></div></figure></p>
+
+<h2>Start using</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem bundle</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/vim-cheatsheet/">VI/ VIM cheats</a></h1>
+    
+    
+      <p class="meta">
+        Nov 18, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Movements</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>b   previous word
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>w   next word
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>e        end of word
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>0/^      begining of line
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>$        end of line
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>G        end of file
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>1G/gg    begining of file
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>/pattern  search next
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>?pattern  search previous
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>n         repeat    search forword ( i.e next occurence )
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>N         repeat    search backword
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>:line     goto line specified</div></div></pre></div></figure></p>
+
+<h2>Modes</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>i   insert mode
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>r   replace mode
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>s   delete character under cursor and eneter insert mode</div></div></pre></div></figure></p>
+
+<h2>Delete</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>x    delete character under cursor
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>dd   delete current line
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>line dd delete number of lines specified</div></div></pre></div></figure></p>
+
+<h2>Copy</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>yy        copy current line
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>pp        print copied contents
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>line yy   copy number of lines specified</div></div></pre></div></figure></p>
+
+<h2>Visual</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>v     enter visual mode
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>aw    highlight word
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>as    highlight sentence
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>ap    highlight paragraph
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>ab    highlight block</div></div></pre></div></figure></p>
+
+<h2>Undo/ Redo</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>u       undo
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>cntrl+r redo</div></div></pre></div></figure></p>
+
+<h2>autocomplete</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cntrl+x   enter completion mode
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>cntrl+p   display autocomplete options</div></div></pre></div></figure></p>
+
+<h2>Uppercase/ Lowercase</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>guu   lowercase line
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>gUU   uppercase line</div></div></pre></div></figure></p>
+
+<h2>Regx replace</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>range s/foo/bar/arg - replace foo with bar in &lsquo;range&rsquo; with
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>Values of &lsquo;range&rsquo;:
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>%               whole file
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>number          that particular line
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>none            apply to current line only
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>values of &lsquo;arg&rsquo;:
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>none  apply to first occurrence
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>g     global (all occurrences)</div></div></pre></div></figure></p>
+
+<h2>Select/Macros</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>qchar      start recording macro storing it in register &lsquo;char&rsquo;
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>q          end recording
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>@char      replay the macro stored in &lsquo;char&rsquo;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>:1,10 norm! @char run the macro stored in &lsquo;char over the 1-10 line range</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/yaml-file-configuration-in-ruby-rails/">YAML file configuration in ruby & rails</a></h1>
+    
+    
+      <p class="meta">
+        Nov 17, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While coding in ruby and rails, we often requires variables to be initialized that can be used across application. There are many ways to define configuration variables</p>
+
+<h2>Initialize variables inside environment</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># This agencies can be used across application
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>AGENCIES = [&lsquo;TIMES NEWS NETWORK&rsquo;, &lsquo;AGENCIES&rsquo;, &lsquo;AFP&rsquo;, &lsquo;PTI&rsquo;]
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'># Configuration for html nodes
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>Article_title_tag = &ldquo;h1.heading&rdquo;
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>Date_auth_agency_tag = &ldquo;span[@class=&lsquo;byline&rsquo;]&rdquo;
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>Location_content_tag = &ldquo;div[@class=&lsquo;Normal&rsquo;]&rdquo;</div></div></pre></div></figure></p>
+
+<h2>Create config inside initializers</h2>
+
+<p>Just make <code>config.rb</code> inside initializers and add variables to it.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>#config/initializers/config.rb
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'># This agencies can be used across application
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>AGENCIES = [&lsquo;TIMES NEWS NETWORK&rsquo;, &lsquo;AGENCIES&rsquo;, &lsquo;AFP&rsquo;, &lsquo;PTI&rsquo;]
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'># Configuration for html nodes
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>Article_title_tag = &ldquo;h1.heading&rdquo;
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>Date_auth_agency_tag = &ldquo;span[@class=&lsquo;byline&rsquo;]&rdquo;
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>Location_content_tag = &ldquo;div[@class=&lsquo;Normal&rsquo;]&rdquo;</div></div></pre></div></figure></p>
+
+<h2>Load config using YML</h2>
+
+<p>But most efficient way to organize variables is YML file
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># config/config.yml</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s">the_times_of_india</span><span class="pi">:</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">article_title_tag</span><span class="pi">:</span> <span class="s">h1.heading</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">date_auth_agency_tag</span><span class="pi">:</span> <span class="s">span[@class=&lsquo;byline&rsquo;]</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">loc_content_tag</span><span class="pi">:</span> <span class="s">div[@class=&lsquo;Normal&rsquo;]</span></div></div></pre></div></figure></p>
+
+<h2>Accessing YML files</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">APP_CONFIG</span> <span class="o">=</span> <span class="no">YAML</span><span class="p">.</span><span class="nf">load_file</span><span class="p">(</span><span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="no">RAILS_ROOT</span><span class="si">&#x7d;</span><span class="s2">/config/config.yml&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; true</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &#x7b;&ldquo;the_times_of_india&rdquo;=&gt;&#x7b;&ldquo;article_title_tag&rdquo;=&gt;&ldquo;h1.heading&rdquo;, &ldquo;loc_content_tag&rdquo;=&gt;&ldquo;div[@class=&lsquo;Normal&rsquo;]&rdquo;, &ldquo;date_auth_agency_tag&rdquo;=&gt;&ldquo;span[@class=&lsquo;byline&rsquo;]&rdquo;&#x7d;&#x7d;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="p">[</span><span class="ss">:the_times_of_india</span><span class="p">]</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; nil</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="p">[</span><span class="s1">&lsquo;the_times_of_india&rsquo;</span><span class="p">]</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &#x7b;&ldquo;article_title_tag&rdquo;=&gt;&ldquo;h1.heading&rdquo;, &ldquo;loc_content_tag&rdquo;=&gt;&ldquo;div[@class=&lsquo;Normal&rsquo;]&rdquo;, &ldquo;date_auth_agency_tag&rdquo;=&gt;&ldquo;span[@class=&lsquo;byline&rsquo;]&rdquo;&#x7d;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">&gt;&gt;</span> <span class="no">APP_CONFIG</span><span class="p">[</span><span class="s1">&lsquo;the_times_of_india&rsquo;</span><span class="p">][</span><span class="s1">&lsquo;article_title_tag&rsquo;</span><span class="p">]</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &ldquo;h1.heading&rdquo;</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/pidgin-install-and-update-pidgin/">pidgin install and update pidgin messenger on ubuntu interpid</a></h1>
+    
+    
+      <p class="meta">
+        Nov 15, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Fresh pidgin Installation</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get update
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install pidgin</div></div></pre></div></figure></p>
+
+<p>Earlier versions of pidgin has problem in connecting yahoo messenger which is solved in newer versions.
+In order to update old version of pidgin, simply follow instructions written below and you are done.
+New version provides video and voice chat, also buddy icon improvements are added.</p>
+
+<h2>Add GPG key</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get update
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-key adv &ndash;keyserver keyserver.ubuntu.com &ndash;recv-keys A1F196A8</div></div></pre></div></figure></p>
+
+<p>Goto <code>System</code> > <code>Administration</code> > <code>Software Sources</code> and select <code>Third-Party Software tab</code> and click <code>ADD</code> and simply Copy-Paste the following Repo
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>deb <a href="http://ppa.launchpad.net/pidgin-developers/ppa/ubuntu">http://ppa.launchpad.net/pidgin-developers/ppa/ubuntu</a> intrepid main
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>deb-src <a href="http://ppa.launchpad.net/pidgin-developers/ppa/ubuntu">http://ppa.launchpad.net/pidgin-developers/ppa/ubuntu</a> intrepid main</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/how-to-remove-extra-spaces-in-ruby/">How to remove extra spaces in ruby strings</a></h1>
+    
+    
+      <p class="meta">
+        Nov 13, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are many methods in ruby which will allow to remove blank spaces from ruby strings (sentenses)</p>
+
+<h4>squeeze</h4>
+
+<p>This will remove extra spaces (more than one) in between two words</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;Write      your       string            here   &rdquo;</span><span class="p">.</span><span class="nf">squeeze</span><span class="p">.</span><span class="nf">strip</span></div></div></pre></div></figure></p>
+
+<h4>gsub</h4>
+
+<p>It can be used to match and substitue additional spaces
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;This     is my      input  string     &rdquo;</span><span class="p">.</span><span class="nf">gsub</span><span class="p">(</span><span class="sr">/ +/</span><span class="p">,</span> <span class="s1">&lsquo; &rsquo;</span><span class="p">)</span></div></div></pre></div></figure></p>
+
+<h4>split &amp; join strings</h4>
+
+<p>Strings can be splitted based on spaces and joined.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;Write      your       string          here   &rdquo;</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">&lsquo;  &rsquo;</span><span class="p">).</span><span class="nf">join</span><span class="p">(</span><span class="s1">&lsquo; &rsquo;</span><span class="p">)</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/manual-active-record-db-connection/">Manual active record db connection in ruby using mysql adapter</a></h1>
+    
+    
+      <p class="meta">
+        Nov 12, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Manual DB connection</h2>
+
+<p>Below ruby code establishes a manual database connection.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">require</span> <span class="s1">&lsquo;active_record&rsquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">establish_connection</span><span class="p">(</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="ss">:adapter</span>  <span class="o">=&gt;</span> <span class="s2">&ldquo;mysql&rdquo;</span><span class="p">,</span>   <br/>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="ss">:host</span>     <span class="o">=&gt;</span> <span class="s2">&ldquo;localhost&rdquo;</span><span class="p">,</span>   <br/>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="ss">:username</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;root&rdquo;</span><span class="p">,</span>   <br/>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;abcd&rdquo;</span><span class="p">,</span>   <br/>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="ss">:database</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;funonrails&rdquo;</span> <br/>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">)</span> </div></div></pre></div></figure></p>
+
+<h2>Snippet of database.yml file</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s">common</span><span class="pi">:</span> <span class="nl">&amp;common</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">adapter</span><span class="pi">:</span> <span class="s">mysql</span> <br/>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">database</span><span class="pi">:</span> <span class="s">students_dev</span> <br/>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">username</span><span class="pi">:</span> <span class="s">root</span> <br/>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">password</span><span class="pi">:</span> <br/>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">host</span><span class="pi">:</span> <span class="s">localhost</span><br/>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s">students_development</span><span class="pi">:</span> <br/>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv"><em>common</span> <br/>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">database</span><span class="pi">:</span> <span class="s">students_dev</span><br/>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s">students_production</span><span class="pi">:</span> <br/>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv"></em>common</span> <br/>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">database</span><span class="pi">:</span> <span class="s">students</span> </div></div></pre></div></figure></p>
+
+<h2>Load database configurations from yml file</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">dbconfig</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="nb">load</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="s1">&lsquo;database.yml&rsquo;</span><span class="p">))</span><br/>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">establish_connection</span><span class="p">(</span> <span class="n">dbconfig</span><span class="p">[</span><span class="ss">:students_development</span><span class="p">]</span> <span class="p">)</span> </div></div></pre></div></figure></p>
+
+<h2>Active Record Model &amp; DB connection</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Student</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">establish_connection</span> <span class="s2">&ldquo;students_production&rdquo;</span> <br/>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">set_table_name</span> <span class="s2">&ldquo;student&rdquo;</span> <br/>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">set_primary_key</span> <span class="s2">&ldquo;stud_number&rdquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span> </div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/writing-rake-task-in-rails/">Writing rake task in rails with namespace, parameters</a></h1>
+    
+    
+      <p class="meta">
+        Nov 10, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rake tasks itself defines that &ldquo;they are bunch of ruby code that performs some task.&rdquo;</p>
+
+<p>Rake tasks are placed in lib/tasks directory of application and files have <code>.rake</code> extension.
+There are many lovable tasks defined in rails. They can be executed from console.</p>
+
+<h2>Benefits of writing rake task :</h2>
+
+<ol>
+<li>Testing of code</li>
+<li>Scheduled rake tasks ( backgroundRb and scheduled tasks using cron )</li>
+<li>Simplifies code.</li>
+</ol>
+
+
+<p>Lets, understand what is code inside rake tasks.</p>
+
+<h2>Simple greet rake task</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># lib/tasks/welcome.rake
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>task :greet do
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  puts &ldquo;Hello !!&rdquo;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>end</div></div></pre></div></figure></p>
+
+<h2>Execute task</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake greet</div></div></pre></div></figure></p>
+
+<h2>Adding description to rake task</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/tasks/welcome.rake</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">desc</span> <span class="s2">&ldquo;This is new style of greet&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">task</span> <span class="ss">:greet</span> <span class="k">do</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nb">puts</span> <span class="s2">&ldquo;Hello !!&rdquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Execute task</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake greet</div></div></pre></div></figure></p>
+
+<h2>Adding namespace to rake tasks</h2>
+
+<p>It’s nothing but prefix that takes while executing rake task. Benefit of adding namespace is to categories similar rake tasks.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># lib/tasks/welcome.rake
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>namespace :introduction do
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  desc &ldquo;This is one style of introduction&rdquo;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  task :greet do
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    puts &ldquo;Hello !!&rdquo;
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  end
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  desc &ldquo;This is 2nd style of introduction&rdquo;
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  task :hi do
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>    puts &ldquo;Hi &rdquo;
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  end
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>end</div></div></pre></div></figure></p>
+
+<h2>Execute task</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake introduction:greet
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>rake introduction:hi</div></div></pre></div></figure></p>
+
+<h2>Passing arguments to rake tasks</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># lib/tasks/welcome.rake</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">namespace</span> <span class="ss">:introduction</span> <span class="k">do</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">desc</span> <span class="s2">&ldquo;This is one style of introduction&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">task</span> <span class="ss">:greet</span> <span class="k">do</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nb">puts</span> <span class="s2">&ldquo;Hello !!&rdquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># Here rails environment is loaded</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># Here you can access model, controllers, etc</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">desc</span> <span class="s2">&ldquo;This is 2nd style of introduction&rdquo;</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">task</span> <span class="ss">:hi</span> <span class="o">=&gt;</span> <span class="ss">:enviroment</span> <span class="k">do</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nb">puts</span> <span class="s2">&ldquo;Hi </span><span class="si">#&#x7b;</span><span class="no">ENV</span><span class="p">[</span><span class="s1">&lsquo;name&rsquo;</span><span class="p">]</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Execute task</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake introduction:hi name=Raj</div></div></pre></div></figure></p>
+
+<p>You can read more on this <a href="http://www.blogger.com/For%20more%20reference%20http://railsenvy.com/2007/6/11/ruby-on-rails-rake-tutorial#namespaces">here</a></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/understanding-and-creating-radinat/">Understanding and creating radinat extensions</a></h1>
+    
+    
+      <p class="meta">
+        Nov 10, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Understanding and creating radinat extensions</h2>
+
+<p>To start with, first understand <em>what is radiant</em> and <em>why to use it ?</em></p>
+
+<blockquote><p>Radiant is a open source content management system designed that serves cms needs for small organisations</p></blockquote>
+
+<h2>Creating new radint application</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>radiant -d  mysql cms
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  create
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  create    CHANGELOG
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  create    CONTRIBUTORS
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  create    INSTALL
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  create    LICENSE
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  create    README
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  create    config
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  create    config/environments
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  &hellip;..</div></div></pre></div></figure></p>
+
+<p>Radiant supports extensions. It means one can add extra features to radiant based cms to add extra capabilities.
+Extension directory structure is almost similar to any standard rails application</p>
+
+<h2>Radiant Extension Directory structure</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>|&ndash; app
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>       |&ndash; controllers
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>       |&ndash; helpers
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>       |&ndash; models
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>       |&ndash; views
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>|&ndash; db
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>       |&ndash; migrate
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>       |&ndash; seeds.rb
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>|&ndash; lib
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>       |&ndash; spec
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>          |&ndash; controllers
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>          |&ndash; helpers
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>          |&ndash; models
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>          |&ndash; spec.opts
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>          |&ndash; spec_helper
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>          |&ndash; views</div></div></pre></div></figure></p>
+
+<h2>Creating radiant extension</h2>
+
+<p>radiant has generators to create new radint extension
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>script/generate extension ExtensionName</div></div></pre></div></figure></p>
+
+<p>Lets create session management extension for radint cms. It will create directory structure for extension.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>script/generate extension session_management
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/app/controllers
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/app/helpers
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/app/models
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/app/views
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/db/migrate
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/lib/tasks
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/README
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/session_management_extension.rb
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/spec/controllers
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/spec/models
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/spec/views
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/spec/helpers
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/features/support
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/features/step_definitions/admin
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/Rakefile
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/spec/spec_helper.rb
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/spec/spec.opts
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/cucumber.yml
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/features/support/env.rb
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>  create vendor/extensions/session_management/features/support/paths.rb</div></div></pre></div></figure></p>
+
+<p>Edit <code>session_management_extension.rb</code> where extension version, description, and website url can be added.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># require_dependency &lsquo;application_controller&rsquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">SessionManagementExtension</span> <span class="o">&lt;</span> <span class="no">Radiant</span><span class="o">::</span><span class="no">Extension</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">version</span> <span class="s2">&ldquo;1.0&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">description</span> <span class="s2">&ldquo;Describe your extension here&rdquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">url</span> <span class="s2">&ldquo;<a href="http://yourwebsite.com/session_management">http://yourwebsite.com/session_management</a>&rdquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># define_routes do |map|</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># map.namespace :admin, :member =&gt; &#x7b; :remove =&gt; :get &#x7d; do |admin|</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1">#     admin.resources :session_management</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># end</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># end</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">activate</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># admin.tabs.add &ldquo;Session Management&rdquo;, &ldquo;/admin/session_management&rdquo;, :after =&gt;</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;Layouts&rdquo;</span><span class="p">,</span> <span class="ss">:visibility</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:all</span><span class="p">]</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">deactivate</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># admin.tabs.remove &ldquo;Session Management&rdquo;</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>In activate block, specify what are the library files , modules that needs to be activated while application starts. In my case, activate method looks like below..</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">def</span> <span class="nf">activate</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># admin.tabs.add &ldquo;Session Management&rdquo;, &ldquo;/admin/session_management&rdquo;, :after =&gt;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;Layouts&rdquo;</span><span class="p">,</span> <span class="ss">:visibility</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:all</span><span class="p">]</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">ApplicationController</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="ss">:include</span><span class="p">,</span> <span class="no">SessionManagementExt</span><span class="o">::</span><span class="no">ApplicationControllerExt</span><span class="p">)</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Generating models and controllers</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>script/generate extension_model session_management session_info
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>session_id:string url:string ip:string</div></div></pre></div></figure></p>
+
+<p>In above command first attribute is the extension name and next is model name and rest specifies attributes that needs to created. It will create
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>exists   app/models/
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>     exists   spec/models/
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>     create   app/models/session_info.rb
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>     create   spec/models/session_info_spec.rb
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>     exists   db/migrate
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>     create   db/migrate/20091110075042_create_session_infos.rb</div></div></pre></div></figure></p>
+
+<h2>Generating controller</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>script/generate extension_controller session_management admin/session_managements</div></div></pre></div></figure></p>
+
+<p>It will create an output</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>create app/controllers/admin
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>     create app/helpers/admin
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>     create app/views/admin/session_managements
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>     create spec/controllers/admin
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>     create spec/helpers/admin
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>     create spec/views/admin/session_managements
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>     create spec/controllers/admin/session_managements_controller_spec.rb
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>     create spec/helpers/admin/session_managements_helper_spec.rb
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>     create app/controllers/admin/session_managements_controller.rb
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>     create app/helpers/admin/session_managements_helper.rb</div></div></pre></div></figure></p>
+
+<p>Modify session managements controller for displaying sesssion infos tracked.</p>
+
+<p>We need before filter for every request that will capture <code>session</code>, <code>ip</code> and <code>page url</code>.
+so we need to override behaviour of application controller to add before_filter</p>
+
+<p>We have already added <code>ApplicationControllerExt</code> in activate of extension.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ApplicationController.send(:include, SessionManagementExt::ApplicationControllerExt)</div></div></pre></div></figure></p>
+
+<p>Lets look into ApplicationControllerExt module.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">module</span> <span class="nn">SessionManagementExt</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">module</span> <span class="nn">ApplicationControllerExt</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="n">base</span><span class="p">.</span><span class="nf">class_eval</span> <span class="k">do</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>       <span class="n">before_filter</span> <span class="ss">:track_session</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="k">end</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">def</span> <span class="nf">track_session</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="c1">#<strong>&ldquo;Hello from Session tracker !!!&rdquo;</strong></span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="c1">#TODO: location track</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="c1"># It can be delayed task</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="c1">#sudo gem install geoip_city &ndash; &ndash;with-geoip-dir=/opt/GeoIP</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="c1"># require &lsquo;geoip_city&rsquo;</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="c1"># g = GeoIPCity::Database.new(&lsquo;/opt/GeoIP/share/GeoIP/GeoLiteCity.dat&rsquo;)</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="c1"># res = g.look_up(&lsquo;201.231.22.125&rsquo;)</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="c1"># &#x7b;:latitude=&gt;-33.13330078125, :country_code3=&gt;&ldquo;ARG&rdquo;,</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="ss">:longitude</span><span class="o">=&gt;-</span><span class="mi">64</span><span class="o">.</span><span class="mi">3499984741211</span><span class="p">,</span> <span class="ss">:city</span><span class="o">=&gt;</span><span class="s2">&ldquo;Río Cuarto&rdquo;</span><span class="p">,</span> <span class="ss">:country_name</span><span class="o">=&gt;</span><span class="s2">&ldquo;Argentina&rdquo;</span><span class="p">,</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="ss">:country_code</span><span class="o">=&gt;</span><span class="s2">&ldquo;AR&rdquo;</span><span class="p">,</span> <span class="ss">:region</span><span class="o">=&gt;</span><span class="s2">&ldquo;05&rdquo;</span><span class="p">&#x7d;</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>     <span class="no">SessionInfo</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span> <span class="ss">:ip</span> <span class="o">=&gt;</span> <span class="n">request</span><span class="p">.</span><span class="nf">remote_ip</span><span class="p">,</span> <span class="ss">:page_url</span> <span class="o">=&gt;</span>
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;<a href="http://">http://</a></span><span class="si">#&#x7b;</span><span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="p">[</span><span class="s2">"HTTP_HOST&rdquo;</span><span class="p">]</span><span class="si">&#x7d;#&#x7b;</span><span class="n">request</span><span class="p">.</span><span class="nf">request_uri</span><span class="si">&#x7d;</span><span class="s2">&ldquo;</span><span class="p">,</span> <span class="ss">:session_id</span> <span class="o">=&gt;</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">request</span><span class="p">.</span><span class="nf">session</span><span class="p">.</span><span class="nf">session_id</span> <span class="p">)</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>That&rsquo;s all! Creating rake task for extension module here is default genrated rake task for session management under <code>vendor/extensions/session_management/lib/tasks/session_management_extension_tasks.rake</code>. It includes task to migrate database and update extension
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>namespace :radiant do
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  namespace :extensions do
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    namespace :session_management do
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>     desc &ldquo;Runs the migration of the Session Management extension&rdquo;
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>     task :migrate => :environment do
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>       require &lsquo;radiant/extension_migrator&rsquo;
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>       if ENV[&ldquo;VERSION&rdquo;]
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>         SessionManagementExtension.migrator.migrate(ENV[&ldquo;VERSION&rdquo;].to_i)
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>       else
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>         SessionManagementExtension.migrator.migrate
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>       end
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>     end
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>     desc &ldquo;Copies public assets of the Session Management to the instance public/ directory.&rdquo;
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>     task :update => :environment do
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>       is_svn_or_dir = proc &#x7b;|path| path =~ /.svn/ || File.directory?(path) &#x7d;
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>       puts &ldquo;Copying assets from SessionManagementExtension&rdquo;
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>       Dir[SessionManagementExtension.root + &ldquo;/public/<em>*/</em>&rdquo;].reject(&amp;is_svn_or_dir).each do
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>|file|
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>         path = file.sub(SessionManagementExtension.root, &lsquo;&rsquo;)
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>         directory = File.dirname(path)
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>         mkdir_p RAILS_ROOT + directory, :verbose => false
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>         cp file, RAILS_ROOT + path, :verbose => false
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>       end
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>     end
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>    end
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>  end
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>end</div></div></pre></div></figure></p>
+
+<p>Add as many custom tasks needed inside this file without changing default tasks.
+Migrate all radiant extensions
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake db:migrate:extensions</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/remote-access-remote-copy-compress-decompress-on-linux/">remote access, remote copy and files compress, decompress on linux</a></h1>
+    
+    
+      <p class="meta">
+        Nov 6, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Remote Login</h2>
+
+<p><code>ssh</code> client is a program for logging into remote system and execute commands on that system</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ssh [-l login_name ] hostname | user@hostname [command ]
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'># other options
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>ssh [-afgknqstvxACNTX1246 ] [-b bind_address ] [-c cipher_spec ]
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>[-e escape_char ] [-i identity_file ] [-l login_name ] [-m mac_spec ]
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>[-o option ] [-p port ] [-F configfile ] [-L port host hostport ]
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>[-R port host hostport ] [-D port ] hostname | user@hostname [command ]</div></div></pre></div></figure></p>
+
+<p>One can use putty for remote login through windows machine</p>
+
+<h2>Remote Copy</h2>
+
+<p><code>scp</code> - secure copy (remote file copy program) that copies file between computers over network</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>scp source[ source file path] destination[user@funonrails.com:/home]
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'># Other options
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>[-F ssh_config ] [-S program ] [-P port ] [-c cipher ] [-i identity_file ]
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>[-o ssh_option ] [[user@ ] host1 : file1 ] [&hellip; ] [[user@ ] host2 : file2 ]</div></div></pre></div></figure></p>
+
+<p>On windows system <code>pscp.exe</code> can be used for remote copy</p>
+
+<h2>Compress</h2>
+
+<p><code>tar</code> is a package that allows you to compress direcory or file
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>tar czfv Test.tar.tgz Test/</div></div></pre></div></figure></p>
+
+<h2>Decompress</h2>
+
+<p><code>gzip</code> is a package that allows to extract compressed file/directories.</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gzip -dc target.tar.tgz | tar xf -</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/13/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/11/">Newer &rarr;</a>
+    
+  </div>
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+<script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

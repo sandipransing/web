@@ -1,0 +1,753 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+  
+  
+  
+    
+      
+    
+      Imagemagick/ RMagick Installation on ubuntu
+    
+    
+      
+        Mar 23, 2010
+        
+      
+    
+  
+
+
+  Imag...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/page/9/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/imagemagick-rmagick-installation-on-ubuntu/">Imagemagick/ RMagick Installation on ubuntu</a></h1>
+    
+    
+      <p class="meta">
+        Mar 23, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>ImageMagick Installation</h4>
+
+<p>Ubuntu machine has default apt-get package manager.
+To install imagemagick following packages needs to be installed.</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install imagemagick librmagick-ruby libmagickwand-dev</div></div></pre></div></figure></p>
+
+<h4>RMagick gem install</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install rmagick</div></div></pre></div></figure></p>
+
+<p>If you still facing problems with gem installation, Please look that following packages are installed
+on your system.</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>dpkg -l | grep libmagickcore-dev graphicsmagick-libmagick-dev-compat</div></div></pre></div></figure></p>
+
+<p>If there are no packages installed then try to install then first.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install libmagickcore-dev graphicsmagick-libmagick-dev-compat</div></div></pre></div></figure></p>
+
+<p>Try to install rmagick gem again. Now it should be installed without any error.</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/rubyconf-2009-lt/">RubyConf 2009 LT Termtter</a></h1>
+    
+    
+      <p class="meta">
+        Mar 19, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Check out this SlideShare Presentation:
+Termtter ruby gem is provides a way to work
+with twitter which is easy to use and integrate.
+Basically it can be used in ruby and rails application
+to get full control over twitter as like we have in web
+browser. Also, it works with terminal.</p>
+
+<div style="width:425px" id="__ss_2557295">
+  <strong style="display:block;margin:12px 0 4px">
+    <a href="http://www.slideshare.net/ujihisa/rubyconf-2009-lt-termtter" title="RubyConf 2009 LT &quot;Termtter&quot;">
+      RubyConf 2009 LT &quot;Termtter&quot;
+    </a>
+  </strong>
+  <object width="800" height="355">
+    <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rubyconflttermtter-091122030721-phpapp01&stripped_title=rubyconf-2009-lt-termtter" />
+    <param name="allowFullScreen" value="true"/>
+    <param name="allowScriptAccess" value="always"/>
+    <embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=rubyconflttermtter-091122030721-phpapp01&stripped_title=rubyconf-2009-lt-termtter" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="800" height="355"></embed>
+  </object>
+  <div style="padding:5px 0 12px">
+    View more 
+    <a href="http://www.slideshare.net/">presentations</a> 
+    from 
+    <a href="http://www.slideshare.net/ujihisa">ujihisa</a>.
+  </div>
+</div>
+
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/mvc-coding-principles-in-rails/">MVC coding principles in rails</a></h1>
+    
+    
+      <p class="meta">
+        Mar 13, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I believe this post should clear basic coding standards before getting started with rails development.</p>
+
+<p>I just came with conversion started for declaring variables on rubyonrailstalk google group and that ended up with&nbsp;exploring the concepts of rails MVC coding principles.
+so, i thought it would be nice if they gets summarized somewhere.</p>
+
+<p>The question raised was:</p>
+
+<p><figure class='quote'><blockquote><p>How to declare variables like arrays so that they are available everytime that layout or its related partials are used. Putting <code>@myarray = MyArray.all</code> into every action in every controller doesn&rsquo;t seem very dry, so I guess I&rsquo;m just looking for a very simple straighforward convention, but can&rsquo;t seem to find it documented anywhere or figure it out</p></blockquote><figcaption class='quote-source'><span class='quote-author'>@capsized </span></figcaption></figure></p>
+
+<p>Before getting into actual conversion, I would like to notedown what rails is.</p>
+
+<blockquote><p>Rails is web framework developed in ruby language. The main purpose behind is to make programmers life easy and development would be a fun. It is  built over MVC framework and philosophy includes DRY, Convention over configuration and REST.</p></blockquote>
+
+<p>Adding conversation as it is here:</p>
+
+<p><figure class='quote'><blockquote><p>Noria Normally something like that goes into a high-level filter, like one  in ApplicationController.</p></blockquote><figcaption class='quote-source'><span class='quote-author'>@Xavier  </span></figcaption></figure></p>
+
+<p>Put a before_filter in your ApplicationController.</p>
+
+<p><figure class='code-highlight-figure'><figcaption class='code-highlight-caption'><span class='code-highlight-caption-title'>@Andy</span></figcaption><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="k">class</span> <span class="nc">ApplicationController</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">before_filter</span> <span class="ss">:set_my_array</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="kp">private</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">set_my_array</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="vi">@myarray</span> <span class="o">=</span> <span class="no">MyArray</span><span class="p">.</span><span class="nf">all</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p><figure class='quote'><blockquote><p>If it is literally something as simple as MyArray.all I believe there
+is nothing wrong with calling the model direct from the view.</p></blockquote><figcaption class='quote-source'><span class='quote-author'>@Colin </span></figcaption></figure></p>
+
+<p>And here started the debate conversation. First of all, i was also convinced with this suggestion but next reply started conversion.</p>
+
+<p><figure class='quote'><blockquote><p>It&rsquo;s dirty, horrible, bad form, breaks the separation of layers&hellip;
+Don&rsquo;t call the model from the view!</p></blockquote><figcaption class='quote-source'><span class='quote-author'>@Andy </span></figcaption></figure></p>
+
+<p><figure class='quote'><blockquote><p>Beware of the MVC police Colin, this suggestion will certanly not get
+good housekeeping seal of approval :D
+I agree through. I&rsquo;m not gonna add a before filter just to set
+MyArray.all into a class variable. I&rsquo;d rather call it directly and claim
+to be pragmatic.</p></blockquote><figcaption class='quote-source'><span class='quote-author'>@Sharagoz </span></figcaption></figure></p>
+
+<p><figure class='quote'><blockquote><p>But you are wrong.  The view should never, ever, ever touch the database.
+Claim all you like.  The fact is that in MVC architecture, database
+queries don&rsquo;t belong in the view. A before_filter is the proper place for this.</p></blockquote><figcaption class='quote-source'><span class='quote-author'>@Marnen </span></figcaption></figure></p>
+
+<p><figure class='quote'><blockquote><p>Is it considered ok to call model methods if they do not touch the db,
+or are model methods forbidden also?</p></blockquote><figcaption class='quote-source'><span class='quote-author'>@Colin </span></figcaption></figure></p>
+
+<p><figure class='quote'><blockquote><p>I would say the view can call instance methods of the model (attributes - real and virtual) but no class methods. So: is OK, but:
+is not.  It&rsquo;s a bit of a contrived example, but there you go.  Accessing the model through instance variables you&rsquo;ve created is OK, going directly to the model bypassing the controller is not.</p></blockquote><figcaption class='quote-source'><span class='quote-author'>@Andy </span></figcaption></figure></p>
+
+<p>I think it is appropriate for the view to call methods on the objects passed in by the controller, provided that these methods do not change the model or touch the database.
+Example:
+<figure class='code-highlight-figure'><figcaption class='code-highlight-caption'><span class='code-highlight-caption-title'>Good: @Marnen</span></figcaption><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># controller</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">def</span> <span class="nf">my_action</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="vi">@person</span> <span class="o">=</span> <span class="no">Person</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#my_action.html.erb</span></div></div></pre></div></figure></p>
+
+<p>Here started conclusion on topic:
+<figure class='quote'><blockquote><p>Good example. I just want to throw in a couple more twists and see what
+you think.
+1.  What about methods on models that change themselves in some way?
+Suppose the last_viewed_at method returned a previously stored time,
+then updated the model to store a new current time. Maybe a bad example,
+but I hope you get my meaning.
+2.  What about aggregating class methods like count, sum or avg?
+Obviously a class methods and does touch the database. I assume it would
+be better to let the controller deal with stuff like this.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># Controller</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="vi">@person_count</span> <span class="o">=</span> <span class="no">Person</span><span class="p">.</span><span class="nf">count</span></div></div></pre></div></figure></p></blockquote><figcaption class='quote-source'><span class='quote-author'>@Robert </span></figcaption></figure></p>
+
+<p><figure class='quote'><blockquote><p>I don&rsquo;t know what you mean by dirty, it saves several lines of code
+and when looking at the view code it is easier to see what is
+happening than to see a variable that has to be hunted for in a filter
+somewhere to find out what it is.
+It does not break the separation of layers any more than calling an
+instance method of a model does when using something like &gt; Don&rsquo;t call the model from the view!
+<code>@person.name</code> is a model call from the view</p></blockquote><figcaption class='quote-source'><span class='quote-author'>@Colin </span></figcaption></figure></p>
+
+<p><figure class='quote'><blockquote><p>But think how many lines of code you are going to have to go edit when you realize that you need to change it.
+Also, I wouldn&rsquo;t consider Person.all to be more clean than @people. What if you need to exclude some? Person.all :conditions =&gt; {whatever}, if you are just using a before filter, it is easy to override, you can override it for any given controller, and for any given controller method. If it&rsquo;s hard coded into the view, then that view has to serve everybody&rsquo;s wishes, it ends up having to know how it is to be used, and having lots of brittle conditional code for each of these situations.
+This is why the controller must be responsible for supplying the appropriate data to the view, not the view being responsible for creating it&rsquo;s own data.
+It might start as innocently as <code>Person.all</code>, it can easily turn into
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">if</span> <span class="n">this</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">Person</span><span class="p">.</span><span class="nf">all</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">elsif</span> <span class="n">that</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">OtherPerson</span><span class="p">.</span><span class="nf">all</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">else</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">Person</span><span class="p">.</span><span class="nf">all</span> <span class="o">+</span> <span class="no">OtherPerson</span><span class="p">.</span><span class="nf">all</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p></blockquote><figcaption class='quote-source'><span class='quote-author'>@Josh </span></figcaption></figure></p>
+
+<p>This took another turn in conversion -</p>
+
+<p><figure class='quote'><blockquote><p>Did you misunderstand my post?  I was arguing for putting it in a filter rather than in the view (hence saying the 4 lines of before_filter, private, def and end was worth it).
+It sounds like - when you start with &ldquo;But&rdquo; - that you disagree, but the rest of your post seems to be arguing from the same side as my posts.</p></blockquote><figcaption class='quote-source'><span class='quote-author'>@Andy </span></figcaption></figure></p>
+
+<p>And finally Colin ended up conversion with conclusion -</p>
+
+<blockquote><p>An excellent post if I may say so that brings out the salient points I think.  Can the issues be summarised as follows?
+The controller should provide all the data that the view should display in instance variables (@person for example).
+The view is expected to understand the structure of the objects and so can access attributes (virtual or otherwise) of the objects.
+If the model needs to access the db in order to provide an attribute value, or accessing the attribute has some side effect that affects the db, then this is ok, providing the view does not &lsquo;know&rsquo; that the side effect or db access is happening. (Not very well written but I hope you know what I mean).
+The view must not call any method of the model who&rsquo;s purpose is to perform an action rather than return a value.
+The view should not make any explicit use of model classes.  For example there should be no reference to Person or any other model class</p></blockquote>
+
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/wordpress-blog-software-installation/">WordPress blog software installation</a></h1>
+    
+    
+      <p class="meta">
+        Mar 12, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://wordpress.org/">WordPress</a> &nbsp;is a&nbsp;open source&nbsp;software developed by and for community with ongoing development on it. Easy installation, customizable, with lots of available plugins, themes and SEO friendly are the strengths of it!</p>
+
+<blockquote><p>Software is mainly serves the purpose of blogging, hosting static websites.
+People with knowledge of php, javascipt and little knowledge of mysql db&nbsp;can customize it however they want.</p></blockquote>
+
+<ol>
+<li>Minimum server requirements</li>
+<li>PHP 4.3 or greater</li>
+<li>MySQL 4.1.2 or greater</li>
+<li>Apache/NGINX (or any web server supporting php &amp; mysql )</li>
+</ol>
+
+
+<p><strong>For detailed information on installation click <a href="http://codex.wordpress.org/Installing_WordPress#Famous%205-Minute%20Install">here</a></strong></p>
+
+<p>Now you will need to decide where on your web site you&rsquo;d like your blog to appear:</p>
+
+<ol>
+<li>In the root directory of your web site. (For example, <a href="http://yoursite.com/">http://yoursite.com/</a>)</li>
+<li>In a subdirectory of your web site. (For example, <a href="http://yoursite.com/blog/">http://yoursite.com/blog/</a></li>
+</ol>
+
+
+<blockquote><p>This can be done by adding new route at nginx configuration file or deploying wordpress software inside blog directory of main website.</p></blockquote>
+
+<p>There are millions of satisfied users using&nbsp;word-press blog.</p>
+
+<p><strong>To create and start blogging with free wordpress.com blog click <a href="http://en.wordpress.com/signup/">here</a></strong></p>
+
+<p><a href="http://codex.wordpress.org/WordPressMU">WordPress MU</a> multiblog software provides a way to create thousands of wordpress blogs
+just like wordpress.com site does.</p>
+
+<p>Download and&nbsp;detailed information on installation click <a href="http://codex.wordpress.org/Installing_WPMU">here</a></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/require-file-in-rails-environment/">require file in rails environment</a></h1>
+    
+    
+      <p class="meta">
+        Mar 12, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are different ways to load particular file in rails application environment if the required file exists.</p>
+
+<p><strong>1. Using RAILS_ROOT</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>if File.exists?(file=File.join(RAILS_ROOT,&lsquo;config&rsquo;, &lsquo;initializers&rsquo;, &lsquo;smtp_gmail.rb&rsquo;))
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  require file
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>end</div></div></pre></div></figure></p>
+
+<p><strong>2. Using Rails.root &amp; join</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>require Rails.root.join(&lsquo;config&rsquo;, &lsquo;initializers&rsquo;, &lsquo;smtp_gmail.rb&rsquo;)</div></div></pre></div></figure></p>
+
+<p><strong>3. Using Rails.root, join &amp; exists? method</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>require file if File.exists?(file = Rails.root.join(&lsquo;config&rsquo;, &lsquo;initializers&rsquo;,&lsquo;smtp_gmail.rb&rsquo;))</div></div></pre></div></figure></p>
+
+<p><strong>4. Using File and direct path to file</strong>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>require  File.join(&lsquo;root&rsquo;,&lsquo;app&rsquo;,&lsquo;config&rsquo;, &lsquo;initializers&rsquo;, &lsquo;smtp_gmail.rb&rsquo;)</div></div></pre></div></figure></p>
+
+<p>Among all above methods of  loading file, Using <code>Rails.root</code>, <code>join &amp;amp; exists?</code> method seems to be pretty good to have.
+Any improvements are most welcome!</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/alternative-for-tortoise-svn-on-ubuntu/">alternative for tortoise svn on ubuntu</a></h1>
+    
+    
+      <p class="meta">
+        Mar 11, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The Tortoise svn client on windows is one of my favorite svn client.</p>
+
+<p>I am working on ubuntu karmic koala from last one year.
+There are kdesvn. smartsvn svn clients available on ubuntu but still
+time haven’t found any svn client as good as tortoise svn on windows.</p>
+
+<p>Is there any alternative ???</p>
+
+<p>Can tortoise svn client installation possible using wine utility package in ubuntu ??</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/blogger-tips/">blogger tips</a></h1>
+    
+    
+      <p class="meta">
+        Mar 11, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><b><span class="Apple-style-span" style="font-size: large;">Change default favicon on blogger</span></b><br /><div class="separator" style="clear: both; text-align: left;">Go to the layout click on Edit HTML link<br /></div><div class="separator" style="clear: both; text-align: center;"><a href="http://lh4.ggpht.com/_WmOmsgqsanw/S5frfs8mKuI/AAAAAAAAAGs/flm5FFFGAxg/dashboard.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://lh4.ggpht.com/_WmOmsgqsanw/S5frfs8mKuI/AAAAAAAAAGs/flm5FFFGAxg/dashboard.jpg" /></a></div><div class="separator" style="clear: both; text-align: left;"><a href="http://lh4.ggpht.com/_WmOmsgqsanw/S5frfs8mKuI/AAAAAAAAAGs/flm5FFFGAxg/dashboard.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"></a></div><div class="separator" style="clear: both; text-align: left;">Insert following link code inside head tag</div><blockquote>&lt;link href=&lsquo;IMAGE_ICON_LINK&rsquo; rel=&lsquo;icon&rsquo; type=&lsquo;image/x-icon&rsquo;/&gt;</blockquote>Replace&nbsp;IMAGE_ICON_LINK url with your icon file url on web<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://lh4.ggpht.com/_WmOmsgqsanw/S5fssi1aLcI/AAAAAAAAAG0/uIyPHdVVED4/favicon.jpg" imageanchor="1" style="display: inline !important; margin-left: 1em; margin-right: 1em;"><img border="0" height="70" src="http://lh4.ggpht.com/_WmOmsgqsanw/S5fssi1aLcI/AAAAAAAAAG0/uIyPHdVVED4/favicon.jpg" width="400" /></a></div><br /><div style="text-align: left;"><span class="Apple-style-span" style="font-family: arial, sans-serif; font-size: small;">Use&nbsp;<a class="l" href="http://tools.dynamicdrive.com/favicon/" onmousedown="return clk(this.href,'','','res','1','&amp;sig2=jqF0S1VsF0XMf7hsfg0bPw','0CAYQFjAA')"><em style="font-style: normal; font-weight: bold;"><span class="Apple-style-span" style="color: #351c75;">Dynamic Drive</span></em><span class="Apple-style-span" style="color: #351c75;">-&nbsp;</span><em style="font-style: normal; font-weight: bold;"><span class="Apple-style-span" style="color: #351c75;">FavIcon Generator</span></em></a>&nbsp;online tool to easily create a favorites icon (<em style="font-style: normal; font-weight: bold;">favicon</em>) for your site</span></div><div style="text-align: left;"><span class="Apple-style-span" style="font-family: arial, sans-serif; font-size: small;"><br /></span></div><div class="separator" style="clear: both; text-align: center;"><img border="0" src="http://tools.dynamicdrive.com/favicon/indexalt.php?demo=toolbar&amp;img=14f6c409d655c92ad136ca89a28de19f_16&amp;x=52&amp;y=5" /><img border="0" src="http://tools.dynamicdrive.com/favicon/export/faviconlogo1.jpg" /></div><div style="text-align: center;"><br /></div><br /></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/rails-tinymce-rich-text-editor-for-rails/">Rails Tiny MCE - A Rich Text Editor for rails 3</a></h1>
+    
+    
+      <p class="meta">
+        Mar 6, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>TinyMCE is a javascript rich text editor. It is easy to integrate with blogs, cms, messages and mailers.</p>
+
+<p>Plugin uses jrails(jQuery) and Paperclip plugin for image &amp; media upload support</p>
+
+<h2>Features</h2>
+
+<ul>
+<li>Provides Rich Text Editor</li>
+<li>Customisable TinyMCE plugins</li>
+<li>Easy to integrate</li>
+<li>Supports Image upload &amp; insert</li>
+<li>Supports Media upload &amp; Youtube embed</li>
+<li>TODO: Document upload plugin</li>
+</ul>
+
+
+<h2>1. Installation</h2>
+
+<pre><code>rails plugin install git://github.com/sandipransing/rails_tiny_mce.git
+</code></pre>
+
+<h2>2. Migrations</h2>
+
+<pre><code>rails g tiny_migration
+
+rake db:migrate
+</code></pre>
+
+<h2>2. Install jrails(jquery) plugin using</h2>
+
+<pre><code>rails plugin install git://github.com/aaronchi/jrails.git
+</code></pre>
+
+<h2>3. Install dependent plugins(if you did not already)</h2>
+
+<pre><code>rake rails_tiny_mce:plugins
+</code></pre>
+
+<p>Above command will copy <code>paperclip</code>, <code>respond_to_parent</code>, <code>will_paginate</code> plugins to vendor/plugins directory.</p>
+
+<ul>
+<li>paperclip <code>git://github.com/thoughtbot/paperclip.git</code></li>
+<li>respond_to_parent <code>git://github.com/itkin/respond_to_parent.git</code></li>
+<li>will_paginate <code>git://github.com/mislav/will_paginate.git</code></li>
+</ul>
+
+
+<h2>4. In your layout add following lines</h2>
+
+<pre><code>&lt;%= javascript_include_tag :defaults %&gt;
+&lt;%= javascript_include_tiny_mce_if_used %&gt;
+&lt;%= tiny_mce if using_tiny_mce? %&gt;
+</code></pre>
+
+<h2>5. Inside controller class on top add following lines</h2>
+
+<pre><code>uses_tiny_mce(:options =&gt; AppConfig.default_mce_options, :only =&gt; [:new, :edit])
+</code></pre>
+
+<p>This <code>AppConfig.default_mce_options</code> is in <code>config/initializers/tiny_mce_plus_config.rb</code>, you could change the setting there</p>
+
+<h2>6. In your view add class mceEditor to text_area</h2>
+
+<p>Then append the following to the text area you want to transform into a TinyMCE editor.
+    :class => :mceEditor</p>
+
+<h2>7. Install file lists</h2>
+
+<pre><code>rake rails_tiny_mce:install
+</code></pre>
+
+<p>will install following files:</p>
+
+<pre><code>app
+  |-- controller
+    |-- attachments_controller.rb
+  |-- helpers
+    |-- remote_link_renderer.rb
+  |-- models
+    |-- print.rb
+    |-- video.rb
+  |-- views
+    |-- attachments
+       |-- _show_attachment_list.html.erb
+config
+  |-- initializers
+    |-- tiny_mce_plus_config.rb
+public
+  |-- images
+    |-- tiny_mce
+  |-- javascripts
+    |-- tiny_mce
+</code></pre>
+
+<p>You may have your custom config in <code>tiny_mce_plus_config.rb.</code></p>
+
+<h2>Attention Note:</h2>
+
+<ul>
+<li>Do not put <code>\&lt;p&gt; \&lt;/p&gt;</code> around the textarea.</li>
+<li>If you are using <code>old will_paginate plugin</code>, change the <em>url_for</em> to <em>url_option</em> in <em>remote_link_renderer.rb</em></li>
+<li>If you are using <code>gem "will_paginate", "~&gt; 3.0.pre2"</code>
+you need changes in <code>app/helpers/remote_link_renderer.rb</code>
+<code>class RemoteLinkRenderer &lt; WillPaginate::LinkRenderer</code> to
+<code>class RemoteLinkRenderer &lt; WillPaginate::ViewHelpers::LinkRenderer</code></li>
+</ul>
+
+
+<h2>Example use:</h2>
+
+<ul>
+<li><p>Create CRUD for post</p>
+
+<p>  rails g scaffold post title:string text:description</p></li>
+<li><p>Run Migrations</p>
+
+<p>  rake db:migrate</p></li>
+<li><p>Add following line to <em>posts_controller.rb</em></p>
+
+<p>  uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])</p></li>
+<li><p>Open <em>/views/posts/_form.html.erb</em></p></li>
+<li><p>Modifiy following line</p>
+
+<p>  &lt;%= f.text_area :description %>
+to
+  &lt;%= f.text_area :description, :class => :mceEditor %></p></li>
+</ul>
+
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/page-cache-control-in-radiant-cms/">Page Cache control in radiant cms</a></h1>
+    
+    
+      <p class="meta">
+        Mar 4, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Radiant Caching</h2>
+
+<p>Radiant cms is very powerful and customizable cms as of now which has inbuilt support for page caching.</p>
+
+<p>Radiant caching mechanisam is somehow similar to action caching in rails.</p>
+
+<p>In latest radiant version i.e. > 0.8 Responsecache has been replaced with Radiant::Cache.</p>
+
+<p>By default radiant cache gets automatically invalidated after every 5 minutes and that is configurable.</p>
+
+<p>The interval is easily configurable by adding following lines inside environment
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">if</span> <span class="n">defined?</span> <span class="no">ResponseCache</span> <span class="o">==</span> <span class="s1">&lsquo;constant&rsquo;</span>  <br/>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">ResponseCache</span><span class="p">.</span><span class="nf">defaults</span><span class="p">[</span><span class="ss">:expire_time</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span><span class="p">.</span><span class="nf">hours</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">else</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">SiteController</span><span class="p">.</span><span class="nf">cache_timeout</span> <span class="o">=</span> <span class="mi">4</span><span class="p">.</span><span class="nf">hours</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>There are situations where automatic cache inavalidation won&rsquo;t work and we need to clear radiant cache on the fly.
+There are two ways to do that to invalidate radiant cache immediately.</p>
+
+<h2>1. Navigate to the root of your Radiant project and delete the cache directory</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cd /home/deploy/radiant_site/tmp
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>rm -r cache</div></div></pre></div></figure></p>
+
+<h2>2. Clearing the page cache from within your code</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">if</span> <span class="n">defined?</span> <span class="no">ResponseCache</span> <span class="o">==</span> <span class="s1">&lsquo;constant&rsquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">ResponseCache</span><span class="p">.</span><span class="nf">instance</span><span class="p">.</span><span class="nf">clear</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">else</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">Radiant</span><span class="o">::</span><span class="no">Cache</span><span class="p">.</span><span class="nf">clear</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<p>While building website using radiant cms, it happens that there are certain pages they are static and not going to change frequently that time configuring cache expiry time to long interval is going to be always beneficial and for pages which conatins dynamic content (displaying logged in user on homepage), we need to disable radiant cache for such pages. this can be done by using page_options extension.</p>
+
+<h2>Installation for radiant version  0.7</h2>
+
+<p>From your RADIANT_ROOT:</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/extension install page_options</div></div></pre></div></figure></p>
+
+<h2>Installation for radiant version  0.8 and higher</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>git clone git://github.com/sandipransing/radiant-page_options-extension.git vendor/extensions/page_options</div></div></pre></div></figure></p>
+
+<p>Restart server</p>
+
+<h2>Usage</h2>
+
+<ol>
+<li>Goto /admin/pages</li>
+<li>Edit any page</li>
+<li>Click on more link and edit cache settings.</li>
+</ol>
+
+
+<p>For more information <a href="http://github.com/avonderluft/radiant-page_options-extension">visit</a></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/remove-svn-files-inside-directory-rm-rf/">Programming ruby Linux basics</a></h1>
+    
+    
+      <p class="meta">
+        Mar 2, 2010
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Remove svn files inside directory</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rm -rf `find . -type d -name .svn</div></div></pre></div></figure></p>
+
+<h2>Set path in linux</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>export PATH=$PATH:/usr/ruby/bin</div></div></pre></div></figure></p>
+
+<p>Here /usr/ruby/bin is the path to ruby extecuatble.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>grep and print process pid
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>ps -ef | grep search_string | grep -v grep | awk &lsquo;&#x7b;print  $2 &#x7d;&rsquo;</div></div></pre></div></figure></p>
+
+<h2>Kill process</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>kill -9 process_id_here
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>ps -ef | grep search_string | grep -v grep | awk &lsquo;&#x7b;print  $2 &#x7d;&rsquo; | xargs kill -9</div></div></pre></div></figure></p>
+
+<h2>Store pid of process in a variable for further process</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>tokill=<code>ps -ef|grep ruby|grep -v grep|awk '&amp;#x7b;print $2&amp;#x7d;'</code>;kill -9 $tokill;</div></div></pre></div></figure></p>
+
+<h2>Mirror a website</h2>
+
+<p>Command to clone/copy a website for offline/local browsing.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>wget -mk www.funonrails.com</div></div></pre></div></figure></p>
+
+<p>Above command downloads all website pages in depth level with stylesheets, images and javascripts.</p>
+</div>
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/10/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/8/">Newer &rarr;</a>
+    
+  </div>
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+<script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PDF in rails using prawn library - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      PDF in rails using prawn library
+    
+    
+      
+        
+        
+      
+    
+  
+
+
+Building PDF Document in ruby &amp; rails appl...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2010/08/pdf-in-rails-using-prawn-library/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">PDF in rails using prawn library</h1>
+    
+    
+      <p class="meta">
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Building PDF Document in ruby &amp; rails application using prawn Library
+<strong>Brief</strong>. Before getting started with this tutorial, I would like to thanks <strong>Greg and
+Prawn team</strong> for their awesome work towards ruby and rails community</p>
+
+<h2>Installing prawn (core, layout, format, security)</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install prawn</div></div></pre></div></figure></p>
+
+<p>or
+Add following line in rails environment file inside initializer block
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>config.gem &lsquo;prawn&rsquo;</div></div></pre></div></figure></p>
+
+<p>Optionally you can specify version to be used and then run task
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>rake gems:install</div></div></pre></div></figure></p>
+
+<p>Generating pdf using rails console</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/console
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>pdf = Prawn::Document.new</div></div></pre></div></figure></p>
+
+<p>It creates new pdf document object. Here you can additionally pass options parameters such as -</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Prawn</span><span class="o">::</span><span class="no">Document</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:page_size</span>   <span class="o">=&gt;</span> <span class="p">[</span><span class="mi">11</span><span class="o">.</span><span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="o">.</span><span class="mi">49</span><span class="p">],</span> <span class="ss">:page_layout</span> <span class="o">=&gt;</span> <span class="ss">:portrait</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Prawn</span><span class="o">::</span><span class="no">Document</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">A0</span><span class="p">)</span> <span class="no">Here</span> <span class="no">A0</span> <span class="n">is</span> <span class="n">page</span> <span class="n">size</span><span class="o">.</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Prawn</span><span class="o">::</span><span class="no">Document</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:page_layout</span> <span class="o">=&gt;</span> <span class="ss">:portrait</span><span class="p">,</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>                     <span class="ss">:left_margin</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">.</span><span class="nf">mm</span><span class="p">,</span>    <span class="c1"># different</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>                     <span class="ss">:right_margin</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">.</span><span class="nf">cm</span><span class="p">,</span>    <span class="c1"># units</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>                     <span class="ss">:top_margin</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="p">.</span><span class="nf">dm</span><span class="p">,</span>    <span class="c1"># work</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>                     <span class="ss">:bottom_margin</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mo">01</span><span class="p">.</span><span class="nf">m</span><span class="p">,</span> <span class="c1"># well</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>                     <span class="ss">:page_size</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;A4&rsquo;</span><span class="p">)</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">pdf</span><span class="p">.</span><span class="nf">text</span><span class="p">(</span><span class="s2">&ldquo;Prawn Rocks&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="mi">12</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="n">pdf</span><span class="p">.</span><span class="nf">render_file</span><span class="p">(</span><span class="s1">&lsquo;prawn.pdf&rsquo;</span><span class="p">)</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="o">=&gt;</span> <span class="c1">#&lt;file:prawn.pdf (closed)=&ldquo;&rdquo;&gt;&lt;/file:prawn.pdf&gt;</span></div></div></pre></div></figure></p>
+
+<p>Here is output file generated
+<a href="http://github.com/sandipransing/prawn-example/raw/master/sample/prawn.pdf">click</a></p>
+
+<p>Now let&rsquo;s go through other goodness of prawn library
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>pdf  = Prawn::Document.new(&lsquo;A3&rsquo;) do</div></div></pre></div></figure></p>
+
+<h2>FONTS</h2>
+
+<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/font.pdf">click</a>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># Specify font to be used or specify path to font file.
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>font &ldquo;times.ttf&rdquo;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>font(&ldquo;/times.ttf&rdquo;)</div></div></pre></div></figure></p>
+
+<h2>TEXT</h2>
+
+<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/font.pdf">click</a></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>text &lsquo;Sandip Ransing&rsquo;, :size => 41, :position => :center, :style => :bold</div></div></pre></div></figure></p>
+
+<h2>STROKE LINE</h2>
+
+<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/stroke.pdf">click</a>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>stroke do
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>      rectangle [300,300], 100, 200
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> end</div></div></pre></div></figure></p>
+
+<h2>IMAGE</h2>
+
+<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/image.pdf">click</a></p>
+
+<p>Displaying Local file system Image
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>image &lsquo;sandip.png&rsquo;, :height => 50, :position => :center, :border => 2
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>Scale Image
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>image &lsquo;sandip.png&rsquo;, :scale => 0.5, :position => :left
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>Display Remote image from Internet inside pdf
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>require &ldquo;open-uri&rdquo;
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> image open(&lsquo;<a href="http://t2.gstatic.com/images?q=tbn:kTG6gAKrnou2gM:http://www.facebook.com/profile/pic.php?uid=AAAAAQAQrLXvTWfyY2ANjttV8D1c0QAAAAnDHPFJe0pPFR84iIzXPKro&amp;t=1">http://t2.gstatic.com/images?q=tbn:kTG6gAKrnou2gM:http://www.facebook.com/profile/pic.php?uid=AAAAAQAQrLXvTWfyY2ANjttV8D1c0QAAAAnDHPFJe0pPFR84iIzXPKro&amp;t=1</a>")
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>end</div></div></pre></div></figure></p>
+
+<h2>LINE BREAKS</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>movedown(20)
+</div></div></pre></div></figure></p>
+
+<h2>TABLE/GRID</h2>
+
+<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/table.pdf">click</a>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>data = [
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>    [&ldquo;Name&rdquo;, &#x7b;:text => &lsquo;Sandip Ransing&rsquo;, :font_style => :bold, :colspan => 4 &#x7d;],
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    [&ldquo;Address&rdquo;, &#x7b;:text => &lsquo;SHIVAJINAGAR, PUNE 411005&rsquo;, :colspan => 4 &#x7d;],
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>    [&ldquo;Landmark&rdquo;,&#x7b;:text => &lsquo;NEAR FC COLLEGE&rsquo;, :colspan => 4 &#x7d;],
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    [&ldquo;Mobile&rdquo;,&ldquo;9860648108&rdquo;, &#x7b;:text => &ldquo;&rdquo;, :colspan => 3 &#x7d;],
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    [&ldquo;Education&rdquo;, &#x7b;:text => &ldquo;Bachelor in Computer Engineering&rdquo;, :colspan => 4 &#x7d;],
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      [&ldquo;Vehicle&rdquo;, &lsquo;Hero Honda&rsquo;,&ldquo;Reg. No.&rdquo;, &#x7b;:text => &ldquo;MH 12 EN 921&rdquo;, :colspan => 3 &#x7d;],
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      [&ldquo;Additional&rdquo;, &ldquo;GDCA&rdquo;, &ldquo;class&rdquo;, &lsquo;First&rsquo;, &ldquo;&rdquo;],
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>      [&#x7b;:text => &ldquo;Areas of Speciality&rdquo;, :font_style => :bold&#x7d;, &#x7b;:text => &ldquo;Ruby, Rails, Radiant, Asterisk, Adhearsion, Geokit, Prawn, &hellip;.,&hellip;&rdquo;, :font_style => :bold, :colspan => 4&#x7d;],
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>      [&#x7b;:text => &ldquo;Website&rdquo;, :colspan => 2&#x7d;,&#x7b;:text => &ldquo;www.funonrails.com&rdquo;, :colspan => 3&#x7d;],
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>      [&#x7b;:text => &ldquo;Company&rdquo;, :colspan => 2&#x7d;,&#x7b;:text => &ldquo;Josh Software&rdquo;, :colspan => 3&#x7d;]
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>  ]
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>table data,
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>    :border_style => :grid, #:underline_header
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>    :font_size  => 10,
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>    :horizontal_padding => 6,
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>    :vertical_padding   => 3,
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>    :border_width => 0.7,
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>    :column_widths => &#x7b; 0 => 130, 1 => 100, 2 => 100, 3 => 100, 4 => 80 &#x7d;,
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>    :position => :left,
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>    :align => &#x7b; 0 => :left, 1 => :right, 2 => :left, 3 => :right, 4 => :right &#x7d;</div></div></pre></div></figure></p>
+
+<h2>LINKS</h2>
+
+<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/link.pdf">click</a>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>link_annotation([200, 200, 500, 40],:Border => [0,0,1], :A => &#x7b; :Type => :Action, :S => :URI, :URI => Prawn::LiteralString.new(&ldquo;<a href="http://twitter.com/sandipransing">http://twitter.com/sandipransing</a>&rdquo;) &#x7d; )
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>link_annotation(([0, 100, 100, 150]), :Border => [0,0,1], :Dest => s"<a href="http://funonrails.com">http://funonrails.com</a>")</div></div></pre></div></figure></p>
+
+<h2>PDF Security</h2>
+
+<p><a href="http://github.com/sandipransing/prawn-example/raw/master/sample/secure.pdf">click</a>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>encrypt_document :user_password => &lsquo;hello&rsquo;, :owner_password => &lsquo;railer&rsquo;,
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>    :permissions => &#x7b; :print_document => false &#x7d;</div></div></pre></div></figure></p>
+
+<h2>Prawn Inline Formatting</h2>
+
+<p>Prawn-format supports inline text formatting that gives user enough flexibility to use html tags</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>require &lsquo;prawn/format&rsquo;
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>text &lsquo;This is Strong  text&rsquo;, :inline_format => true
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>text &lsquo;This is bold text \n It should be on newline.&rsquo;, :inline_format => true</div></div></pre></div></figure></p>
+
+<h2>SAVE Generated PDF</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>end
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>pdf.render_file &lsquo;my.pdf&rsquo;</div></div></pre></div></figure></p>
+
+<p>!!! NOTE: As of time now &lsquo;prawn-format&rsquo; is incompatible with latest prawn gem, It is compatible with prawn version &lt;= 0.6 s</p>
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    rubyprawnrails
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2010/08/pdf-in-rails-using-prawn-library/" data-via="sandipransing" data-counturl="http://funonrails.com/2010/08/pdf-in-rails-using-prawn-library/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/05/specify-rails-version-to-use-while/" title="Previous Post: Specify rails version to new rails app">&laquo; Specify rails version to new rails app</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/08/rails-3-beautiful-code/" title="Next Post: Rails 3 Beautiful Code">Rails 3 Beautiful Code &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

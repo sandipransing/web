@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Customizing rails default form builder - Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+
+  
+    
+      Customizing rails default form builder
+    
+    
+      
+        
+        
+      
+    
+  
+
+
+Customizing default rails form builder t...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/2011/12/using-formbuilder-in-rails/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  <header>
+    
+      <h1 class="entry-title">Customizing rails default form builder</h1>
+    
+    
+      <p class="meta">
+        
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Customizing default rails form builder to adopt for labels, input fields, errors, hints, etc. in order to build forms just in minutes</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># app/helpers/app_form_builder.rb</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">AppFormBuilder</span> <span class="o">&lt;</span> <span class="no">ActionView</span><span class="o">::</span><span class="no">Helpers</span><span class="o">::</span><span class="no">FormBuilder</span><br/>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">HELPERS</span> <span class="o">=</span> <span class="sx">%w[check_box text_field text_area password_field select date_select datetime_select file_field collection_select state_select label calendar_date_select]</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">create_tagged_field</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">define_method</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="p">,</span> <span class="o"><em></span><span class="n">args</span><span class="o">|</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">errs</span> <span class="o">=</span> <span class="n">object</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">on</span><span class="p">(</span><span class="nb">name</span><span class="p">.</span><span class="nf">to_sym</span><span class="p">)</span> <span class="k">if</span> <span class="n">object</span> <span class="o">&amp;&amp;</span> <span class="n">object</span><span class="p">.</span><span class="nf">errors</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1"># initialize some local variables</span>
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">if</span> <span class="n">args</span><span class="p">.</span><span class="nf">last</span><span class="p">.</span><span class="nf">is_a?</span><span class="p">(</span><span class="no">Hash</span><span class="p">)</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">label</span> <span class="o">=</span> <span class="n">args</span><span class="p">.</span><span class="nf">last</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="ss">:label</span><span class="p">)</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">suffix</span> <span class="o">=</span> <span class="n">args</span><span class="p">.</span><span class="nf">last</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="ss">:suffix</span><span class="p">)</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">klass</span> <span class="o">=</span> <span class="n">args</span><span class="p">.</span><span class="nf">last</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="ss">:class</span><span class="p">)</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">req</span> <span class="o">=</span> <span class="n">args</span><span class="p">.</span><span class="nf">last</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="ss">:required</span><span class="p">)</span>
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">label</span> <span class="o">=</span> <span class="s1">&lsquo;none&rsquo;</span> <span class="k">if</span> <span class="n">method_name</span> <span class="o">==</span> <span class="s1">&lsquo;hidden_field&rsquo;</span>
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">label</span> <span class="o">||=</span> <span class="nb">name</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">titleize</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">label</span> <span class="o">=</span> <span class="kp">nil</span> <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&lsquo;none&rsquo;</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">klass</span> <span class="o">=</span> <span class="n">klass</span> <span class="p">?</span> <span class="p">[</span><span class="n">klass</span><span class="p">]</span> <span class="p">:</span> <span class="p">[]</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1"># Custom class if it exists</span>
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">if</span> <span class="n">method_name</span> <span class="o">=~</span> <span class="sr">/text_field|check_box|select/</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">klass</span> <span class="o">&lt;&lt;</span> <span class="n">method_name</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">klass</span> <span class="o">&lt;&lt;</span> <span class="s1">&lsquo;f&rsquo;</span> <span class="c1">#A default selector</span>
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">klass</span> <span class="o">&lt;&lt;</span> <span class="s1">&lsquo;error&rsquo;</span> <span class="k">if</span> <span class="n">errs</span><span class="p">.</span><span class="nf">present?</span>
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">klass</span> <span class="o">=</span> <span class="n">klass</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s1">&lsquo; &rsquo;</span><span class="p">)</span>
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1"># Required Field Notations</span>
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">if</span> <span class="n">req</span> <span class="o">==</span> <span class="s1">&lsquo;all&rsquo;</span> <span class="o">||</span> <span class="p">(</span><span class="n">req</span> <span class="o">==</span> <span class="s1">&lsquo;new&rsquo;</span> <span class="o">&amp;&amp;</span> <span class="n">object</span><span class="p">.</span><span class="nf">new_record?</span><span class="p">)</span>
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">label</span> <span class="o">&lt;&lt;</span> <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="p">:</span><span class="o"></em></span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="ss">:req</span><span class="p">)</span>
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='34' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">suffix</span> <span class="o">=</span> <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:label</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span> <span class="k">if</span> <span class="n">suffix</span><span class="p">.</span><span class="nf">present?</span>
+</div></div><div data-line='35' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">label</span> <span class="o">=</span> <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:label</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="k">if</span> <span class="n">label</span><span class="p">.</span><span class="nf">present?</span>
+</div></div><div data-line='36' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">errs</span> <span class="o">=</span> <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:span</span><span class="p">,</span> <span class="n">errs</span><span class="p">.</span><span class="nf">to_s</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="ss">:message</span><span class="p">)</span> <span class="k">if</span> <span class="n">errs</span><span class="p">.</span><span class="nf">present?</span>
+</div></div><div data-line='37' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">reverse</span> <span class="o">=</span> <span class="kp">true</span> <span class="k">if</span> <span class="n">method_name</span> <span class="o">==</span> <span class="s1">&lsquo;check_box&rsquo;</span>
+</div></div><div data-line='38' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">if</span> <span class="n">reverse</span>
+</div></div><div data-line='39' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">content</span> <span class="o">=</span> <span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="k">super</span><span class="si">&#x7d;</span><span class="s2"> </span><span class="si">#&#x7b;</span><span class="n">suffix</span><span class="si">&#x7d;</span><span class="s2"> </span><span class="si">#&#x7b;</span><span class="n">label</span><span class="si">&#x7d;</span><span class="s2"> </span><span class="si">#&#x7b;</span><span class="n">errs</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='40' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">else</span>
+</div></div><div data-line='41' class='code-highlight-row numbered'><div class='code-highlight-line'>        <span class="n">content</span> <span class="o">=</span> <span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="n">label</span><span class="si">&#x7d;</span><span class="s2"> </span><span class="si">#&#x7b;</span><span class="k">super</span><span class="si">&#x7d;</span><span class="s2"> </span><span class="si">#&#x7b;</span><span class="n">suffix</span><span class="si">&#x7d;</span><span class="s2"> </span><span class="si">#&#x7b;</span><span class="n">errs</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='42' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="k">end</span>
+</div></div><div data-line='43' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='44' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="vi">@template</span><span class="p">.</span><span class="nf">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="n">klass</span><span class="p">)</span>
+</div></div><div data-line='45' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='46' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='47' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='48' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">HELPERS</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</div></div><div data-line='49' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">create_tagged_field</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</div></div><div data-line='50' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='51' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+</div>
+  <footer>
+    <p class="meta">
+      <span class="byline author vcard">Posted by <span class="fn">sandipransing</span></span>
+      
+      <span class="categories">
+  
+    railsform-builder
+  
+</span>
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://funonrails.com/2011/12/using-formbuilder-in-rails/" data-via="sandipransing" data-counturl="http://funonrails.com/2011/12/using-formbuilder-in-rails/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/12/authorize-net-payment-gateway-with-rails/" title="Previous Post: Authorize Net Payment Gateway integration with rails">&laquo; Authorize Net Payment Gateway integration with rails</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/12/authorize-net-sim-payment-integration-with-rails/" title="Next Post: Authorize Net (SIM) payment integration with rails">Authorize Net (SIM) payment integration with rails &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

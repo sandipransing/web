@@ -1,0 +1,693 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+  
+  
+  
+    
+      
+    
+      Variables initialization, assignments and swapping in ruby
+    
+    
+      
+        Nov 5, 2009
+        
+      
+  ...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/page/13/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/11/variables-initialization-assignments/">Variables initialization, assignments and swapping in ruby</a></h1>
+    
+    
+      <p class="meta">
+        Nov 5, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Single line code to swap variables in ruby</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">x</span></div></div></pre></div></figure></p>
+
+<h2>Examples</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">x</span> <span class="o">=</span> <span class="s2">&ldquo;Fun&rdquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">y</span> <span class="o">=</span> <span class="s2">&ldquo;Rails&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">x</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [&ldquo;Rails&rdquo;, &ldquo;Fun&rdquo;]</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">puts</span> <span class="n">x</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &ldquo;Rails&rdquo;</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">puts</span> <span class="n">y</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &ldquo;Fun&rdquo;</span></div></div></pre></div></figure></p>
+
+<h2>Variable assignments in Ruby</h2>
+
+<p>Also Multiple variables assignments can be done in a single line
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; [1, 2, 3, 4]</span></div></div></pre></div></figure></p>
+
+<p>Here is interpretation of the above line
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">puts</span> <span class="s2">&ldquo;a is </span><span class="si">#&#x7b;</span><span class="n">a</span><span class="si">&#x7d;</span><span class="s2">, b is </span><span class="si">#&#x7b;</span><span class="n">b</span><span class="si">&#x7d;</span><span class="s2">, c is </span><span class="si">#&#x7b;</span><span class="n">c</span><span class="si">&#x7d;</span><span class="s2">, d is </span><span class="si">#&#x7b;</span><span class="n">d</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#=&gt; &ldquo;a is 1, b is 2, c is 3, d is 4&rdquo;</span></div></div></pre></div></figure></p>
+
+<h2>Multiple assignments in ruby</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>a = b = c = d = 12</div></div></pre></div></figure></p>
+
+<p>Here <code>a</code>,<code>b</code>,<code>c</code> and <code>d</code> has value 12</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/10-steps-to-get-start-with-myspace-ruby/">10 steps to get start with MySpace Ruby SDK</a></h1>
+    
+    
+      <p class="meta">
+        Oct 27, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Follow 10 simple steps listed below in order to use myspace sdk api</p>
+
+<h4>1. Remove existing <code>myspace</code> gems installed if any</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem uninstall myspace</div></div></pre></div></figure></p>
+
+<h4>2. Checkout sample source code</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>svn checkout <a href="http://myspaceid-ruby-sdk.googlecode.com/svn/trunk/">http://myspaceid-ruby-sdk.googlecode.com/svn/trunk/</a> myspacesdk</div></div></pre></div></figure></p>
+
+<h4>3. Move to sample dir</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cd myspacesdk/samples/rails/sample</div></div></pre></div></figure></p>
+
+<h4>4. Modify DB config</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># Modify config/database.yml accordingly</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s">development</span><span class="pi">:</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">adapter</span><span class="pi">:</span> <span class="s">mysql</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">database</span><span class="pi">:</span> <span class="s">sample_development</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">password</span><span class="pi">:</span> <span class="s">abcd</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">pool</span><span class="pi">:</span> <span class="s">5</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s">timeout</span><span class="pi">:</span> <span class="s">5000</span></div></div></pre></div></figure></p>
+
+<h4>5. Download Gem</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>wget <a href="http://myspaceid-ruby-sdk.googlecode.com/files/myspaceid-sdk-0.1.11.gem">http://myspaceid-ruby-sdk.googlecode.com/files/myspaceid-sdk-0.1.11.gem</a></div></div></pre></div></figure></p>
+
+<h4>6. Install <code>myspaceid-sdk</code> gem locally</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install &ndash;local ~/Desktop/myspaceid-sdk-0.1.11.gem
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'># &ndash;local option taskes local PATH_TO_GEM</div></div></pre></div></figure></p>
+
+<h4>7. Above command supposed to give following error otherwise skip to step 10</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ERROR:  Error installing /home/sandip/Desktop/myspaceid-sdk-0.1.11.gem:
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>myspaceid-sdk requires ruby-openid (>= 0, runtime)</div></div></pre></div></figure></p>
+
+<h4>8. Install <code>ruby-openid</code> and go to &ldquo;step 6&rdquo;</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install ruby-openid
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'># Go to step 6</div></div></pre></div></figure></p>
+
+<h4>9. Start Server</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/server</div></div></pre></div></figure></p>
+
+<h4>10.  Browse Application</h4>
+
+<p>Open URL <a href="http://localhost:3000/">http://localhost:3000/</a></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/find-processor-cpu-information-on-linux/">Find processor (cpu) information on linux</a></h1>
+    
+    
+      <p class="meta">
+        Oct 26, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Below command will give you all the details about CPU
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cat /proc/cpuinfo</div></div></pre></div></figure></p>
+
+<h4>Example use</h4>
+
+<p>on my ubuntu machine, It showed me below information :
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>processor : 0
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>vendor_id : GenuineIntel
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>cpu family  : 6
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>model   : 42
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>model name  : Intel&reg; Core&trade; i3-2350M CPU @ 2.30GHz
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>stepping  : 7
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>microcode : 0x1b
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>cpu MHz   : 800.000
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>cache size  : 3072 KB
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>physical id : 0
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>siblings  : 4
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>core id   : 0
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>cpu cores : 2
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>apicid    : 0
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>initial apicid  : 0
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>fpu   : yes
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>fpu_exception : yes
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>cpuid level : 13
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>wp    : yes
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>bogomips  : 4589.39
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>clflush size  : 64
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>cache_alignment : 64
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>address sizes : 36 bits physical, 48 bits virtual
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>power management:
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>processor : 1
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'>vendor_id : GenuineIntel
+</div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>cpu family  : 6
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'>model   : 42
+</div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'>model name  : Intel&reg; Core&trade; i3-2350M CPU @ 2.30GHz
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'>stepping  : 7
+</div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'>microcode : 0x1b
+</div></div><div data-line='34' class='code-highlight-row numbered'><div class='code-highlight-line'>cpu MHz   : 800.000
+</div></div><div data-line='35' class='code-highlight-row numbered'><div class='code-highlight-line'>cache size  : 3072 KB
+</div></div><div data-line='36' class='code-highlight-row numbered'><div class='code-highlight-line'>physical id : 0
+</div></div><div data-line='37' class='code-highlight-row numbered'><div class='code-highlight-line'>siblings  : 4
+</div></div><div data-line='38' class='code-highlight-row numbered'><div class='code-highlight-line'>core id   : 1
+</div></div><div data-line='39' class='code-highlight-row numbered'><div class='code-highlight-line'>cpu cores : 2
+</div></div><div data-line='40' class='code-highlight-row numbered'><div class='code-highlight-line'>apicid    : 2
+</div></div><div data-line='41' class='code-highlight-row numbered'><div class='code-highlight-line'>initial apicid  : 2
+</div></div><div data-line='42' class='code-highlight-row numbered'><div class='code-highlight-line'>fpu   : yes
+</div></div><div data-line='43' class='code-highlight-row numbered'><div class='code-highlight-line'>fpu_exception : yes
+</div></div><div data-line='44' class='code-highlight-row numbered'><div class='code-highlight-line'>cpuid level : 13
+</div></div><div data-line='45' class='code-highlight-row numbered'><div class='code-highlight-line'>wp    : yes
+</div></div><div data-line='46' class='code-highlight-row numbered'><div class='code-highlight-line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+</div></div><div data-line='47' class='code-highlight-row numbered'><div class='code-highlight-line'>bogomips  : 4589.39
+</div></div><div data-line='48' class='code-highlight-row numbered'><div class='code-highlight-line'>clflush size  : 64
+</div></div><div data-line='49' class='code-highlight-row numbered'><div class='code-highlight-line'>cache_alignment : 64
+</div></div><div data-line='50' class='code-highlight-row numbered'><div class='code-highlight-line'>address sizes : 36 bits physical, 48 bits virtual
+</div></div><div data-line='51' class='code-highlight-row numbered'><div class='code-highlight-line'>power management:
+</div></div><div data-line='52' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='53' class='code-highlight-row numbered'><div class='code-highlight-line'>processor : 2
+</div></div><div data-line='54' class='code-highlight-row numbered'><div class='code-highlight-line'>vendor_id : GenuineIntel
+</div></div><div data-line='55' class='code-highlight-row numbered'><div class='code-highlight-line'>cpu family  : 6
+</div></div><div data-line='56' class='code-highlight-row numbered'><div class='code-highlight-line'>model   : 42
+</div></div><div data-line='57' class='code-highlight-row numbered'><div class='code-highlight-line'>model name  : Intel&reg; Core&trade; i3-2350M CPU @ 2.30GHz
+</div></div><div data-line='58' class='code-highlight-row numbered'><div class='code-highlight-line'>stepping  : 7
+</div></div><div data-line='59' class='code-highlight-row numbered'><div class='code-highlight-line'>microcode : 0x1b
+</div></div><div data-line='60' class='code-highlight-row numbered'><div class='code-highlight-line'>cpu MHz   : 800.000
+</div></div><div data-line='61' class='code-highlight-row numbered'><div class='code-highlight-line'>cache size  : 3072 KB
+</div></div><div data-line='62' class='code-highlight-row numbered'><div class='code-highlight-line'>physical id : 0
+</div></div><div data-line='63' class='code-highlight-row numbered'><div class='code-highlight-line'>siblings  : 4
+</div></div><div data-line='64' class='code-highlight-row numbered'><div class='code-highlight-line'>core id   : 0
+</div></div><div data-line='65' class='code-highlight-row numbered'><div class='code-highlight-line'>cpu cores : 2
+</div></div><div data-line='66' class='code-highlight-row numbered'><div class='code-highlight-line'>apicid    : 1
+</div></div><div data-line='67' class='code-highlight-row numbered'><div class='code-highlight-line'>initial apicid  : 1
+</div></div><div data-line='68' class='code-highlight-row numbered'><div class='code-highlight-line'>fpu   : yes
+</div></div><div data-line='69' class='code-highlight-row numbered'><div class='code-highlight-line'>fpu_exception : yes
+</div></div><div data-line='70' class='code-highlight-row numbered'><div class='code-highlight-line'>cpuid level : 13
+</div></div><div data-line='71' class='code-highlight-row numbered'><div class='code-highlight-line'>wp    : yes
+</div></div><div data-line='72' class='code-highlight-row numbered'><div class='code-highlight-line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+</div></div><div data-line='73' class='code-highlight-row numbered'><div class='code-highlight-line'>bogomips  : 4589.39
+</div></div><div data-line='74' class='code-highlight-row numbered'><div class='code-highlight-line'>clflush size  : 64
+</div></div><div data-line='75' class='code-highlight-row numbered'><div class='code-highlight-line'>cache_alignment : 64
+</div></div><div data-line='76' class='code-highlight-row numbered'><div class='code-highlight-line'>address sizes : 36 bits physical, 48 bits virtual
+</div></div><div data-line='77' class='code-highlight-row numbered'><div class='code-highlight-line'>power management:
+</div></div><div data-line='78' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='79' class='code-highlight-row numbered'><div class='code-highlight-line'>processor : 3
+</div></div><div data-line='80' class='code-highlight-row numbered'><div class='code-highlight-line'>vendor_id : GenuineIntel
+</div></div><div data-line='81' class='code-highlight-row numbered'><div class='code-highlight-line'>cpu family  : 6
+</div></div><div data-line='82' class='code-highlight-row numbered'><div class='code-highlight-line'>model   : 42
+</div></div><div data-line='83' class='code-highlight-row numbered'><div class='code-highlight-line'>model name  : Intel&reg; Core&trade; i3-2350M CPU @ 2.30GHz
+</div></div><div data-line='84' class='code-highlight-row numbered'><div class='code-highlight-line'>stepping  : 7
+</div></div><div data-line='85' class='code-highlight-row numbered'><div class='code-highlight-line'>microcode : 0x1b
+</div></div><div data-line='86' class='code-highlight-row numbered'><div class='code-highlight-line'>cpu MHz   : 800.000
+</div></div><div data-line='87' class='code-highlight-row numbered'><div class='code-highlight-line'>cache size  : 3072 KB
+</div></div><div data-line='88' class='code-highlight-row numbered'><div class='code-highlight-line'>physical id : 0
+</div></div><div data-line='89' class='code-highlight-row numbered'><div class='code-highlight-line'>siblings  : 4
+</div></div><div data-line='90' class='code-highlight-row numbered'><div class='code-highlight-line'>core id   : 1
+</div></div><div data-line='91' class='code-highlight-row numbered'><div class='code-highlight-line'>cpu cores : 2
+</div></div><div data-line='92' class='code-highlight-row numbered'><div class='code-highlight-line'>apicid    : 3
+</div></div><div data-line='93' class='code-highlight-row numbered'><div class='code-highlight-line'>initial apicid  : 3
+</div></div><div data-line='94' class='code-highlight-row numbered'><div class='code-highlight-line'>fpu   : yes
+</div></div><div data-line='95' class='code-highlight-row numbered'><div class='code-highlight-line'>fpu_exception : yes
+</div></div><div data-line='96' class='code-highlight-row numbered'><div class='code-highlight-line'>cpuid level : 13
+</div></div><div data-line='97' class='code-highlight-row numbered'><div class='code-highlight-line'>wp    : yes
+</div></div><div data-line='98' class='code-highlight-row numbered'><div class='code-highlight-line'>flags   : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer xsave avx lahf_lm arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+</div></div><div data-line='99' class='code-highlight-row numbered'><div class='code-highlight-line'>bogomips  : 4589.39
+</div></div><div data-line='100' class='code-highlight-row numbered'><div class='code-highlight-line'>clflush size  : 64
+</div></div><div data-line='101' class='code-highlight-row numbered'><div class='code-highlight-line'>cache_alignment : 64
+</div></div><div data-line='102' class='code-highlight-row numbered'><div class='code-highlight-line'>address sizes : 36 bits physical, 48 bits virtual
+</div></div><div data-line='103' class='code-highlight-row numbered'><div class='code-highlight-line'>power management:</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/how-to-find-os-x-version-on-linux/">How to find OS X version on linux machine</a></h1>
+    
+    
+      <p class="meta">
+        Oct 26, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Command</h2>
+
+<p>Here is the command which will give you OS name with version along with other detail information.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cat /etc/<em>release</em></div></div></pre></div></figure></p>
+
+<h2>Example</h2>
+
+<p>On my ubutnu machine, It showed me :
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>cat /etc/<em>release</em>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>DISTRIB_ID=Ubuntu
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>DISTRIB_RELEASE=8.10
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>DISTRIB_CODENAME=intrepid
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>DISTRIB_DESCRIPTION=&ldquo;Ubuntu 8.10&rdquo;</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/how-to-map-irregular-database-tables/">How to map irregular database tables with rails models</a></h1>
+    
+    
+      <p class="meta">
+        Oct 21, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails specifies conventions while creating models, controllers, migrations ( database tables ).</p>
+
+<h2>Conventions for creating database tables</h2>
+
+<ol>
+<li>Table name should be plural</li>
+<li>id field should be primary_key for table.</li>
+<li>foreign_key should be like _id i.e. post_id, site_id</li>
+</ol>
+
+
+<h2>Conventions for creating models &amp; Controllers</h2>
+
+<ol>
+<li>Model name should be singular</li>
+<li>controller name should be plural.</li>
+</ol>
+
+
+<p>Although rails has standard defined, In some cases it becomes quite necessary to map irregular</p>
+
+<h4>1. Table mapping</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Review</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> <br/>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># Here comments is name of database table   </span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">set_table_name</span> <span class="ss">:comments</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span> </div></div></pre></div></figure></p>
+
+<h4>2. Set primary key ( other than rails standar ‘id’ primary_key )</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Review</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> <br/>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># It assumes &ldquo;reviews&rdquo; as table in database   </span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># Below line indicates reviews table contains column_name &ldquo;reviewId&rdquo; which is a primary_key   </span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">set_primary_key</span> <span class="ss">:reviewId</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span> </div></div></pre></div></figure></p>
+
+<h4>3. Foreign key association</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Review</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span> <br/>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># Below line indicates reviews table contains column_name &lsquo;RatingId&rsquo; which is foreign_key to primary_key   </span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># of &lsquo;ratings&rsquo; table.   </span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># It can be applied to any associan type [ has_one, has_many, belongs_to, has_many_through ]   </span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">belongs_to</span> <span class="ss">:rating</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;SiteUser&rdquo;</span><span class="p">,</span> <span class="ss">:foreign_key</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;RatingId&rdquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span> </div></div></pre></div></figure></p>
+
+<h4>4. Model association ( non-standard model name )</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Review</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># Below line indicates reviews table contains column_name &lsquo;UserId&rsquo; which is foreign_key to primary_key   </span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="c1"># of model with class_name &lsquo;SiteUser&rsquo;   </span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">belongs_to</span> <span class="ss">:user</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;SiteUser&rsquo;</span><span class="p">,</span> <span class="ss">:foreign_key</span><span class="p">:</span> <span class="o">=&gt;</span> <span class="s1">&lsquo;UserId&rsquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span> </div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/getting-wireless-working-on-ubuntu/">Getting wireless working on ubuntu machine</a></h1>
+    
+    
+      <p class="meta">
+        Oct 14, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Pleae follow below steps to get wireless working on ubuntu.</p>
+
+<h2>Disable wireless</h2>
+
+<p>Disable the <code>Support for Atheros 802.11 wireless LAN cards</code> on Hardware Drivers, and reboot your box.</p>
+
+<h2>In a terminal:</h2>
+
+<h4>Updates all package lists</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get update</div></div></pre></div></figure></p>
+
+<h4>Update driver</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install linux-backports-modules-intrepid-generic</div></div></pre></div></figure></p>
+
+<h4>Reboot</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo reboot!</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/feedzirra-installtion-on-ubuntu/">Feedzirra installtion on ubuntu interpid</a></h1>
+    
+    
+      <p class="meta">
+        Oct 12, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Feedzirra is a feed library that is designed to get and update many feeds as quickly as possible.
+This includes using <code>libcurl-multi</code> through the <code>taf2-curb</code> gem for faster <code>http gets</code> and <code>libxml</code> through <code>nokogiri</code> and <code>sax-machine</code> for faster parsing.</p>
+
+<h2>Installing packages</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install libcurl3 libxml2 libxml2-dev libxslt1-dev</div></div></pre></div></figure></p>
+
+<h2>Gem install</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo gem install pauldix-feedzirra</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/converting-dos-windows-files-to-unix/">Converting dos (windows) files to unix files</a></h1>
+    
+    
+      <p class="meta">
+        Oct 7, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While editing files on windows system,  we get <code>^M</code> characters added to files and those gets displayed when you open files on <code>unix</code> machines.
+To remove such <code>^M</code> characters,</p>
+
+<h2>Install dos2unix package</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install sysutils</div></div></pre></div></figure></p>
+
+<h2>Convert individual file</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>dos2unix file_path</div></div></pre></div></figure></p>
+
+<h2>Convert files recursively</h2>
+
+<p>Run following command to convert recursively all the files inside directory.</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>find . -type f -exec dos2unix &#x7b;&#x7d; \;</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/10/how-to-submit-sitemap-to-search-engines/">How to submit sitemap to different search engines</a></h1>
+    
+    
+      <p class="meta">
+        Oct 1, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are many ways that can be used to submit sitemap to search engines.</p>
+
+<p>Lets discuss approaches :</p>
+
+<h4>1. Put sitemap.xml in public folder and you are done</h4>
+
+<p>Crawlers will be finding <code>sitemap.xml</code> file through url
+<a href="http://yourdomain.com/sitemap.xml">http://yourdomain.com/sitemap.xml</a></p>
+
+<h4>2. There are many online sites which generates sitemaps for you</h4>
+
+<p><a href="http://www.xml-sitemaps.com/">http://www.xml-sitemaps.com/</a></p>
+
+<h4>3. Open following urls in browser</h4>
+
+<p>Make sure to add <code>sitemap url</code> of your website in-place of <code>XML_SITEMAP_PATH</code> in the below urls</p>
+
+<p><strong>a. Google submit</strong></p>
+
+<p><a href="http://www.google.com/webmasters/tools/ping?sitemap=XML_SITEMAP_PATH">http://www.google.com/webmasters/tools/ping?sitemap=XML_SITEMAP_PATH</a></p>
+
+<p><strong>b. Yahoo Submit</strong></p>
+
+<p><a href="http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap=XML_SITEMAP_PATH">http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap=XML_SITEMAP_PATH</a></p>
+
+<p><strong>c. Ask Submit</strong></p>
+
+<p><a href="http://submissions.ask.com/ping?sitemap=XML_SITEMAP_PATH">http://submissions.ask.com/ping?sitemap=XML_SITEMAP_PATH</a></p>
+
+<p><strong>d. Webmaster submit</strong></p>
+
+<p><a href="http://webmaster.live.com/ping.aspx?siteMap=XML_SITEMAP_PATH">http://webmaster.live.com/ping.aspx?siteMap=XML_SITEMAP_PATH</a></p>
+
+<h4>4. Best practice in rails to submit sitemap i.e. use of scheduled task (cron job)</h4>
+
+<p>Write a rake task that will perform following actions:</p>
+
+<ol>
+<li>Generate sitemap in rails public folder</li>
+<li>Submit <code>sitemap.xml</code> file to search engines</li>
+</ol>
+
+
+<p>Submitting sitemaps is already explained above and you just need to invoke above urls for each engine</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/09/no-ri-no-rdoc-for-ruby-gem-installation/">--no-ri --no-rdoc for ruby gem installation</a></h1>
+    
+    
+      <p class="meta">
+        Sep 30, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>GEM install without rdoc</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install GEM_NAME –no-ri –no-rdoc</div></div></pre></div></figure></p>
+
+<p>Skip ri rdoc for all gem installation as i haven’t seen anyone using it.</p>
+
+<h2>Edit gemrc file</h2>
+
+<p>Add following line to it
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># vi ~/.gemrc
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>:gem: &ndash;no-ri &ndash;no-rdoc</div></div></pre></div></figure></p>
+
+<p>Here is my <code>~/.gemrc</code> file
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>&mdash;
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>:verbose: true
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>gem: &ndash;no-ri &ndash;no-rdoc
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>:update_sources: true
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>:sources:
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>- <a href="http://gems.rubyforge.org">http://gems.rubyforge.org</a>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>- <a href="http://gems.github.com">http://gems.github.com</a>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>:backtrace: false
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>:bulk_threshold: 1000
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>:benchmark: false</div></div></pre></div></figure></p>
+
+<p>That’s it !</p>
+
+<h2>Comments</h2>
+
+<p><strong>@Tnelson</strong>
+I don’t usually reply to posts but I will in this case, great info…I will add a backlink and bookmark your site. Keep up the good work!</p>
+</div>
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/14/">&larr; Older</a>
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/12/">Newer &rarr;</a>
+    
+  </div>
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+<script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>

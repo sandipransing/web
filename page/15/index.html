@@ -1,0 +1,1026 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fun On Rails</title>
+  <meta name="author" content="sandipransing">
+
+  
+  <meta name="description" content="
+  
+  
+  
+    
+      
+    
+      Intresting String inflections in rails
+    
+    
+      
+        May 22, 2009
+        
+      
+    
+  
+
+
+  Here is l...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://funonrails.com/page/15/">
+
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/css/screen.css">
+
+  <link href="http://feeds.feedburner.com/funonrails" rel="alternate" title="Fun On Rails" type="application/atom+xml">
+  <script src="/js/modernizr-2.0.js"></script>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/js/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48366424-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Fun On Rails</a></h1>
+  
+    <h2>Journal of a Web Developer #ruby #rails #JS</h2>
+  
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/funonrails" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="http://funonrails.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+  <li><a href="/assets/sandipransing_cv.pdf" target='_blank'>CV</a></li>
+  <li><a href="/ruby-on-rails-developers-in-india">ROR devs in india</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/inspirational-quotes-of-the-day">Inspirational Quotes</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/interesting-string-inflections-in-rails/">Intresting String inflections in rails</a></h1>
+    
+    
+      <p class="meta">
+        May 22, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Here is list of string inflections :</p>
+
+<ul>
+<li>camelcase</li>
+<li>camelize</li>
+<li>classify</li>
+<li>constantize</li>
+<li>dasherize</li>
+<li>demodulize</li>
+<li>foreign_key</li>
+<li>humanize</li>
+<li>parameterize</li>
+<li>pluralize</li>
+<li>singularize</li>
+<li>tableize</li>
+<li>titlecase</li>
+<li>titleize</li>
+<li>underscore</li>
+</ul>
+
+
+<h4>camelcase()</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>camelcase(first_letter = :upper)</div></div></pre></div></figure></p>
+
+<p>Alias for camelize
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">camelize</span><span class="p">(</span><span class="n">first_letter</span> <span class="o">=</span> <span class="ss">:upper</span><span class="p">)</span></div></div></pre></div></figure></p>
+
+<p>By default, camelize converts strings to UpperCamelCase. If the argument to camelize is set to :lower then camelize produces lowerCamelCase.</p>
+
+<p>camelize will also convert ’/’ to ’::’ which is useful for converting paths to namespaces.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>&ldquo;active_record&rdquo;.camelize # => &ldquo;ActiveRecord&rdquo;
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>&ldquo;active_record&rdquo;.camelize(:lower) # => &ldquo;activeRecord&rdquo;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>&ldquo;active_record/errors&rdquo;.camelize # => &ldquo;ActiveRecord::Errors&rdquo;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>&ldquo;active_record/errors&rdquo;.camelize(:lower) # => &ldquo;activeRecord::Errors&rdquo;</div></div></pre></div></figure></p>
+
+<p>This method is also aliased as camelcase</p>
+
+<h4>classify()</h4>
+
+<p>Create a class name from a plural table name like Rails does for table names to models. Note that this returns a string and not a class. (To convert to an actual class follow classify with constantize.)
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;egg_and_hams&rdquo;</span><span class="p">.</span><span class="nf">classify</span> <span class="c1"># =&gt; &ldquo;EggAndHam&rdquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;posts&rdquo;</span><span class="p">.</span><span class="nf">classify</span> <span class="c1"># =&gt; &ldquo;Post&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># Singular names are not handled correctly.</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;business&rdquo;</span><span class="p">.</span><span class="nf">classify</span> <span class="c1"># =&gt; &ldquo;Busines&rdquo;</span></div></div></pre></div></figure></p>
+
+<h4>constantize()</h4>
+
+<p>constantize tries to find a declared constant with the name specified in the string. It raises a NameError when the name is not in CamelCase or is not initialized.</p>
+
+<p><strong>Examples :</strong></p>
+
+<p>&ldquo;Module&rdquo;.constantize # => Module
+&ldquo;Class&rdquo;.constantize # => Class</p>
+
+<h4>dasherize()</h4>
+
+<p>Replaces underscores with dashes in the string.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>&ldquo;puni_puni&rdquo; # => &ldquo;puni-puni&rdquo;</div></div></pre></div></figure></p>
+
+<h4>demodulize()</h4>
+
+<p>Removes the module part from the constant expression in the string.</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;ActiveRecord::CoreExtensions::String::Inflections&rdquo;</span><span class="p">.</span><span class="nf">demodulize</span> <span class="c1"># =&gt; &ldquo;Inflections&rdquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;Inflections&rdquo;</span><span class="p">.</span><span class="nf">demodulize</span> <span class="c1"># =&gt; &ldquo;Inflections&rdquo;</span></div></div></pre></div></figure></p>
+
+<h4>foreign_key(separate_class_name_and_id_with_underscore = true)</h4>
+
+<p>Creates a foreign key name from a class name. separate_class_name_and_id_with_underscore sets whether the method should put &ldquo;_&rdquo; between the name and &lsquo;id&rsquo;.</p>
+
+<p><strong>Examples :</strong></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;Message&rdquo;</span><span class="p">.</span><span class="nf">foreign_key</span> <span class="c1"># =&gt; &ldquo;message_id&rdquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;Message&rdquo;</span><span class="p">.</span><span class="nf">foreign_key</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span> <span class="c1"># =&gt; &ldquo;messageid&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;Admin::Post&rdquo;</span><span class="p">.</span><span class="nf">foreign_key</span> <span class="c1"># =&gt; &ldquo;post_id&rdquo;</span></div></div></pre></div></figure></p>
+
+<h4>humanize()</h4>
+
+<p>Capitalizes the first word, turns underscores into spaces, and strips <code>_id</code>. Like titleize, this is meant for creating pretty output.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;employee_salary&rdquo;</span> <span class="c1"># =&gt; &ldquo;Employee salary&rdquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;author_id&rdquo;</span> <span class="c1"># =&gt; &ldquo;Author&rdquo;</span></div></div></pre></div></figure>
+`</p>
+
+<h4>parameterize()</h4>
+
+<p>Replaces special characters in a string so that it may be used as part of a ‘pretty’ URL.
+<strong>Examples :</strong></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Person</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">def</span> <span class="nf">to_param</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="s2">&ldquo;</span><span class="si">#&#x7b;</span><span class="nb">id</span><span class="si">&#x7d;</span><span class="s2">-</span><span class="si">#&#x7b;</span><span class="nb">name</span><span class="p">.</span><span class="nf">parameterize</span><span class="si">&#x7d;</span><span class="s2">&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@person</span> <span class="o">=</span> <span class="no">Person</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># =&gt; Donald E. Knuth</span></div></div></pre></div></figure></p>
+
+<h4>pluralize()</h4>
+
+<p>Returns the plural form of the word in the string.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;post&rdquo;</span><span class="p">.</span><span class="nf">pluralize</span> <span class="c1"># =&gt; &ldquo;posts&rdquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;octopus&rdquo;</span><span class="p">.</span><span class="nf">pluralize</span> <span class="c1"># =&gt; &ldquo;octopi&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;sheep&rdquo;</span><span class="p">.</span><span class="nf">pluralize</span> <span class="c1"># =&gt; &ldquo;sheep&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;words&rdquo;</span><span class="p">.</span><span class="nf">pluralize</span> <span class="c1"># =&gt; &ldquo;words&rdquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;the blue mailman&rdquo;</span><span class="p">.</span><span class="nf">pluralize</span> <span class="c1"># =&gt; &ldquo;the blue mailmen&rdquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;CamelOctopus&rdquo;</span><span class="p">.</span><span class="nf">pluralize</span> <span class="c1"># =&gt; &ldquo;CamelOctopi&rdquo;</span></div></div></pre></div></figure></p>
+
+<h4>singularize()</h4>
+
+<p>The reverse of pluralize, returns the singular form of a word in a string.</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;posts&rdquo;</span><span class="p">.</span><span class="nf">singularize</span> <span class="c1"># =&gt; &ldquo;post&rdquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;octopi&rdquo;</span><span class="p">.</span><span class="nf">singularize</span> <span class="c1"># =&gt; &ldquo;octopus&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;sheep&rdquo;</span><span class="p">.</span><span class="nf">singularize</span> <span class="c1"># =&gt; &ldquo;sheep&rdquo;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;word&rdquo;</span><span class="p">.</span><span class="nf">singularize</span> <span class="c1"># =&gt; &ldquo;word&rdquo;</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;the blue mailmen&rdquo;</span><span class="p">.</span><span class="nf">singularize</span> <span class="c1"># =&gt; &ldquo;the blue mailman&rdquo;</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;CamelOctopi&rdquo;</span><span class="p">.</span><span class="nf">singularize</span> <span class="c1"># =&gt; &ldquo;CamelOctopus&rdquo;</span></div></div></pre></div></figure></p>
+
+<h4>tableize()</h4>
+
+<p>Creates the name of a table like Rails does for models to table names. This method uses the pluralize method on the last word in the string.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;RawScaledScorer&rdquo;</span><span class="p">.</span><span class="nf">tableize</span> <span class="c1"># =&gt; &ldquo;raw_scaled_scorers&rdquo;</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;egg_and_ham&rdquo;</span><span class="p">.</span><span class="nf">tableize</span> <span class="c1"># =&gt; &ldquo;egg_and_hams&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;fancyCategory&rdquo;</span><span class="p">.</span><span class="nf">tableize</span> <span class="c1"># =&gt; &ldquo;fancy_categories&rdquo;</span></div></div></pre></div></figure></p>
+
+<h4>titlecase()</h4>
+
+<p>Alias for titleize
+titleize()</p>
+
+<p>Capitalizes all the words and replaces some characters in the string to create a nicer looking title. titleize is meant for creating pretty output. It is not used in the Rails internals.</p>
+
+<p>titleize is also aliased as titlecase.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;man from the boondocks&rdquo;</span><span class="p">.</span><span class="nf">titleize</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># =&gt; &ldquo;Man From The Boondocks&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;x-men: the last stand&rdquo;</span><span class="p">.</span><span class="nf">titleize</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># =&gt; &ldquo;X Men: The Last Stand&rdquo;</span></div></div></pre></div></figure></p>
+
+<p>This method is also aliased as titlecase</p>
+
+<h4>underscore()</h4>
+
+<p>The reverse of camelize. Makes an underscored, lowercase form from the expression in the string.
+underscore will also change ’::’ to ’/’ to convert namespaces to paths.</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;ActiveRecord&rdquo;</span><span class="p">.</span><span class="nf">underscore</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># =&gt; &ldquo;active_record&rdquo;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;ActiveRecord::Errors&rdquo;</span><span class="p">.</span><span class="nf">underscore</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># =&gt; active_record/errors</span></div></div></pre></div></figure></p>
+
+<h4>Remove special characters from string</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="s2">&ldquo;STRING&rdquo;</span><span class="p">.</span><span class="nf">.</span><span class="nb">gsub</span><span class="p">(</span><span class="sr">/[^a-zA-Z 0-9]/</span><span class="p">,</span> <span class="s2">&ldquo;&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># escape special chars before save</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">def</span> <span class="nf">before_save</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nb">self</span><span class="p">.</span><span class="nf">name</span><span class="p">.</span><span class="nf">gsub</span><span class="p">(</span><span class="sr">/[^a-zA-Z 0-9]/</span><span class="p">,</span> <span class="s2">&ldquo;&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/render-partial-or-view-from-another/">Render partial or view from another controller</a></h1>
+    
+    
+      <p class="meta">
+        May 22, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>To render view files from another controller&rsquo;s view files</p>
+
+<h2>In rail 2.3</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>render &ldquo;controller/action&rdquo;</div></div></pre></div></figure></p>
+
+<h2>In rails 2.2 or below</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>render :template => &lsquo;controller/action&rsquo;</div></div></pre></div></figure></p>
+
+<h2>To render partial from another controller’s views folder</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>render :partial => &ldquo;controller/partial&rdquo;</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/vi-vim-shortcuts/">vi / vim Shortcuts</a></h1>
+    
+    
+      <p class="meta">
+        May 22, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As i am newb on linux macine, i dont know vi shortcuts.
+so, i am listing down shortcuts which i am getting familier :)</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># Open file
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>vi filename
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'># Insert in file
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>i
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'># Exit file
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>q
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'># Forced exit
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>q!
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'># Save file
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>wq
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'># Forced save
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>wq!
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'># Copy no of lines
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>yy
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'># Paste copied lines
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>pp
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'># Undo changes
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>uu
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'># Delete lines
+</div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>dd
+</div></div><div data-line='30' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='31' class='code-highlight-row numbered'><div class='code-highlight-line'># To search and replace string in vi
+</div></div><div data-line='32' class='code-highlight-row numbered'><div class='code-highlight-line'>:%s/search_string/replacement_string/g
+</div></div><div data-line='33' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='34' class='code-highlight-row numbered'><div class='code-highlight-line'># To find particular word in file
+</div></div><div data-line='35' class='code-highlight-row numbered'><div class='code-highlight-line'>?string1</div></div></pre></div></figure></p>
+
+<p>If you have any quick list, please let me know !</p>
+
+<p>Below post is reblogged from <a href="http://nakuls77.wordpress.com/2008/09/14/using-vi-editor/#comment-144">http://nakuls77.wordpress.com/2008/09/14/using-vi-editor/#comment-144</a></p>
+
+<blockquote><p>Vi is a very powerful editor that has been part of nearly every linux/unix distro for a very long time. Many people stray away from Vi due to the curve involved in learning this editor. This guide will help you dive into the world of Vi. Once you do, you will understand why many prefer Vi over other editors.</p></blockquote>
+
+<p>There are countless options for Vi that can be set up inside the /etc/vimrc file.</p>
+
+<p>Auto-indent and creating a macro to change the color of the background.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># vi /etc/vimrc</div></div></pre></div></figure></p>
+
+<h2>Auto-Indent Option -</h2>
+
+<p>This option is so when you tab-space out a line and then press enter, the cursor will move to the next line, automatically indented to the start of the previous line. This helps programmers indent out code easily to create clean looking code. To implement this feature, please add the following line to the bottom of your /etc/vimrc file:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>set ai</div></div></pre></div></figure></p>
+
+<p>Please note that generally speaking only programmers will want to turn ON auto-indent.</p>
+
+<h2>Background Color -</h2>
+
+<p>Some SSH clients have white backgrounds and some have black backgrounds. This can make it very difficult to see the screen depending on the color of the text. This macro allows you to configure F11 to change the background color &amp; color of the text. To implement this feature, please add the following lines to the bottom of your /etc/vimrc file:</p>
+
+<p>set background=dark
+map :let &amp;background = ( &amp;background == “dark”? “light” : “dark” )</p>
+
+<p>I would highly recommend adding in the Background Color option. However if you do not wish to implement either of these features, then please proceed on in the guide.</p>
+
+<p>Commands</p>
+
+<h2>Cursor Movement</h2>
+
+<p>0 (Zero) Start of Line
+^ – First non-Blank Character of Line
+$ – End of Line
+G Go To Command (prefix with number 5G goes to line 5)</p>
+
+<p>Insert Mode Inserting/Appending Text
+Insert Start Insert Mode at Cursor
+A Append at the end of the Line
+o open (append) blank link below current line
+I Open blank line above current line
+Esc Exit Insert Mode</p>
+
+<h2>Editing</h2>
+
+<p>r Replace a single character (does not use insert mode)
+J Join line below with the current one
+cc Change (replace) an entire line
+cw Change (replace) to the end of word
+c$ – Change (replace) to the end of line
+s Delete character at cursor and substitute text
+S Delete line at cursor and substitute text (same as cc)
+u Undo
+. – Repeat last command</p>
+
+<h2>Cut and Paste</h2>
+
+<p>yy Copy(yank) a line
+2yy Copy(yank) two lines
+yw Copy(yank) word
+p Paste the clipboard after the cursor
+P Paste the clipboard before the cursor
+dd Delete a line
+dw Delete the current word
+x Delete the current character</p>
+
+<h2>Exiting</h2>
+
+<p>:w Write (save) the file, but don’t exit
+:wq Write &amp; Quit
+:q Quit
+:q! – Quit and don’t save changes</p>
+
+<h2>Searching</h2>
+
+<p>/pattern Search for a pattern
+?pattern Search backward for a pattern
+n Repeat last search in same direction
+N Repeat last search in opposite direction
+:%2/old/new/g Replace all old with new throughout file
+:%s/old/new/gc Replace all old with new throughout file with confirmations</p>
+
+<h2>Working with Multiple Files</h2>
+
+<p>:e filename Edit a file in a new buffer
+:bn Go to next buffer
+:bp Go to previous buffer
+:bd Close file(buffer)
+:sp filename Open a file in a new buffer and split window
+ctrl-ws Split windows
+ctrl-ww Switch between windows
+ctrl-wq Quite a window
+ctrl-wv Split windows vertically
+ctrl-wq Quite a window
+ctrl-wv Split windows vertically</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/working-with-multiple-ruby-versions-on-same-server/">Working with multiple ruby versions on same server</a></h1>
+    
+    
+      <p class="meta">
+        May 13, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This post is reblogged from Michael Greenly blog <a href="http://blog.michaelgreenly.com/2008/08/multiple-versions-of-ruby-on-ubuntu-2.html">post</a></p>
+
+<p>I recently changed how I&rsquo;m handling multiple simultaneous Ruby installations and I&rsquo;d like to share.</p>
+
+<p>What I needed was to make it convenient to switch between the system provided packages and specific, from source, installations. After some experiments I decided to use &lsquo;update-alternatives&rsquo; to do it.</p>
+
+<p>Here&rsquo;s a quick walk through&hellip;</p>
+
+<p>First I removed all of my Ruby and RubyGem environment variables, they&rsquo;re not needed.</p>
+
+<p>Then I installed Ubuntu&rsquo;s default Ruby packages via apt-get.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>$ sudo apt-get install ruby irb ri rdoc libruby-extras rubygems ruby1.8-dev</div></div></pre></div></figure></p>
+
+<p>Next I downloaded and installed alternate versions of Ruby from source. In this example I&rsquo;m going to use two additional versions; the newest stable release and the newest development release.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>$ cd /tmp
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>$ wget -c <a href="ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p71.tar.gz">ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p71.tar.gz</a>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>$ tar -xvzf ruby-1.8.7-p71.tar.gz
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>$ cd ruby-1.8.7-p71
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>$ ./configure &ndash;prefix=/opt/ruby-1.8.7-p71
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>$ make
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>$ sudo make install
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>$ wget -c <a href="ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.0-3.tar.gz">ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.0-3.tar.gz</a>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>$ tar -xvzf ruby-1.9.0-3.tar.gz
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>$ ./configure &ndash;prefix=/opt/ruby-ruby-1.9.0-3
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>$ make
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>$ sudo make install</div></div></pre></div></figure></p>
+
+<p>At this point I have three versions of Ruby installed and each can be accessed through it&rsquo;s full path.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>$ /usr/bin/ruby &ndash;version
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'># ruby 1.8.6 (2007-09-24 patchlevel 111) [i486-linux]
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>$ /opt/ruby-1.8.7-p71/bin/ruby &ndash;version
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'># ruby 1.8.7 (2008-08-08 patchlevel 71) [i686-linux]
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>$ /opt/ruby-1.9.0-r18217/bin/ruby &ndash;version
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'># ruby 1.9.0 (2008-07-25 revision 18217) [i686-linux]</div></div></pre></div></figure></p>
+
+<p>You&rsquo;ll also notice that the default installation is the one provided by Ubuntu.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>$ ruby &ndash;version
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'># ruby 1.8.6 (2007-09-24 patchlevel 111) [i486-linux]</div></div></pre></div></figure></p>
+
+<p>Next we&rsquo;ll use &lsquo;update-alternatives&rsquo; to make it a bit easier to switch between them. You could do this on the command line but it becomes a fairly long nasty command so I found it easier to write a quick shell script and run it. The script:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>update-alternatives &ndash;install \
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>/usr/local/bin/ruby ruby /usr/bin/ruby 100 \
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/erb erb /usr/bin/erb \
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/gem gem /usr/bin/gem \
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/irb irb /usr/bin/irb \
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/rdoc rdoc /usr/bin/rdoc \
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/ri ri /usr/bin/ri \
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/testrb testrb /usr/bin/testrb
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>update-alternatives &ndash;install \
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>/usr/local/bin/ruby   ruby /opt/ruby-1.8.7-p71/bin/ruby 50 \
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/erb erb /opt/ruby-1.8.7-p71/bin/erb \
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/gem gem /opt/ruby-1.8.7-p71/bin/gem \
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/irb irb /opt/ruby-1.8.7-p71/bin/irb \
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/rdoc rdoc /opt/ruby-1.8.7-p71/bin/rdoc \
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/ri ri /opt/ruby-1.8.7-p71/bin/ri \
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/testrb testrb /opt/ruby-1.8.7-p71/bin/testrb
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>update-alternatives &ndash;install \
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>/usr/local/bin/ruby   ruby /opt/ruby-1.9.0-r18217/bin/ruby 25 \
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/erb erb /opt/ruby-1.9.0-r18217/bin/erb \
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/gem gem /opt/ruby-1.9.0-r18217/bin/gem \
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/irb irb /opt/ruby-1.9.0-r18217//bin/irb \
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/rdoc rdoc /opt/ruby-1.9.0-r18217/bin/rdoc \
+</div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/ri ri /opt/ruby-1.9.0-r18217/bin/ri \
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>&ndash;slave /usr/local/bin/testrb testrb /opt/ruby-1.9.0-r18217/bin/testrb</div></div></pre></div></figure></p>
+
+<p>What that does is create a group of applications under the generic name Ruby. In addition each application has several slave applications tied to it; erb, irb, etc&hellip; In defining each application we specify what symbolic link it will be accessed through and where the application is actually installed. In my case Ubuntu installed Ruby in /usr/bin and the source installed versions are in /opt. All of the installations will be accessed through the generic name Ruby and will have there symbolic links created in /usr/local/bin. I choose /usr/local/bin because it supercedes /usr/bin in the default path.</p>
+
+<p>Before moving on make sure that &lsquo;update-alternatives&rsquo; sees all of our Ruby installations:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>$ update-alternatives &ndash;list ruby
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'># /opt/ruby-1.9.0-r18217/bin/ruby
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'># /opt/ruby-1.8.7-p71/bin/ruby
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'># /usr/bin/ruby</div></div></pre></div></figure></p>
+
+<p>Now switching between them is as easy as running the &lsquo;update-alternatives&rsquo; command and selecting the number of the installation you&rsquo;d like to use. Example:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>$ sudo update-alternatives &ndash;config ruby</div></div></pre></div></figure></p>
+
+<p>It&rsquo;s important to keep in mind that each installation is separate. So for example if you install RubyGems while using /usr/bin/ruby it will not be available to /opt/ruby-1.9.0-r18217/bin/ruby, or /opt/ruby-1.8.7-p71/bin/ruby, etc&hellip;.</p>
+
+<p>While it&rsquo;s probably possible to use a shared repository for RubyGems across multiple installations I haven&rsquo;t tried it and instead have choosen to use multiple separate RubyGem installs, one for each Ruby installation.</p>
+
+<p>Also RubyGem&rsquo;s bindir will most likely not be in your path. To get around this I created a short script called &lsquo;gemexec&rsquo; in /usr/local/bin
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>#!/usr/bin/env ruby
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>require &lsquo;rubygems&rsquo;
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>if ARGV.size > 1
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>exec &ldquo;#&#x7b;Gem.bindir&#x7d;/#&#x7b;ARGV.shift&#x7d;&rdquo;,ARGV.join(&ldquo; &rdquo;)
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>else
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>exec &ldquo;#&#x7b;Gem.bindir&#x7d;/#&#x7b;ARGV.shift&#x7d;&rdquo;
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>end</div></div></pre></div></figure></p>
+
+<p>This script uses the RubyGems installation of the currently selected Ruby to determine where the executable gem should be found, then runs it with any additional command line arguments provided. example:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>$ gemexec rake &ndash;version
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'># rake, version 0.8.1</div></div></pre></div></figure></p>
+
+<p>With all that in place the only thing to watch out for is other peoples scripts that hardcode the shebang line with something like &ldquo;#!/usr/bin/ruby&rdquo;. What I do myself, and prefer in general, is to use &ldquo;#!/usr/bin/env ruby&rdquo;.</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/ruby-1-8-7-and-rails-installation-on-ubuntu/">Ruby 1.8.7 and rails installation on ubuntu interpid</a></h1>
+    
+    
+      <p class="meta">
+        May 13, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Execute following commands in order to install ruby and rails
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install build-essential</div></div></pre></div></figure></p>
+
+<p>Below command will install all necessary packages. if you don&rsquo;t want any <code>package</code> from list then remove it from command.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo apt-get install ruby ri rdoc mysql-server libmysql-ruby ruby1.8-dev irb1.8 libdbd-mysql-perl libdbi-perl libmysql-ruby1.8 libmysqlclient15off libnet-daemon-perl libplrpc-perl libreadline-ruby1.8 libruby1.8 mysql-client-5.0 mysql-common mysql-server-5.0 rdoc1.8 ri1.8 ruby1.8 irb libopenssl-ruby libopenssl-ruby1.8 libterm-readkey-perl psmisc</div></div></pre></div></figure></p>
+
+<h2>Gem Installation</h2>
+
+<p>Please find the latest stable gem version on rubyforge.
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>wget <a href="http://rubyforge.org/frs/download.php/45905/rubygems-1.3.1.tgz">http://rubyforge.org/frs/download.php/45905/rubygems-1.3.1.tgz</a>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>tar xvzf rubygems-1.3.1.tgz
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>cd rubygems-1.3.1
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo ruby setup.rb</div></div></pre></div></figure></p>
+
+<p>And last to install rails without documentation
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudo gem install rails &ndash;no-rdoc &ndash;no-ri</div></div></pre></div></figure></p>
+
+<p>and finally rails server, you can either install <code>apache mongrel</code> or <code>nginx + thin</code> whichever you feel suitable.</p>
+
+<h2>Mongrel install</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>sudu gem install mongrel</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/fix-for-ruby-1-8-7-incompatibity/">Fix for ruby 1.8.7 incompatibity</a></h1>
+    
+    
+      <p class="meta">
+        May 13, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last week i shifted from <code>ruby</code> version <code>1.8.6</code> to <code>1.8.7</code> :-)
+But over a week i found that rails <code>1.2.3</code> applications developed in ruby <code>1.8.6</code> are not working in ruby <code>1.8.7</code></p>
+
+<p>From lot of search on google, i found that its issue with ruby <code>1.8.7</code></p>
+
+<p>So in order to fix this bug, i started searching <code>fix / solution</code> for this incompatibity and got below fix.</p>
+
+<p>You just need to fix file <code>delegate.rb</code> and done</p>
+
+<h2>Diff of <code>/branches/ruby_1_8_7/lib/delegate.rb</code></h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>&mdash; branches/ruby_1_8_7/lib/delegate.rb 2008/05/31 15:17:53 16732
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>+++ branches/ruby_1_8_7/lib/delegate.rb 2008/06/02 10:52:07 16756
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>@@ -163,9 +163,9 @@
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>   # Checks for a method provided by this the delegate object by fowarding the
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>   # call through __getobj__.
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>   #
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>-  def respond_to?(m)
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>+  def respond_to?(m, include_private = false)
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>     return true if super
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>-    return self.<strong>getobj</strong>.respond_to?(m)
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'>+    return self.<strong>getobj</strong>.respond_to?(m, include_private)
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'>   end
+</div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'>   #
+</div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'>@@ -270,9 +270,9 @@
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'>       end
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'>       @<em>dc_obj.<strong>send</strong>(m, *args)
+</div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'>     end
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'>-    def respond_to?(m)  # :nodoc:
+</div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'>+    def respond_to?(m, include_private = false)  # :nodoc:
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'>       return true if super
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'>-      return @</em>dc_obj.respond_to?(m)
+</div></div><div data-line='26' class='code-highlight-row numbered'><div class='code-highlight-line'>+      return @<em>dc_obj.respond_to?(m, include_private)
+</div></div><div data-line='27' class='code-highlight-row numbered'><div class='code-highlight-line'>     end
+</div></div><div data-line='28' class='code-highlight-row numbered'><div class='code-highlight-line'>     def <strong>getobj</strong>  # :nodoc:
+</div></div><div data-line='29' class='code-highlight-row numbered'><div class='code-highlight-line'>       @</em>dc_obj</div></div></pre></div></figure></p>
+
+<p>You have to make necessary changes and you are ready to work with ruby 1.8.7.
+need not downgrade ruby version :)</p>
+
+<h2>for Hash error</h2>
+
+<p>Add following line in <code>config/environment.rb</code>
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">unless</span> <span class="s1">&lsquo;1.9&rsquo;</span><span class="p">.</span><span class="nf">respond_to?</span><span class="p">(</span><span class="ss">:force_encoding</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">String</span><span class="p">.</span><span class="nf">class_eval</span> <span class="k">do</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">begin</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="n">remove_method</span> <span class="ss">:chars</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">rescue</span> <span class="no">NameError</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="c1"># OK</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="k">end</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/rails-coding-standards/">Rails Coding Standards</a></h1>
+    
+    
+      <p class="meta">
+        May 13, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>IN ESSENCE: ALL CODE SHOULD BE READABLE!</p></blockquote>
+
+<ol>
+<li>DO NOT OPTIMISE for performance - OPTIMISE FOR CLARITY OF CODE</li>
+<li>STYLE: use 2 spaces for indent (not tabs)</li>
+<li>STYLE: Line up hash arrows for readability</li>
+<li>STYLE: put spaces around => hash arrows</li>
+<li>STYLE: put spaces after ‘,’ in method params - but none between method names and ‘(’</li>
+<li>VIEWS: use HAML for views</li>
+<li>VIEWS: break up the structure with white space to help readability - VERTICALLY TOO!</li>
+<li>VIEWS STYLE: Rely on structure of page, without having to insert messages or new components…</li>
+<li>LOGIC: Rails Models should be as heavy as in logic and controllers should be lightweight as much as .</li>
+<li>Example: Effect to visually highlight then drop out an existing element rather than flash a message</li>
+<li>Example: Highlight newly added row rather than a message about it</li>
+<li>AVOID logic in views - they should be simple</li>
+<li>Views indentation should be well formatted and not like this :
+
+<h4>WRONG</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="err">&lt;</span>% for joke in @jokes %&gt;
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&ldquo;joke&rdquo;</span><span class="nt">&gt;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nt">&lt;p&gt;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="err">&lt;</span>%= h(truncate(joke.joketext, 20)) %&gt;
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="err">&lt;</span>%= link_to &lsquo;Read this joke&rsquo;, &#x7b;:action =&gt; &lsquo;show_joke&rsquo;, :id =&gt; joke&#x7d; %&gt;
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nt">&lt;/p&gt;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&ldquo;author&gt;
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>by &lt;%= h(joke.author.full_name) %&gt;&lt;/p&gt;
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>&lt;/div&gt;
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>&lt;% end %&gt;</span></div></div></pre></div></figure></p></li>
+</ol>
+
+
+<h4>CORRECT</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="err">&lt;</span>% for joke in @jokes %&gt;
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&ldquo;joke&rdquo;</span><span class="nt">&gt;</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">&lt;p&gt;</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="err">&lt;</span>%= h(truncate(joke.joketext, 20)) %&gt;
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="err">&lt;</span>%= link_to &lsquo;Read this joke&rsquo;, &#x7b; :action =&gt; &lsquo;show_joke&rsquo;, :id =&gt; joke &#x7d; %&gt;
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">&lt;/p&gt;</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&ldquo;author&gt;
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>      by &lt;%= h(joke.author.full_name) %&gt;
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'>    &lt;/p&gt;
+</div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'>  &lt;/div&gt;
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'>&lt;% end %&gt;</span></div></div></pre></div></figure></p>
+
+<ol>
+<li>Put html generating logic into helpers</li>
+<li>instead of inline ruby logic, add to models (filtering, checking)</li>
+<li>NEVER use ActiveRecord models in migrations unless you re-define them within the migration</li>
+<li>…otherwise the migration fails when you later remove/rename the AR class</li>
+<li>BETTER SOLUTION: use bootstrapping until deployed!!!</li>
+<li>AJAX only for sub-components of an object, and avoid over-use</li>
+</ol>
+
+
+<h2>CONTROLLER CODING STANDARDS</h2>
+
+<ol>
+<li>Before filter should be added at the top of controller.</li>
+<li>Before filter implementation should be immediate after filter declaration</li>
+<li>Standard rails actions</li>
+<li>Own custom actions</li>
+<li>Inter-related actions should be clubbed together.</li>
+<li>please, try to use of protected, private methods and they should be declared at the bottom of page in order.</li>
+<li>Controller Actions should be like :
+(use 2 spaces for indent and not tabs)</li>
+</ol>
+
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">published_jokes</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">find</span><span class="p">(</span><span class="ss">:all</span><span class="p">,</span> <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;published = 1&rdquo;</span><span class="p">)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>MODEL CODING STANDARDS</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1">#======= HEADER SECTION=========</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># SCHEMA INFORMATION WILL BE HERE</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># REQUIRE FILES WILL GO HERE</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Model</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="c1">#======== TOP ===================</span>
+</div></div><div data-line='9' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='10' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="c1"># LIBRARY OR INCLUDE METHODS</span>
+</div></div><div data-line='11' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="c1"># MODEL RELATIONSHIPS</span>
+</div></div><div data-line='12' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="c1"># VIRTUAL ATTRIBUTES</span>
+</div></div><div data-line='13' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="c1"># ACTIVE RECORD VALIDATIONS</span>
+</div></div><div data-line='14' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='15' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="c1">#======== MIDDLE ===============</span>
+</div></div><div data-line='16' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='17' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="c1"># CUSTOM VALIDATIONS</span>
+</div></div><div data-line='18' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="c1"># PUBLIC METHODS</span>
+</div></div><div data-line='19' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='20' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="c1">#======== BASE ==================</span>
+</div></div><div data-line='21' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='22' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="c1"># PROTECTED METHODS</span>
+</div></div><div data-line='23' class='code-highlight-row numbered'><div class='code-highlight-line'> <span class="c1"># PRIVATE METHODS</span>
+</div></div><div data-line='24' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='25' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/high-performance-rails-hosting/">High Performance Rails Hosting</a></h1>
+    
+    
+      <p class="meta">
+        May 8, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are lot of rails hosting, like <code>wired tree</code>, etc.
+While doing search for cost effective and high performance hosting, Recently i came across with <code>joyent</code> rails hosting.
+please let me know your opinions on this.</p>
+
+<p>Here are some of the listed capabilities :</p>
+
+<h4>Scale on Demand</h4>
+
+<p>Your rails infrastructure can be dynamically expanded or reduced within minutes.</p>
+
+<h4>Support Billions of Hits</h4>
+
+<p>The largest ruby on rails application running on Joyent does over 1 Billion page views a month. Joyent’s hardware load balancers make this kind of scale possible.
+<code>Ruby 1.8.6</code>, <code>Rails 2.1</code>, <code>Mongrel</code>, <code>Nginx</code></p>
+
+<p>Everything you need to get rolling is pre-installed, including Ruby 1.8.6 and Rails 2.1, Apache, lighttpd, nginx and Mongrel.</p>
+
+<h4>Extremely Cost Effective</h4>
+
+<p>Static IPs, real storage, 10TB data transfer / bandwidth, and fantastic support all included.
+Lightning Fast Speed</p>
+
+<p>We provide direct connections to tier 1 internet back-bones, Force10 switches and f5 BigIP load-balancers.</p>
+
+<p><strong>Trusted by Companies like LinkedIn</strong></p>
+
+<h4>Check out their post</h4>
+
+<p>Official Ruby on Rails Host</p>
+
+<p>We’re the Official Ruby on Rails host. Go check it out at rubyonrails.org. “If you need hosting, Joyent is the official Ruby on Rails host, offering fantastic plans with a knowledgeable staff. Whether you need shared or dedicated hosting, these guys are experts in Ruby on Rails. ”
+Leverage a Large Community</p>
+
+<p>Over 2,400 companies run Rails applications on Joyent. You gain from our experience hosting them and you can connect directly with them through the Joyent Forums and the Joyent Wiki</p>
+
+<h4>Entirely Open Loving Cloud</h4>
+
+<p>Joyent offers open protocols, open source solutions. Use any Language, any DB. You can move your application. No vendor lock-in.</p>
+
+<p>please, help me……:(</p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/working-with-rails-console/">Awesome: Working with the Rails console and all the tricks</a></h1>
+    
+    
+      <p class="meta">
+        May 8, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Testing your active record methods using <em>script/console</em></p>
+
+<h4>Windows</h4>
+
+<p>If you are using windows, you start the console by using this command:
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/console</div></div></pre></div></figure></p>
+
+<h4>Linux:</h4>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>./script/console</div></div></pre></div></figure></p>
+
+<p>Just use the following command whenever you make changes to your model objects:</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>reload!</div></div></pre></div></figure></p>
+
+<p>Instead of accessing your MySQL database with
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>mysql -u  -p</div></div></pre></div></figure></p>
+
+<p>You can instead do
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>script/dbconsole</div></div></pre></div></figure></p>
+
+<p>and if you database has a password, just do
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/dbconsole -p</div></div></pre></div></figure></p>
+
+<p>Connecting to different rails environments
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/dbconsole     # connect to development database (or $RAILS_ENV)
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/dbconsole production    # connect to production database</div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  
+    <article>
+      <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/rails-acts-as-taggable-on-plugin/">using rails acts as taggable on plugin</a></h1>
+    
+    
+      <p class="meta">
+        May 8, 2009
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A tagging plugin for Rails applications that allows for custom tagging along dynamic contexts.</p>
+
+<h2>Plugin Installation</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/plugin install git://github.com/mbleigh/acts-as-taggable-on.git</div></div></pre></div></figure></p>
+
+<h2>Install as a Gem</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>gem install mbleigh-acts-as-taggable-on &ndash;source <a href="http://gems.github.com">http://gems.github.com</a></div></div></pre></div></figure></p>
+
+<h2>Auto Install</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'># include following line in environment.rb
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>config.gem &ldquo;mbleigh-acts-as-taggable-on&rdquo;, :source => &ldquo;<a href="http://gems.github.com">http://gems.github.com</a>&rdquo;, :lib => &ldquo;acts-as-taggable-on&rdquo;
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>rake gems:install</div></div></pre></div></figure></p>
+
+<h2>Post Installation (Rails)</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>ruby script/generate acts_as_taggable_on_migration
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>rake db:migrate</div></div></pre></div></figure></p>
+
+<h2>Adding taggable to model</h2>
+
+<p>Add following line in your model for which you wanted to be tagged
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>acts_as_taggable_on :tags</div></div></pre></div></figure></p>
+
+<h2>Example</h2>
+
+<p>Lets take <code>post</code> model</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">acts_as_taggable_on</span> <span class="ss">:tags</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Controller code</h2>
+
+<p>Inside controller action
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:post</span><span class="p">])</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># Or just hardcode to test</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@post</span><span class="p">.</span><span class="nf">tag_list</span> <span class="o">=</span><span class="s2">&ldquo;awesome, slick, hefty&rdquo;</span> <br/>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@post</span><span class="p">.</span><span class="nf">save</span></div></div></pre></div></figure></p>
+
+<h2>Methods</h2>
+
+<p>What are the methods provided?
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@post</span><span class="p">.</span><span class="nf">tag_list</span> <span class="o">=</span> <span class="s2">&ldquo;awesome, slick, hefty&rdquo;</span> <br/>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Post</span><span class="p">.</span><span class="nf">tagged_with</span><span class="p">(</span><span class="s2">&ldquo;awesome&rdquo;</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:tags</span><span class="p">)</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># =&gt; [@post1, @post2]</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Post</span><span class="p">.</span><span class="nf">tag_counts</span> <span class="c1"># =&gt; [,&hellip;]</span></div></div></pre></div></figure></p>
+
+<h2>Named Scope</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Post</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># created_at DESC</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">Post</span><span class="p">.</span><span class="nf">tagged_with</span><span class="p">(</span><span class="s2">&ldquo;awesome&rdquo;</span><span class="p">).</span><span class="nf">by_creation</span></div></div></pre></div></figure></p>
+
+<h2>Pagination</h2>
+
+<p>It is easy to paginate tags collection using will_paginate plugin</p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="no">List_Of_Tags</span><span class="p">.</span><span class="nf">paginate</span><span class="p">(</span><span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:page</span><span class="p">],</span> <span class="ss">:per_page</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">)</span></div></div></pre></div></figure></p>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@post</span><span class="p">.</span><span class="nf">find_related_tags</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># =&gt; will give related posts having related tags. [ @post1, @post2, &hellip;]</span></div></div></pre></div></figure></p>
+
+<h2>Tag Owners</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">acts_as_tagger</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="n">acts_as_taggable_on</span> <span class="ss">:tags</span>
+</div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span></div></div></pre></div></figure></p>
+
+<h2>Console play</h2>
+
+<p><figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@some_user</span><span class="p">.</span><span class="nf">tag</span><span class="p">(</span><span class="vi">@some_post</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&ldquo;paris, normandy&rdquo;</span><span class="p">,</span> <span class="ss">:on</span> <span class="o">=&gt;</span> <span class="ss">:tags</span><span class="p">)</span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@some_user</span><span class="p">.</span><span class="nf">owned_taggings</span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@some_user</span><span class="p">.</span><span class="nf">owned_tags</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="vi">@some_post</span><span class="p">.</span><span class="nf">tags_from</span><span class="p">(</span><span class="vi">@some_user</span><span class="p">)</span></div></div></pre></div></figure></p>
+</div>
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/archives/">Blog Archives</a>
+    
+    <a class="next" href="/page/14/">Newer &rarr;</a>
+    
+  </div>
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2016 - sandipransing -
+  <span class="credit">Powered by <a href="http://octopress.org" target='_blank'>Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace" target='_blank'>Whitespace</a></span>
+</p></footer>
+  <script type="text/javascript">
+      var disqus_shortname = 'funonrails';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+<script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+<script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+</body>
+</html>
