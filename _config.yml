@@ -6,7 +6,7 @@ author: sandipransing
 simple_search: http://google.com/search
 description: >
   Journal of a web developer containing learnings and experiences while developing with ruby, rails, JS and linux
-baseurl: "" # the subpath of your site, e.g. /blog/
+baseurl: "/web/" # the subpath of your site, e.g. /blog/
 keywords: ruby, rails, gems, plugins, radiant, cms, SEO, geokit, asterisk, adhearsion, pdf, prawn, ubuntu, vim, linux, jQuery, sass, haml, nginx, passenger
 twitter_username: sandipransing
 github_username:  sandipransing
